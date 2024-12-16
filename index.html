@@ -353,12 +353,137 @@
 								<center> <a href="https://medium.com/@shashankguda.gs/the-truth-behind-the-shine-fake-offers-in-todays-job-market-d179099eb767" target="_blank" class="button">Link to article </a> </center>
 								<br>
 								<h4> <center> Total Number of Posts (Till Now):<strong> 5 </strong> </center> </h4>
+							
+								<button id="up-button" onclick="scrollToTop()">
+									<span class="arrow-up">&#8593;</span>
+								</button>
+								
+
 							</article>
 
 
 							<article id="about">
 								<h2 class="major">Projects</h2>
 								<span class="image main"><img src="images/skills.jpg" alt="" /></span>
+								<h3> Anomaly Detection in Auxiliary Power Unit (APU) of Metro Trains</h3>
+										<a href="https://github.com/gudashashank/apu-sensor-failure-prediction" target="_blank" style="display: inline-block;">
+											<span class="image main">
+												<img src="images/anomaly-detection.jpg" alt="Anomaly Detection in APU"
+													style="border: 5px solid #555454; border-radius: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+													onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 4px 15px rgba(0, 0, 0, 0.2)';"
+													onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" />
+											</span>
+										</a>
+
+										<p>
+											This project focuses on detecting anomalies in the Auxiliary Power Unit (APU) of metro trains using sensor data. The goal is to enable predictive maintenance, enhance system reliability, and minimize downtime by identifying potential failures early.
+										</p>
+
+										<p><strong>Technologies Used:</strong>
+											<img src="https://img.icons8.com/color/48/000000/apache-spark.png" alt="Apache Spark" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+											<img src="https://img.icons8.com/color/48/000000/python.png" alt="Python" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+											<img src="https://img.icons8.com/ios-filled/50/000000/ai.png" alt="Machine Learning" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+										</p>
+
+										<ul>
+											<li><strong>Dataset:</strong> MetroPT dataset with 1,516,948 rows and 17 columns (February to August 2020).</li>
+											<li><strong>Data Preprocessing:</strong> Schema definition, data cleaning, and exploratory data analysis (EDA) using correlation heatmaps and temporal analysis.</li>
+											<li><strong>Anomaly Detection Techniques:</strong>
+												<ul>
+													<li><strong>K-Means Clustering:</strong> Identified normal (Cluster 0) and anomalous (Cluster 1) operations.</li>
+													<li><strong>LSTM Autoencoder:</strong> Detected anomalies based on reconstruction error (95th percentile threshold).</li>
+												</ul>
+											</li>
+											<li><strong>Key Results:</strong> Anomalies peaked during early morning hours (2 AM - 5 AM) and aligned with recorded failure events.</li>
+											<li><strong>Challenges:</strong> Implementing Isolation Forest and One-Class SVM with PySpark and determining anomaly thresholds.</li>
+										</ul>
+
+										<br>
+										<center> <a href="https://github.com/gudashashank/apu-sensor-failure-prediction/blob/main/IST_718_Final_Project_Code_Team_2_4.ipynb" target="_blank" class="button">Analysis Notebook</a> </center>
+										<br>
+										<center> <a href="https://github.com/gudashashank/apu-sensor-failure-prediction" target="_blank" class="button">Technical Report</a> </center>
+										<br>
+										<hr>
+										<h3> COMPASS - University Recommendation System 🎓</h3>
+												<a href="https://github.com/gudashashank/compass-assistant" target="_blank" style="display: inline-block;">
+													<span class="image main">
+														<img src="images/compass-logo.png" alt="COMPASS University Recommendation System"
+															style="border: 5px solid #555454; border-radius: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+															onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 4px 15px rgba(0, 0, 0, 0.2)';"
+															onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" />
+													</span>
+												</a>
+
+												<p>
+													COMPASS is an AI-powered university guidance system that helps international students find and track university programs, living expenses, and career opportunities in the United States. The system provides personalized recommendations based on user preferences and maintains an interactive chat interface for queries about universities, costs, weather, and job prospects.
+												</p>
+
+												<p><strong>Technologies Used:</strong>
+													<img src="https://img.icons8.com/color/48/000000/python.png" alt="Python" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+													<img src="https://img.icons8.com/color/48/000000/streamlit.png" alt="Streamlit" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+													<img src="https://img.icons8.com/color/48/000000/api.png" alt="APIs" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+													<img src="https://img.icons8.com/color/48/000000/database.png" alt="Database" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+												</p>
+
+												<ul>
+													<li><strong>Personalized University Recommendations:</strong> Based on field of study, budget, location, and weather preferences.</li>
+													<li><strong>Interactive Chat Interface:</strong> Ask about university programs, living expenses, weather conditions, and job market trends.</li>
+													<li><strong>Application Tracking:</strong> Manage applications, deadlines, and document requirements with downloadable templates.</li>
+													<li><strong>Resource Generation:</strong> Generate application checklists in DOCX format and CSV templates for tracking.</li>
+												</ul>
+
+												<h4>Technical Stack 💻</h4>
+												<ul>
+													<li><strong>Frontend:</strong> Streamlit</li>
+													<li><strong>Database:</strong> ChromaDB with OpenAI embeddings</li>
+													<li><strong>APIs:</strong> OpenAI GPT-4, OpenWeather API</li>
+													<li><strong>Data Processing:</strong> Pandas, Python-docx</li>
+												</ul>
+
+												<br>
+												<center> <a href="https://github.com/gudashashank/compass-assistant" target="_blank" class="button">Technical Report</a> </center>
+												<br>
+												<center> <a href="https://youtu.be/rXJV2C41s28?si=XYrLQ1agAdm8-yQU" target="_blank" class="button">Project Video</a> </center>
+												<br>
+												<center> <a href="https://compass-education.streamlit.app/" target="_blank" class="button">Application</a> </center>
+												<br>
+												<hr>
+
+
+								<h3> Tokyo Olympics in Data 🎌</h3>
+								<a href="https://github.com/gudashashank/tokyo-olympics-analysis" target="_blank" style="display: inline-block;">
+									<span class="image main">
+										<img src="images/tokyo-olympics-in-data.jpg" alt="Tokyo Olympics Data Pipeline"
+											 style="border: 5px solid #555454; border-radius: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+											 onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0px 4px 15px rgba(0, 0, 0, 0.2)';"
+											 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';" />
+									</span>
+								</a>
+								
+								<p>
+									This project aims to build a cloud-based data pipeline using Azure services to analyze and visualize the 2021 Tokyo Olympics dataset. The pipeline integrates data ingestion, transformation, and visualization to unlock insights into athlete demographics, country performance, and event participation.
+								</p>
+								
+								<p><strong>Technologies Used:</strong>
+									<img src="https://img.icons8.com/color/48/000000/power-bi.png" alt="Power BI" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+									<img src="https://img.icons8.com/color/48/000000/sql.png" alt="SQL" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+									<img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="Azure" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+									<img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" style="width: 35px; vertical-align: middle; margin-right: 10px;">
+								</p>
+								
+								<ul>
+									<li><strong>Data Ingestion (Azure Data Factory):</strong> Automated extraction of data from a GitHub-hosted CSV file into Azure.</li>
+									<li><strong>Data Storage (Azure Data Lake Gen2):</strong> Scalable and secure storage for raw and processed data.</li>
+									<li><strong>Data Transformation (Azure Databricks):</strong> Cleansing and processing data using Spark.</li>
+									<li><strong>Data Analysis (Azure Synapse Analytics):</strong> SQL-based querying and advanced analytics.</li>
+									<li><strong>Visualization (Power BI):</strong> Interactive dashboards displaying insights and performance metrics.</li>
+								</ul>
+								<br>
+								<center> <a href="https://github.com/gudashashank/tokyo-olympics-analysis" target="_blank" class="button">Technical Report</a> </center>
+								<br>
+								<center> <a href="https://www.youtube.com/watch?v=MUiJub80OHM" target="_blank" class="button">Project Video</a> </center>
+								<hr>
+
 								<h3> LEAP – Personalized Learning Path Generator </h3>
 								<a href="https://github.com/gudashashank/LEAP" target="_blank" style="display: inline-block;">
 									<span class="image main">
@@ -518,7 +643,13 @@
 								<br>
 								<center> <a href="https://drive.google.com/file/d/1bIPH72TzM46jOHGmv8UYd9baJVSG-ErQ/view?usp=sharing" target="_blank" class="button">Presentation</a> </center> 
 								<br>
-								<h4> <center> Total Number of Projects (Till Now):<strong> 6 </strong> </center> </h4>
+								<h4> <center> Total Number of Projects (Till Now):<strong> 9 </strong> </center> </h4>
+							
+								<button id="up-button" onclick="scrollToTop()">
+									<span class="arrow-up">&#8593;</span>
+								</button>
+								
+
 							</article>
 
 
@@ -570,6 +701,78 @@
     from, to { border-color: transparent; }
     50% { border-color: white; }
 }
+
+scroll-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top-button span {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.scroll-top-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.scroll-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 736px) {
+  .scroll-top-button {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+#up-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#up-button:hover {
+    background-color: #333;
+}
+
+.arrow-up {
+    line-height: 1; 
+}
+
+
+
   
 </style>
 </head>
@@ -589,6 +792,7 @@
 							<li><a href="https://twitter.com/gudashash" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
 							<li><a href="https://www.linkedin.com/in/shashankguda/" class="fab fa-linkedin-in" target="_blank"><span class="label"></span></a></li>
 							<li><a href="https://github.com/gudashashank" class="icon brands fa-github" target="_blank"><span class="label" >GitHub</span></a></li>
+							<li><a href="https://www.youtube.com/@GudaShashank" class="icon brands fa-youtube" target="_blank"><span class="label">YouTube</span></a></li>
 						</center>
 						</ul>
 							</article>
@@ -894,9 +1098,63 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			
 					type();
 				});
-			</script>
-			
 
-			
+				document.addEventListener('DOMContentLoaded', function() {
+  const scrollButton = document.getElementById('scroll-top-button');
+  
+  // Show/hide button based on scroll position
+  function toggleScrollButton() {
+    const scrollY = window.scrollY;
+    const article = document.querySelector('#main article.active');
+    
+    if (article && scrollY > 300) {
+      scrollButton.classList.add('visible');
+    } else {
+      scrollButton.classList.remove('visible');
+    }
+  }
+
+  // Smooth scroll to top when button is clicked
+  scrollButton.addEventListener('click', function() {
+    const article = document.querySelector('#main article.active');
+    if (article) {
+      article.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  });
+
+  // Listen for scroll events
+  const main = document.getElementById('main');
+  if (main) {
+    const articles = main.getElementsByTagName('article');
+    for (let article of articles) {
+      article.addEventListener('scroll', toggleScrollButton);
+    }
+  }
+
+  // Initial check for button visibility
+  toggleScrollButton();
+});
+// Show or hide the button when scrolling
+
+
+window.addEventListener('scroll', function () {
+    const upButton = document.getElementById('up-button');
+    if (window.scrollY > 200) {
+        upButton.style.display = 'flex';
+    } else {
+        upButton.style.display = 'none';
+    }
+});
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+			</script>
+				
 	</body>
 </html>

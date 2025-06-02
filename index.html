@@ -413,8 +413,111 @@
 								</div>
 
 								</div>
-								<br>
-								<br>
+								<!-- Swiper CSS -->
+								<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+								<!-- Swiper JS -->
+								<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+								<h2 style="margin-top: 3rem; color: white;">What Others Say</h2>
+
+								<div style="position: relative; margin-top: 2rem;">
+
+								<!-- Navigation Arrows Positioned Outside -->
+								<div class="swiper-button-prev custom-nav"></div>
+								<div class="swiper-button-next custom-nav"></div>
+
+								<div class="swiper testimonialSwiper" style="margin-top: 1.5rem;">
+								<div class="swiper-wrapper">
+
+									<!-- Jeff Rubin -->
+									<div class="swiper-slide" style="background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(4px); height: auto;">
+									<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+										<img src="images/jeff-rubin-profile.jpg" alt="Jeff Rubin" style="width: 60px; height: 60px; border-radius: 50%;">
+										<div>
+										<p style="margin: 0; color: white; font-weight: 600;">Jeff Rubin</p>
+										<p style="margin: 0; font-size: 0.9rem; color: #ccc;">SVP & Chief Digital Officer, Syracuse University</p>
+										</div>
+									</div>
+									<p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.6;">
+										“Shashank consistently went above and beyond as a recitation lead — delivering on time, enhancing the student experience, and contributing meaningfully to the class culture. A natural leader that any team would benefit from.”
+									</p>
+									</div>
+
+									<!-- Rahul Kumar -->
+									<div class="swiper-slide" style="background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(4px); height: auto;">
+									<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+										<img src="images/rahul-kumar-profile.jpg" alt="Rahul Kumar" style="width: 60px; height: 60px; border-radius: 50%;">
+										<div>
+										<p style="margin: 0; color: white; font-weight: 600;">Rahul Kumar</p>
+										<p style="margin: 0; font-size: 0.9rem; color: #ccc;">Manager, Tredence Inc.</p>
+										</div>
+									</div>
+									<p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.6;">
+										“Shashank has a sharp analytical mind and a knack for solving complex problems. His solutions consistently exceeded expectations, and his collaborative nature made him a valuable asset to the team.”
+									</p>
+									</div>
+
+									<!-- Archana Mishra -->
+									<div class="swiper-slide" style="background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(4px); height: auto;">
+									<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+										<img src="images/archana-mishra-profile.jpg" alt="Archana Mishra" style="width: 60px; height: 60px; border-radius: 50%;">
+										<div>
+										<p style="margin: 0; color: white; font-weight: 600;">Archana Mishra</p>
+										<p style="margin: 0; font-size: 0.9rem; color: #ccc;">Associate Manager, Tredence Inc.</p>
+										</div>
+									</div>
+									<p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.6;">
+										“From technical execution to research passion, Shashank stood out across projects. His performance on the Unilever initiative and award-winning delivery reflect his excellence and commitment to impact.”
+									</p>
+									</div>
+
+								</div>
+								<style>
+								.custom-nav {
+									color: white;
+									background-color: rgba(255, 255, 255, 0.08);
+									width: 28px; /* Smaller circle */
+									height: 28px;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									border-radius: 50%;
+									position: absolute;
+									top: 40%;
+									z-index: 10;
+									cursor: pointer;
+									transition: background-color 0.3s;
+								}
+
+								.custom-nav::after {
+									font-size: 12px; /* Smaller arrow icon */
+								}
+
+								.custom-nav:hover {
+									background-color: rgba(255, 255, 255, 0.2);
+								}
+
+								.swiper-button-prev.custom-nav {
+									left: -35px;
+								}
+
+								.swiper-button-next.custom-nav {
+									right: -35px;
+								}
+
+								@media screen and (max-width: 600px) {
+									.custom-nav {
+									display: none;
+									}
+								}
+								</style>
+
+								<!-- Pagination Dots -->
+								<div class="swiper-pagination" style="margin-top: 1rem;"></div>
+								</div>
+
+									<br> 
+									<br> 
 								<button id="up-button" onclick="scrollToTop()">
 									<span class="arrow-up">&#8593;</span>
 								</button>
@@ -1404,6 +1507,23 @@ function scrollToTop() {
 
 
 			</script>
-				
+<script>
+  const swiper = new Swiper('.testimonialSwiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoHeight: true, // <-- KEY SETTING
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
+
 	</body>
 </html>

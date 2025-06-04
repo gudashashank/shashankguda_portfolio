@@ -426,6 +426,7 @@
 								<!-- Navigation Arrows Positioned Outside -->
 								<div class="swiper-button-prev custom-nav"></div>
 								<div class="swiper-button-next custom-nav"></div>
+								<div class="swiper-pagination"></div>
 
 								<div class="swiper testimonialSwiper" style="margin-top: 1.5rem;">
 								<div class="swiper-wrapper">
@@ -472,6 +473,20 @@
 									</p>
 									</div>
 
+									<!-- Keval R Menon -->
+									<div class="swiper-slide" style="background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(4px); height: auto;">
+									<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+										<img src="images/keval-menon-profile.jpg" alt="Keval R Menon" style="width: 60px; height: 60px; border-radius: 50%;">
+										<div>
+										<p style="margin: 0; color: white; font-weight: 600;">Keval R Menon</p>
+										<p style="margin: 0; font-size: 0.9rem; color: #ccc;">Senior Manager (Analytics), Tredence Inc.</p>
+										</div>
+									</div>
+									<p style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.6;">
+										“Shashank brought deep analytical thinking, technical expertise, and strong leadership to our data science team. He took initiative on high-impact projects, automated complex pipelines, and consistently delivered results under pressure, all with clarity, ownership, and professionalism.”
+									</p>
+									</div>
+
 									<!-- Rahul Kumar -->
 									<div class="swiper-slide" style="background-color: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(4px); height: auto;">
 									<div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
@@ -499,6 +514,8 @@
 										“From technical execution to research passion, Shashank stood out across projects. His performance on the Unilever initiative and award-winning delivery reflect his excellence and commitment to impact.”
 									</p>
 									</div>
+
+								
 
 								</div>
 								<style>
@@ -534,10 +551,46 @@
 									right: -35px;
 								}
 
+								.swiper-slide {
+								padding-bottom: 10rem; /* adds space above the dots */
+								}
+
+								.swiper-pagination {
+								text-align: center;
+								}
+
+								.swiper-slide > p {
+								margin-bottom: 2rem;
+								}
+
+
 								@media screen and (max-width: 600px) {
 									.custom-nav {
 									display: none;
 									}
+								}
+								  .swiper-slide {
+									padding: 1.5rem;
+									height: auto !important;
+									display: flex;
+									flex-direction: column;
+									justify-content: center;
+								}
+
+								.swiper-pagination {
+									margin-top: 1.5rem;
+									text-align: center;
+									position: relative;
+								}
+
+								.swiper-pagination-bullet {
+									background: #999;
+									opacity: 0.5;
+								}
+
+								.swiper-pagination-bullet-active {
+									background: #00aaff;
+									opacity: 1;
 								}
 								</style>
 

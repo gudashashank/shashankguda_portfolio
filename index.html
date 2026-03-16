@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
   <style>
     :root {
       --paper:     #f2ede4;
@@ -36,12 +35,9 @@
       --mono-bg:   #0a0905;
       --mono-text: #e8d5b0;
     }
-
-    /* ── DARK MODE TOGGLE ─────────────────────────── */
     #dark-toggle {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
+      top: 1rem; right: 1rem;
       z-index: 200;
       background: var(--paper2);
       border: 1px solid var(--rule);
@@ -75,166 +71,53 @@
     ::-webkit-scrollbar-track { background: var(--paper2); }
     ::-webkit-scrollbar-thumb { background: var(--ink3); border-radius: 2px; }
 
-    /* ── MASTHEAD ─────────────────────────────────── */
-    #masthead {
-      border-bottom: 3px solid var(--ink);
-      padding: 2.5rem 2rem 0;
-      max-width: var(--max);
-      margin: 0 auto;
-    }
-    .masthead-kicker {
-      font-family: var(--ff-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink3);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .masthead-kicker::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: var(--orange);
-    }
-    .masthead-name {
-      font-family: var(--ff-display);
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 900;
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-      margin-bottom: 0.4rem;
-      animation: revealUp 0.7s ease both;
-    }
+    /* MASTHEAD */
+    #masthead { border-bottom: 3px solid var(--ink); padding: 2.5rem 2rem 0; max-width: var(--max); margin: 0 auto; }
+    .masthead-kicker { font-family: var(--ff-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .masthead-kicker::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--orange); flex-shrink: 0; }
+    .masthead-name { font-family: var(--ff-display); font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; line-height: 0.92; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.4rem; animation: revealUp 0.7s ease both; }
     .masthead-name em { font-style: italic; color: var(--orange); }
-    .masthead-rule {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 1rem;
-      margin: 1rem 0;
-    }
+    .masthead-rule { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin: 1rem 0; }
     .masthead-rule::before, .masthead-rule::after { content: ''; height: 1px; background: var(--rule); }
-    .masthead-rule-text {
-      font-family: var(--ff-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink3);
-      white-space: nowrap;
-    }
-    .masthead-tagline {
-      font-family: var(--ff-mono);
-      font-size: 0.88rem;
-      background: var(--mono-bg);
-      color: var(--mono-text);
-      display: inline-block;
-      padding: 0.35rem 0.75rem;
-      margin: 0.75rem 0 1.25rem;
-      border-left: 3px solid var(--orange);
-      animation: revealUp 0.7s 0.15s ease both;
-      opacity: 0;
-      animation-fill-mode: forwards;
-    }
-    #typewriter-text {
-      border-right: 2px solid var(--orange);
-      animation: blink 0.75s step-end infinite;
-      padding-right: 2px;
-    }
+    .masthead-rule-text { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
+    .masthead-tagline { font-family: var(--ff-mono); font-size: 0.88rem; background: var(--mono-bg); color: var(--mono-text); display: inline-block; padding: 0.35rem 0.75rem; margin: 0.75rem 0 1.25rem; border-left: 3px solid var(--orange); animation: revealUp 0.7s 0.15s ease both; opacity: 0; animation-fill-mode: forwards; max-width: 100%; }
+    #typewriter-text { border-right: 2px solid var(--orange); animation: blink 0.75s step-end infinite; padding-right: 2px; }
     @keyframes blink { from, to { border-color: transparent; } 50% { border-color: var(--orange); } }
-    .masthead-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 2rem;
-      padding-bottom: 1rem;
-      font-family: var(--ff-mono);
-      font-size: 0.72rem;
-      color: var(--ink3);
-      animation: revealUp 0.7s 0.25s ease both;
-      opacity: 0;
-      animation-fill-mode: forwards;
-    }
+    .masthead-meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem; padding-bottom: 1rem; font-family: var(--ff-mono); font-size: 0.72rem; color: var(--ink3); animation: revealUp 0.7s 0.25s ease both; opacity: 0; animation-fill-mode: forwards; }
     .masthead-meta span { display: flex; align-items: center; gap: 0.4rem; }
     .masthead-meta span::before { content: '▸'; color: var(--orange); font-size: 0.6rem; }
-    @keyframes revealUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes revealUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ── NAV ──────────────────────────────────────── */
-    #nav-bar {
-      max-width: var(--max);
-      margin: 0 auto;
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      overflow-x: auto;
-      scrollbar-width: none;
-      animation: revealUp 0.7s 0.3s ease both;
-      opacity: 0;
-      animation-fill-mode: forwards;
-    }
+    /* NAV */
+    #nav-bar { max-width: var(--max); margin: 0 auto; border-bottom: 1px solid var(--rule); display: flex; overflow-x: auto; scrollbar-width: none; animation: revealUp 0.7s 0.3s ease both; opacity: 0; animation-fill-mode: forwards; }
     #nav-bar::-webkit-scrollbar { display: none; }
-    .nav-tab {
-      font-family: var(--ff-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink3);
-      padding: 0.75rem 0;
-      text-decoration: none;
-      border-right: 1px solid var(--rule);
-      white-space: nowrap;
-      position: relative;
-      transition: color 0.2s, background 0.2s;
-      cursor: pointer;
-      flex: 1;
-      text-align: center;
-    }
+    .nav-tab { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); padding: 0.75rem 0; text-decoration: none; border-right: 1px solid var(--rule); white-space: nowrap; position: relative; transition: color 0.2s, background 0.2s; cursor: pointer; flex: 1; text-align: center; }
     .nav-tab:first-child { border-left: 1px solid var(--rule); }
     .nav-tab:hover, .nav-tab.active { color: var(--ink); background: var(--paper2); }
-    .nav-tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 3px;
-      background: var(--orange);
-    }
+    .nav-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 3px; background: var(--orange); }
 
-    /* ── LAYOUT ───────────────────────────────────── */
+    /* LAYOUT */
     #main-content { max-width: var(--max); margin: 0 auto; padding: 0 2rem 4rem; }
     .section { display: none; animation: fadeSection 0.35s ease; }
     .section.active { display: block; }
     @keyframes fadeSection { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ── SECTION HEADER ───────────────────────────── */
+    /* SECTION HEADER */
     .section-header { padding: 2.5rem 0 1.5rem; border-bottom: 2px solid var(--ink); margin-bottom: 2.5rem; }
     .section-eyebrow { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
     .section-title { font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
 
-    /* ── INTRO ────────────────────────────────────── */
+    /* INTRO */
     .intro-grid { display: grid; grid-template-columns: 1fr 220px; gap: 3rem; margin-bottom: 3rem; }
-    @media (max-width: 640px) { .intro-grid { grid-template-columns: 1fr; } }
     .intro-bio p { font-size: 1.05rem; line-height: 1.85; color: var(--ink2); margin-bottom: 1.2rem; }
-    .intro-bio p:first-child::first-letter {
-      font-family: var(--ff-display);
-      font-size: 3.5rem;
-      font-weight: 900;
-      float: left;
-      line-height: 0.8;
-      margin: 0.05em 0.1em 0 0;
-      color: var(--orange);
-    }
+    .intro-bio p:first-child::first-letter { font-family: var(--ff-display); font-size: 3.5rem; font-weight: 900; float: left; line-height: 0.8; margin: 0.05em 0.1em 0 0; color: var(--orange); }
     .intro-sidebar { border-left: 2px solid var(--rule); padding-left: 1.5rem; }
     .sidebar-block { margin-bottom: 1.75rem; }
     .sidebar-label { font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem; }
     .sidebar-value { font-family: var(--ff-display); font-size: 0.95rem; color: var(--ink); line-height: 1.4; }
     .profile-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; filter: grayscale(20%) contrast(1.05); display: block; margin-bottom: 1.25rem; border: 1px solid var(--rule); }
 
-    /* ── TABLE ────────────────────────────────────── */
+    /* TABLE */
     .editorial-table { width: 100%; border-collapse: collapse; font-family: var(--ff-body); font-size: 0.9rem; margin: 2rem 0; }
     .editorial-table thead tr { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
     .editorial-table th { font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3); padding: 0.6rem 0.75rem; text-align: left; background: none; font-weight: 600; }
@@ -243,22 +126,21 @@
     .editorial-table td a:hover { color: var(--orange); }
     .gpa-chip { font-family: var(--ff-mono); font-size: 0.8rem; font-weight: 600; color: var(--orange); }
 
-    /* ── BADGE ────────────────────────────────────── */
+    /* BADGE */
     .badge-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
     .badge { font-family: var(--ff-mono); font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.25rem 0.65rem; border: 1px solid var(--rule); color: var(--ink3); text-transform: uppercase; }
     .badge.highlight { border-color: var(--orange); color: var(--orange); }
 
-    /* ── AWARD / PULL QUOTE ───────────────────────── */
+    /* AWARD / PULL QUOTE */
     .award-callout { border-left: 4px solid var(--orange); background: var(--paper2); padding: 1.25rem 1.5rem; margin: 2rem 0; display: flex; gap: 1.25rem; align-items: flex-start; }
     .award-icon { font-family: var(--ff-display); font-size: 2.5rem; line-height: 1; color: var(--orange); flex-shrink: 0; }
     .award-body h4 { font-family: var(--ff-display); font-weight: 700; font-size: 1rem; color: var(--ink); margin-bottom: 0.35rem; }
     .award-body p { font-size: 0.88rem; color: var(--ink2); line-height: 1.6; margin: 0; }
-    .pull-quote { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 1.5rem 0; margin: 2.5rem 0; font-family: var(--ff-display); font-size: clamp(1.3rem, 3vw, 1.8rem); font-style: italic; color: var(--ink); line-height: 1.4; text-align: center; }
+    .pull-quote { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 1.5rem 0; margin: 2.5rem 0; font-family: var(--ff-display); font-size: clamp(1.1rem, 3vw, 1.8rem); font-style: italic; color: var(--ink); line-height: 1.4; text-align: center; }
     .pull-quote span { color: var(--orange); }
 
-    /* ── WORK ─────────────────────────────────────── */
+    /* WORK */
     .job-entry { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
-    @media (max-width: 580px) { .job-entry { grid-template-columns: 1fr; gap: 0.75rem; } }
     .job-meta { padding-top: 0.25rem; }
     .job-company { font-family: var(--ff-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.3rem; }
     .job-company a { color: inherit; text-decoration: none; }
@@ -280,14 +162,14 @@
     .job-bullet-list li { font-size: 0.88rem; color: var(--ink2); line-height: 1.65; padding-left: 1rem; position: relative; margin-bottom: 0.35rem; }
     .job-bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--orange); font-size: 0.75rem; }
 
-    /* ── IMPACT STRIP ─────────────────────────────── */
+    /* IMPACT STRIP */
     .impact-strip { display: flex; flex-wrap: wrap; gap: 0; margin-top: 1.25rem; border: 1px solid var(--rule); }
-    .impact-item { flex: 1 1 120px; padding: 0.9rem 1rem; border-right: 1px solid var(--rule); text-align: center; }
+    .impact-item { flex: 1 1 100px; padding: 0.9rem 1rem; border-right: 1px solid var(--rule); text-align: center; }
     .impact-item:last-child { border-right: none; }
     .impact-num { font-family: var(--ff-display); font-size: 1.8rem; font-weight: 900; color: var(--orange); line-height: 1; display: block; }
     .impact-label { font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); display: block; margin-top: 0.25rem; }
 
-    /* ── TESTIMONIALS ─────────────────────────────── */
+    /* TESTIMONIALS */
     .testimonial-block { background: var(--mono-bg); color: var(--mono-text); padding: 1.5rem; margin-top: 3rem; }
     .testimonial-header { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.75rem; }
     .testimonial-slide { display: none; animation: fadeSection 0.3s ease; }
@@ -304,7 +186,7 @@
     .t-nav-btn:hover { border-color: var(--orange); color: var(--orange); }
     .t-counter { font-family: var(--ff-mono); font-size: 0.65rem; color: rgba(232,213,176,0.5); }
 
-    /* ── PROJECTS ─────────────────────────────────── */
+    /* PROJECTS */
     .project-entry { padding: 2rem 0; border-bottom: 1px solid var(--rule); }
     .project-entry:last-child { border-bottom: none; }
     .project-number { font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.4rem; }
@@ -318,16 +200,15 @@
     .project-img { width: 100%; display: block; margin: 1rem 0; border: 1px solid var(--rule); filter: grayscale(15%) contrast(1.02); transition: filter 0.3s; cursor: pointer; }
     .project-img:hover { filter: none; }
     .project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
-    .proj-link { font-family: var(--ff-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.3rem 0.8rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .proj-link { font-family: var(--ff-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.4rem 0.9rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
     .proj-link:hover { background: var(--ink); color: var(--paper); }
     .proj-link.primary-link { background: var(--orange); border-color: var(--orange); color: #fff; }
     .proj-link.primary-link:hover { background: var(--ink); border-color: var(--ink); }
 
-    /* ── POSTS ────────────────────────────────────── */
+    /* POSTS */
     .posts-count-bar { font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ink3); border-bottom: 1px solid var(--rule); padding-bottom: 1rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
     .posts-count-num { font-family: var(--ff-display); font-size: 2.5rem; font-weight: 900; color: var(--orange); line-height: 1; }
     .post-entry { display: grid; grid-template-columns: 1fr 160px; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--rule); align-items: start; }
-    @media (max-width: 560px) { .post-entry { grid-template-columns: 1fr; } }
     .post-date { font-family: var(--ff-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.4rem; }
     .post-title { font-family: var(--ff-display); font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.3; }
     .post-title a { color: inherit; text-decoration: none; }
@@ -336,9 +217,8 @@
     .post-thumb { width: 100%; aspect-ratio: 16/10; object-fit: cover; filter: grayscale(30%); border: 1px solid var(--rule); transition: filter 0.3s; }
     .post-thumb:hover { filter: none; }
 
-    /* ── CONTACT ──────────────────────────────────── */
+    /* CONTACT */
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 1rem; }
-    @media (max-width: 600px) { .contact-layout { grid-template-columns: 1fr; gap: 2rem; } }
     .contact-intro { font-family: var(--ff-display); font-size: 1.5rem; font-style: italic; color: var(--ink); line-height: 1.5; margin-bottom: 2rem; }
     .contact-intro span { color: var(--orange); }
     .contact-items { list-style: none; }
@@ -354,36 +234,131 @@
     .cta-secondary { display: inline-block; font-family: var(--ff-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.9rem 2rem; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; }
     .cta-secondary:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
 
-
-    /* ── COMPANY LOGOS ────────────────────────────── */
+    /* COMPANY LOGOS */
     .job-logo { display: block; margin-bottom: 0.75rem; height: 28px; width: auto; max-width: 100px; object-fit: contain; filter: grayscale(100%) opacity(0.55); transition: filter 0.25s; }
     .job-logo:hover { filter: grayscale(0%) opacity(1); }
     body.dark .job-logo { filter: grayscale(100%) invert(1) opacity(0.45); }
     body.dark .job-logo:hover { filter: grayscale(0%) invert(0) opacity(1); }
 
-    /* ── VIDEO ────────────────────────────────────── */
+    /* VIDEO */
     .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 1.5rem 0; border: 1px solid var(--rule); }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 
-    /* ── FOOTER ───────────────────────────────────── */
+    /* FOOTER */
     footer { max-width: var(--max); margin: 0 auto 2rem; padding: 1.5rem 2rem 0; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
     .footer-name { font-family: var(--ff-display); font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
     .footer-copy { font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink3); cursor: pointer; border-bottom: 1px dotted var(--orange); padding-bottom: 1px; user-select: none; transition: color 0.2s; }
     .footer-copy:hover { color: var(--orange); }
 
-    /* ── BACK TO TOP ──────────────────────────────── */
+    /* BACK TO TOP */
     #back-top { position: fixed; bottom: 2rem; right: 2rem; width: 40px; height: 40px; background: var(--ink); color: var(--paper); font-family: var(--ff-mono); font-size: 1rem; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s, background 0.2s; z-index: 100; }
     #back-top.visible { opacity: 1; pointer-events: all; }
     #back-top:hover { background: var(--orange); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+       ═══════════════════════════════════════════════ */
+
+    @media (max-width: 768px) {
+      #main-content { padding: 0 1.25rem 3rem; }
+      #masthead { padding: 2rem 1.25rem 0; }
+      footer { padding: 1.25rem 1.25rem 0; }
+    }
+
+    @media (max-width: 640px) {
+      /* Toggle: smaller, tucked away */
+      #dark-toggle { top: 0.6rem; right: 0.6rem; padding: 0.3rem 0.55rem; font-size: 0.55rem; gap: 0.3rem; }
+
+      /* Masthead: extra top padding to clear toggle */
+      #masthead { padding: 3.5rem 1rem 0; }
+      .masthead-name { font-size: clamp(2.6rem, 11vw, 3.5rem); }
+      .masthead-kicker { font-size: 0.6rem; letter-spacing: 0.1em; }
+      .masthead-rule-text { font-size: 0.56rem; letter-spacing: 0.07em; }
+      .masthead-tagline { font-size: 0.76rem; padding: 0.3rem 0.6rem; }
+      .masthead-meta { gap: 0.3rem 0.9rem; font-size: 0.63rem; }
+
+      /* Nav: scrollable, not squished */
+      .nav-tab { flex: 0 0 auto; padding: 0.7rem 0.9rem; font-size: 0.62rem; }
+
+      /* Intro grid: sidebar moves below bio */
+      .intro-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .intro-sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      /* Photo spans full width above the 2-col info grid */
+      .profile-photo { grid-column: 1 / -1; aspect-ratio: 16/9; object-position: center 15%; max-height: 200px; width: 100%; }
+      .intro-bio p { font-size: 0.97rem; }
+
+      /* Section */
+      .section-header { padding: 1.75rem 0 1.25rem; margin-bottom: 1.75rem; }
+      .section-title { font-size: 1.9rem; }
+
+      /* Table: hide GPA on mobile */
+      .editorial-table th:last-child, .editorial-table td:last-child { display: none; }
+      .editorial-table th, .editorial-table td { padding: 0.5rem 0.5rem; font-size: 0.8rem; }
+
+      /* Award */
+      .award-callout { padding: 1rem 1.1rem; gap: 0.8rem; }
+      .award-icon { font-size: 1.8rem; }
+      .award-body h4 { font-size: 0.92rem; }
+
+      /* Work: meta inline with logo + company, period hidden */
+      .job-entry { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.5rem 0; }
+      .job-meta { display: flex; flex-direction: row; align-items: center; gap: 0.6rem; padding-top: 0; }
+      .job-logo { margin-bottom: 0; height: 20px; }
+      .job-company { margin-bottom: 0; }
+      .job-period { display: none; }
+      .job-title { font-size: 1.15rem; margin-bottom: 0.4rem; }
+      .job-desc { font-size: 0.88rem; margin-bottom: 0.75rem; }
+
+      /* Impact: 2x2 */
+      .impact-item { flex: 1 1 45%; }
+      .impact-num { font-size: 1.5rem; }
+      .impact-label { font-size: 0.55rem; }
+
+      /* Testimonials */
+      .testimonial-text { font-size: 0.92rem; line-height: 1.65; }
+      .testimonial-attribution { font-size: 0.62rem; }
+
+      /* Projects */
+      .project-title { font-size: 1.2rem; }
+      .proj-link { font-size: 0.62rem; padding: 0.4rem 0.7rem; }
+
+      /* Posts: stack thumbnail below title */
+      .post-entry { grid-template-columns: 1fr; gap: 0.75rem; }
+      .post-thumb { aspect-ratio: 16/7; max-height: 130px; }
+      .post-title { font-size: 1rem; }
+
+      /* Contact */
+      .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-intro { font-size: 1.2rem; margin-bottom: 1.25rem; }
+      .cta-main, .cta-secondary { padding: 0.8rem 1.5rem; font-size: 0.7rem; }
+
+      /* Footer */
+      footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+
+      /* Back to top */
+      #back-top { bottom: 1.25rem; right: 1rem; width: 36px; height: 36px; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 400px) {
+      .masthead-name { font-size: clamp(2.2rem, 13vw, 2.8rem); }
+      .masthead-rule { gap: 0.4rem; }
+      .masthead-rule-text { font-size: 0.5rem; }
+      #main-content { padding: 0 0.85rem 2.5rem; }
+      #masthead { padding: 3.5rem 0.85rem 0; }
+      /* On very small screens, sidebar info goes single column */
+      .intro-sidebar { grid-template-columns: 1fr; }
+      .nav-tab { padding: 0.65rem 0.75rem; font-size: 0.58rem; }
+    }
   </style>
-<link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="images/android-icon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-<link rel="manifest" href="images/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/android-icon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="manifest" href="images/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
@@ -547,45 +522,27 @@
       <div class="testimonial-carousel">
         <div class="testimonial-slide active">
           <p class="testimonial-text">Shashank consistently went above and beyond as a recitation lead — delivering on time, enhancing the student experience, and contributing meaningfully to the class culture. A natural leader that any team would benefit from.</p>
-          <div class="testimonial-author">
-            <img src="images/jeff-rubin-profile.jpg" alt="Jeff Rubin" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Jeff Rubin</strong> — SVP & Chief Digital Officer, Syracuse University</div>
-          </div>
+          <div class="testimonial-author"><img src="images/jeff-rubin-profile.jpg" alt="Jeff Rubin" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Jeff Rubin</strong> — SVP & Chief Digital Officer, Syracuse University</div></div>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-text">Shashank is a smart, curious, and hardworking student who consistently goes above and beyond. In our Generative AI class, he led his team in building an impressive chatbot and actively supported his peers — a true reflection of why he earned the Graduate Student Excellence Award.</p>
-          <div class="testimonial-author">
-            <img src="images/jeff-saltz-profile.jpg" alt="Jeff Saltz" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Jeff Saltz</strong> — Professor, School of Information Studies, Syracuse University</div>
-          </div>
+          <div class="testimonial-author"><img src="images/jeff-saltz-profile.jpg" alt="Jeff Saltz" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Jeff Saltz</strong> — Professor, School of Information Studies, Syracuse University</div></div>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-text">Shashank is a brilliant, driven, and highly skilled data science consultant with a rare ability to turn complex ideas into impactful solutions. His work ethic, leadership, and collaborative mindset make him an asset to any team.</p>
-          <div class="testimonial-author">
-            <img src="images/scott-bryan-profile.jpg" alt="Scott Bryan" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Scott Bryan</strong> — President & CEO, Macronomics Inc. & Advisor, E78 Partners</div>
-          </div>
+          <div class="testimonial-author"><img src="images/scott-bryan-profile.jpg" alt="Scott Bryan" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Scott Bryan</strong> — President & CEO, Macronomics Inc. & Advisor, E78 Partners</div></div>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-text">Shashank brought deep analytical thinking, technical expertise, and strong leadership to our data science team. He took initiative on high-impact projects, automated complex pipelines, and consistently delivered results under pressure.</p>
-          <div class="testimonial-author">
-            <img src="images/keval-menon-profile.jpg" alt="Keval R Menon" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Keval R Menon</strong> — Senior Manager (Analytics), Tredence Inc.</div>
-          </div>
+          <div class="testimonial-author"><img src="images/keval-menon-profile.jpg" alt="Keval R Menon" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Keval R Menon</strong> — Senior Manager (Analytics), Tredence Inc.</div></div>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-text">Shashank has a sharp analytical mind and a knack for solving complex problems. His solutions consistently exceeded expectations, and his collaborative nature made him a valuable asset to the team.</p>
-          <div class="testimonial-author">
-            <img src="images/rahul-kumar-profile.jpg" alt="Rahul Kumar" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Rahul Kumar</strong> — Manager, Tredence Inc.</div>
-          </div>
+          <div class="testimonial-author"><img src="images/rahul-kumar-profile.jpg" alt="Rahul Kumar" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Rahul Kumar</strong> — Manager, Tredence Inc.</div></div>
         </div>
         <div class="testimonial-slide">
           <p class="testimonial-text">From technical execution to research passion, Shashank stood out across projects. His performance on the Unilever initiative and award-winning delivery reflect his excellence and commitment to impact.</p>
-          <div class="testimonial-author">
-            <img src="images/archana-mishra-profile.jpg" alt="Archana Mishra" class="testimonial-avatar"/>
-            <div class="testimonial-attribution"><strong>Archana Mishra</strong> — Associate Manager, Tredence Inc.</div>
-          </div>
+          <div class="testimonial-author"><img src="images/archana-mishra-profile.jpg" alt="Archana Mishra" class="testimonial-avatar"/><div class="testimonial-attribution"><strong>Archana Mishra</strong> — Associate Manager, Tredence Inc.</div></div>
         </div>
       </div>
       <div class="testimonial-nav">
@@ -674,7 +631,6 @@
       <a href="https://github.com/gudashashank/Austin_Animal_Data_Analysis" target="_blank"><img src="images/analyzing-austin-animal-center-data.jpg" alt="Austin Animal Center" class="project-img"/></a>
       <div class="project-links"><a href="https://github.com/gudashashank/Austin_Animal_Data_Analysis" target="_blank" class="proj-link primary-link">GitHub</a></div>
     </div>
-
   </section>
 
   <!-- POSTS -->
@@ -691,7 +647,7 @@
     <div class="post-entry"><div><div class="post-date">Feb 06, 2026</div><div class="post-title"><a href="https://shashankguda.medium.com/engineering-data-across-modalities-802fbb59198a" target="_blank">Engineering Data Across Modalities: Architectures, Techniques, and Practice</a></div><div class="post-read">📖 19 min read</div></div><img src="images/post_24.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Dec 06, 2025</div><div class="post-title"><a href="https://shashankguda.medium.com/the-agentic-data-shift-c4bbe4b31eea" target="_blank">The Agentic Data Shift: Architecting Self Healing Data Ecosystems for the Financial Systems</a></div><div class="post-read">📖 25 min read</div></div><img src="images/post_23.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Nov 04, 2025</div><div class="post-title"><a href="https://shashankguda.medium.com/unstructured-data-management-in-finance-86e06c190ec5" target="_blank">Unstructured Data Management in Finance: Challenges, Architecture & Modern Tools</a></div><div class="post-read">📖 21 min read</div></div><img src="images/post_22.jpg" alt="" class="post-thumb"/></div>
-    <div class="post-entry"><div><div class="post-date">Sep 26, 2025</div><div class="post-title"><a href="https://shashankguda.medium.com/inside-microsofts-ai-tour-2025-chicago-9275e376eed1" target="_blank">Inside Microsoft’s AI Tour 2025 @ Chicago: Building Agentic Apps, Unified Data Estates, and Next-Gen AI Agents</a></div><div class="post-read">📖 29 min read</div></div><img src="images/post_21.jpg" alt="" class="post-thumb"/></div>
+    <div class="post-entry"><div><div class="post-date">Sep 26, 2025</div><div class="post-title"><a href="https://shashankguda.medium.com/inside-microsofts-ai-tour-2025-chicago-9275e376eed1" target="_blank">Inside Microsoft's AI Tour 2025 @ Chicago: Building Agentic Apps, Unified Data Estates, and Next-Gen AI Agents</a></div><div class="post-read">📖 29 min read</div></div><img src="images/post_21.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Sep 15, 2025</div><div class="post-title"><a href="https://medium.com/@shashankguda/data-reconciliation-with-genai-de7e4cd707da" target="_blank">Data Reconciliation with GenAI: Can LLMs Solve a Billion Dollar Banking Headache?</a></div><div class="post-read">📖 47 min read</div></div><img src="images/post_20.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Aug 20, 2025</div><div class="post-title"><a href="https://medium.com/@shashankguda/lakehouse-agent-bricks-lakeflow-10a2e2bd056a" target="_blank">Lakehouse, Agent Bricks & Lakeflow: Learnings from Databricks DevConnect Chicago 2025</a></div><div class="post-read">📖 26 min read</div></div><img src="images/post_19.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Aug 04, 2025</div><div class="post-title"><a href="https://medium.com/@shashankguda/why-your-data-lake-became-a-swamp-how-data-contracts-can-save-it-318ac3ae49f1" target="_blank">Why Your Data Lake Became a Swamp & How Data Contracts Can Save It</a></div><div class="post-read">📖 36 min read</div></div><img src="images/post_18.jpg" alt="" class="post-thumb"/></div>
@@ -706,8 +662,6 @@
     <div class="post-entry"><div><div class="post-date">Mar 02, 2025</div><div class="post-title"><a href="https://medium.com/@shashankguda/challenges-criticisms-of-langchain-b26afcef94e7" target="_blank">Challenges & Criticisms of LangChain</a></div><div class="post-read">📖 15 min read</div></div><img src="images/post_9.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Jan 09, 2025</div><div class="post-title"><a href="https://medium.com/@shashankguda/understanding-llm-as-a-judge-the-future-of-automated-evaluation-b124bd178fb1" target="_blank">Understanding LLM-as-a-Judge: The Future of Automated Evaluation</a></div><div class="post-read">📖 7 min read</div></div><img src="images/post_8.jpg" alt="" class="post-thumb"/></div>
     <div class="post-entry"><div><div class="post-date">Dec 27, 2024</div><div class="post-title"><a href="https://medium.com/@shashankguda/beyond-tokens-large-concept-models-in-ai-2a404148665b" target="_blank">Beyond Tokens: Large Concept Models in AI</a></div><div class="post-read">📖 7 min read</div></div><img src="images/post_7.jpg" alt="" class="post-thumb"/></div>
-
-
   </section>
 
   <!-- CONTACT -->
@@ -748,7 +702,7 @@
 <script>
   // Typewriter
   (function() {
-    const titles = ["Senior Consultant (DAE-FSO) @ EY","New York, USA","$1M+ Revenue Impact","20+ Published Articles", "5+ Projects"];
+    const titles = ["Senior Consultant (DAE-FSO) @ EY","New York, USA","$1M+ Revenue Impact","20+ Published Articles","5+ Projects"];
     let idx=0,charIdx=0,deleting=false;
     const el=document.getElementById('typewriter-text');
     function tick(){
@@ -811,7 +765,6 @@
     document.getElementById('toggle-icon').textContent = isDark ? '○' : '◐';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
-  // Load saved preference
   (function() {
     const saved = localStorage.getItem('theme');
     if (saved === 'dark') {
@@ -837,7 +790,6 @@
       }
     });
   }
-
 </script>
 </body>
 </html>

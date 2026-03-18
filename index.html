@@ -723,9 +723,11 @@
       });
       requestAnimationFrame(draw);
     }
-    cx.fillStyle='rgba(242,237,228,1)';cx.fillRect(0,0,cv.width,cv.height);
-    draw();
-    window.addEventListener('resize',()=>{resize();initS();});
+cx.fillStyle='rgba(242,237,228,1)';cx.fillRect(0,0,cv.width,cv.height);
+draw();
+window.addEventListener('resize',()=>{resize();initS();});
+window.addEventListener('load',()=>{resize();initS();});
+setTimeout(()=>{resize();initS();},100);
   })();
   </script>
 </div>

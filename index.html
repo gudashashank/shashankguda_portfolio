@@ -686,27 +686,49 @@
         <p style="font-size:0.9rem;color:var(--ink2);margin-bottom:1.5rem;line-height:1.7;">Open to consulting engagements, full-time opportunities, and collaborations where data and innovation intersect.</p>
         <a href="https://outlook.office.com/bookwithme/user/95d2e66bebef4ca0a1c303913b95c9ec@syr.edu?anonymous&ep=plink" target="_blank" class="cta-main" style="display:block;text-align:center;margin-bottom:0.75rem;">Book a Meeting</a>
         <a href="https://drive.google.com/file/d/100Zm6x4681NwQ8oEZfcykeX98i7s33uT/view?usp=sharing" target="_blank" class="cta-secondary" style="display:block;text-align:center;">Download Résumé</a>
-        <div style="margin-top:2rem;border-top:1px solid var(--rule);padding-top:1.5rem;">
-        <div style="font-family:var(--ff-mono);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;">Currently available for</div>
-        <div style="display:flex;flex-direction:column;gap:0.5rem;">
-        <div style="display:flex;align-items:center;gap:0.75rem;">
-        <span style="width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;"></span>
-      <span style="font-family:var(--ff-body);font-size:0.88rem;color:var(--ink2);">Full-time Data Engineering roles</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:0.75rem;">
-      <span style="width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;"></span>
-      <span style="font-family:var(--ff-body);font-size:0.88rem;color:var(--ink2);">AI/ML consulting engagements</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:0.75rem;">
-      <span style="width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0;"></span>
-      <span style="font-family:var(--ff-body);font-size:0.88rem;color:var(--ink2);">Speaking & technical writing</span>
-    </div>
-  </div>
-  <div style="margin-top:1.5rem;padding:1rem;border:1px solid var(--rule);font-family:var(--ff-mono);font-size:0.7rem;color:var(--ink3);line-height:1.6;">
-    <span style="color:var(--orange);">▸</span> Response time: <strong style="color:var(--ink);">~24 hrs</strong><br>
-    <span style="color:var(--orange);">▸</span> Time zone: <strong style="color:var(--ink);">EST (New York)</strong><br>
-    <span style="color:var(--orange);">▸</span> Open to: <strong style="color:var(--ink);">Remote · Hybrid · On-site</strong>
-  </div>
+        <div style="margin-top:1.5rem;border-top:1px solid var(--rule);overflow:hidden;">
+  <canvas id="data-stream-canvas" style="display:block;width:100%;height:180px;"></canvas>
+  <script>
+  (function(){
+    const cv=document.getElementById('data-stream-canvas');
+    const cx=cv.getContext('2d');
+    function resize(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
+    resize();
+    const chars='01アイウエオ∑∫∂∇λμσΩ█▓▒░│┤╣║╗╝┐└┴┬├─┼'.split('');
+    const streams=[];
+    function initS(){
+      streams.length=0;
+      const n=Math.floor(cv.width/14);
+      for(let i=0;i<n;i++){
+        streams.push({x:i*14+7,y:Math.random()*cv.height*-1,speed:0.4+Math.random()*1.2,len:6+Math.floor(Math.random()*18),chars:Array.from({length:30},()=>chars[Math.floor(Math.random()*chars.length)]),mt:0,mi:8+Math.floor(Math.random()*20),op:0.12+Math.random()*0.25,on:Math.random()>0.35});
+      }
+    }
+    initS();
+    function draw(){
+      cx.fillStyle='rgba(242,237,228,0.13)';
+      cx.fillRect(0,0,cv.width,cv.height);
+      cx.font='11px "IBM Plex Mono",monospace';
+      streams.forEach(s=>{
+        if(!s.on)return;
+        s.y+=s.speed;s.mt++;
+        if(s.mt>=s.mi){s.chars[Math.floor(Math.random()*s.chars.length)]=chars[Math.floor(Math.random()*chars.length)];s.mt=0;}
+        for(let j=0;j<s.len;j++){
+          const cy=s.y-j*14;
+          if(cy<-14||cy>cv.height+14)continue;
+          const fade=1-(j/s.len);
+          cx.fillStyle=j===0?`rgba(212,80,10,${s.op*2.2*fade})`:j===1?`rgba(212,80,10,${s.op*1.4*fade})`:`rgba(26,22,16,${s.op*fade*0.7})`;
+          cx.fillText(s.chars[Math.abs((j+Math.floor(s.y/14))%s.chars.length)],s.x-4,cy);
+        }
+        if(s.y-s.len*14>cv.height){s.y=-Math.random()*cv.height*0.5;s.speed=0.4+Math.random()*1.2;s.len=6+Math.floor(Math.random()*18);s.op=0.12+Math.random()*0.25;s.on=Math.random()>0.2;}
+      });
+      requestAnimationFrame(draw);
+    }
+    cx.fillStyle='rgba(242,237,228,1)';cx.fillRect(0,0,cv.width,cv.height);
+    draw();
+    window.addEventListener('resize',()=>{resize();initS();});
+  })();
+  </script>
+</div>
 </div>
       </div>
     </div>

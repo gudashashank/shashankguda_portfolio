@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalpavriksha — The Divine Encyclopedia of Hinduism</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --saffron: #E8630A;
+  --saffron-light: #F5A623;
+  --gold: #C9920A;
+  --gold-light: #F0C050;
+  --gold-dim: rgba(240,192,80,0.45);
+  --cream: #FDF8EE;
+  --border: rgba(200,140,40,0.28);
+  --border-strong: rgba(200,140,40,0.55);
+  --text-body: rgba(253,248,238,0.72);
+  --text-muted: rgba(200,160,100,0.65);
+  --card-bg: rgba(22,9,0,0.88);
+  --section-bg: rgba(14,5,0,0.6);
+}
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  background: #0D0500;
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   BACKGROUND
+═══════════════════════════════════════════ */
+.bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% -10%, #331200 0%, #0D0500 55%, #060200 100%);
+}
+.bg-ring {
+  position: absolute; border-radius: 50%; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border: 1px solid rgba(200,140,40,0.06);
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT WRAPPER
+═══════════════════════════════════════════ */
+.site { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, rgba(232,99,10,0.09) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--saffron); border: 1px solid rgba(232,99,10,0.3);
+  padding: 0.4rem 1.4rem; margin-bottom: 2.2rem; display: inline-block;
+}
+.om-wrap {
+  position: relative;
+  width: 160px; height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.4rem;
+}
+.om-halo {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(240,192,80,0.18);
+  pointer-events: none;
+}
+.om-halo.r1 {
+  width: 110px; height: 110px;
+  animation: halo-pulse-1 4s ease-in-out infinite;
+}
+.om-halo.r2 {
+  width: 140px; height: 140px;
+  animation: halo-pulse-2 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+.om-halo.r3 {
+  width: 170px; height: 170px;
+  animation: halo-pulse-3 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+@keyframes halo-pulse-1 {
+  0%,100% { transform: scale(1); opacity: 0.6; border-color: rgba(240,192,80,0.3); }
+  50%      { transform: scale(1.1); opacity: 0.2; border-color: rgba(232,99,10,0.4); }
+}
+@keyframes halo-pulse-2 {
+  0%,100% { transform: scale(1); opacity: 0.4; }
+  50%      { transform: scale(1.08); opacity: 0.15; }
+}
+@keyframes halo-pulse-3 {
+  0%,100% { transform: scale(1); opacity: 0.25; }
+  50%      { transform: scale(1.06); opacity: 0.05; }
+}
+.om-glow {
+  position: absolute;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,192,80,0.25) 0%, rgba(232,99,10,0.12) 35%, transparent 70%);
+  animation: om-glow-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes om-glow-pulse {
+  0%,100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+.om {
+  position: relative; z-index: 2;
+  font-size: 5.5rem; line-height: 1;
+  color: var(--gold-light);
+  animation: om-breathe 4s ease-in-out infinite;
+  display: block;
+}
+@keyframes om-breathe {
+  0%,100% {
+    text-shadow:
+      0 0 20px rgba(240,192,80,0.6),
+      0 0 50px rgba(240,192,80,0.4),
+      0 0 90px rgba(232,99,10,0.3);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(240,192,80,1),
+      0 0 80px rgba(240,192,80,0.7),
+      0 0 150px rgba(232,99,10,0.55),
+      0 0 220px rgba(232,99,10,0.25);
+    transform: scale(1.04);
+  }
+}
+.hero-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  color: var(--gold-light);
+  letter-spacing: 0.05em; line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+.hero-sanskrit {
+  font-family: 'Cinzel', serif; font-size: clamp(0.8rem, 1.6vw, 1rem);
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--saffron-light); margin-bottom: 0.55rem;
+}
+.hero-meaning {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--gold-dim); margin-bottom: 2.8rem;
+  letter-spacing: 0.08em;
+}
+.hero-divider {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; width: 100%; max-width: 520px;
+}
+.hero-divider-line { flex: 1; height: 1px; background: var(--border-strong); }
+.hero-divider-gem { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+.hero-desc {
+  max-width: 660px; font-size: 1.15rem; line-height: 1.9;
+  color: var(--text-body); font-style: italic; margin-bottom: 1.8rem;
+}
+.hero-desc2 {
+  max-width: 600px; font-size: 1rem; line-height: 1.85;
+  color: var(--text-muted); margin-bottom: 3rem;
+}
+.scroll-cue {
+  font-family: 'Cinzel', serif; font-size: 0.68rem;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+  animation: bob 2.2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* ═══════════════════════════════════════════
+   STICKY NAV
+═══════════════════════════════════════════ */
+.nav {
+  background: rgba(8,3,0,0.95);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 500;
+  display: flex; justify-content: center; flex-wrap: wrap;
+}
+.nav-btn {
+  background: none; border: none; border-right: 1px solid var(--border);
+  cursor: pointer;
+  font-family: 'Cinzel', serif; font-size: 0.67rem;
+  color: rgba(240,192,80,0.55); padding: 0.9rem 1.15rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap; position: relative;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { color: var(--gold-light); background: rgba(232,99,10,0.06); }
+.nav-btn.active { color: var(--gold-light); }
+.nav-btn.active::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--saffron);
+}
+
+/* ═══════════════════════════════════════════
+   PAGES
+═══════════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════════════════
+   SECTION WRAPPER
+═══════════════════════════════════════════ */
+.section {
+  max-width: 1080px; margin: 0 auto; padding: 5rem 2rem 4rem;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════════ */
+.sec-head { text-align: center; margin-bottom: 4rem; }
+.sec-label {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-size: 0.68rem;
+  letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 1rem;
+}
+.sec-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+  color: var(--gold-light); line-height: 1.25; margin-bottom: 1.1rem;
+}
+.sec-intro {
+  font-size: 1.08rem; line-height: 1.88; color: var(--text-body);
+  font-style: italic; max-width: 680px; margin: 0 auto 1.2rem;
+}
+.sec-body {
+  font-size: 0.97rem; line-height: 1.85; color: var(--text-muted);
+  max-width: 680px; margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   DECORATIVE DIVIDER
+═══════════════════════════════════════════ */
+.divider {
+  display: flex; align-items: center; gap: 1rem;
+  max-width: 700px; margin: 0 auto 2.5rem; padding: 0 2rem;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border-strong); }
+.divider-gem { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   COSMOS CARDS
+═══════════════════════════════════════════ */
+.cosmos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem; margin-bottom: 2.5rem;
+}
+@media(max-width: 680px) { .cosmos-grid { grid-template-columns: 1fr; } }
+
+.cosmos-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 2rem; position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.cosmos-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.cosmos-card:hover { border-color: var(--border-strong); }
+.cosmos-card-num {
+  font-family: 'Cinzel Decorative', serif; font-size: 3rem;
+  color: rgba(240,192,80,0.08); position: absolute;
+  top: 0.8rem; right: 1.2rem; line-height: 1; pointer-events: none;
+}
+.cosmos-card-title {
+  font-family: 'Cinzel', serif; font-size: 0.92rem;
+  color: var(--saffron-light); margin-bottom: 0.8rem; letter-spacing: 0.04em;
+}
+.cosmos-card-text {
+  font-size: 0.93rem; line-height: 1.82; color: var(--text-body);
+}
+
+/* ═══════════════════════════════════════════
+   GOD CARDS GRID
+═══════════════════════════════════════════ */
+.gods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* ═══════════════════════════════════════════
+   INDIVIDUAL GOD CARD
+═══════════════════════════════════════════ */
+.god-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.god-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-strong);
+  box-shadow: 0 12px 48px rgba(200,100,0,0.18);
+}
+.god-banner { height: 4px; flex-shrink: 0; }
+.god-art {
+  width: 100%; aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; overflow: hidden;
+}
+.god-svg { width: 100px; height: 100px; }
+.god-body {
+  padding: 1.6rem 1.8rem 1.8rem;
+  display: flex; flex-direction: column; flex: 1;
+}
+.god-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.25rem; line-height: 1.25; margin-bottom: 0.28rem;
+}
+.god-epithet {
+  font-family: 'Cinzel', serif; font-size: 0.63rem;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1rem;
+}
+.god-mantra {
+  background: rgba(200,140,40,0.07);
+  border-left: 2px solid var(--gold);
+  padding: 0.6rem 0.9rem; margin-bottom: 1rem;
+  font-style: italic; font-size: 0.88rem;
+  color: var(--gold-light); line-height: 1.55;
+}
+.god-summary {
+  font-size: 0.91rem; line-height: 1.78;
+  color: var(--text-body); margin-bottom: 1rem; flex: 1;
+}
+.god-attrs {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem;
+}
+.attr {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid var(--border); color: var(--text-muted);
+}
+.read-btn {
+  background: none;
+  border: 1px solid var(--border-strong);
+  color: var(--saffron-light);
+  font-family: 'Cinzel', serif; font-size: 0.67rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.55rem 1rem; cursor: pointer;
+  transition: all 0.22s; width: 100%; margin-top: auto;
+}
+.read-btn:hover { background: rgba(232,99,10,0.1); border-color: var(--saffron); color: var(--gold-light); }
+
+/* ═══════════════════════════════════════════
+   CONCEPTS
+═══════════════════════════════════════════ */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; margin-bottom: 2.5rem;
+}
+.concept-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  padding: 1.8rem;
+  transition: border-color 0.3s;
+}
+.concept-card:hover { border-color: var(--border-strong); }
+.concept-icon { font-size: 1.7rem; margin-bottom: 0.8rem; display: block; }
+.concept-title {
+  font-family: 'Cinzel', serif; font-size: 1rem;
+  color: var(--gold-light); margin-bottom: 0.6rem;
+}
+.concept-text { font-size: 0.91rem; line-height: 1.8; color: var(--text-body); }
+
+/* ═══════════════════════════════════════════
+   TEXTS & SCRIPTURES (on Cosmos page)
+═══════════════════════════════════════════ */
+.scripture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem; margin-top: 2rem;
+}
+.scripture-card {
+  background: rgba(30,12,0,0.7);
+  border: 1px solid var(--border);
+  padding: 1.8rem;
+  transition: border-color 0.3s;
+  position: relative;
+}
+.scripture-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.scripture-card:hover { border-color: var(--border-strong); }
+.scripture-era {
+  display: block;
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 0.6rem;
+}
+.scripture-title {
+  font-family: 'Cinzel Decorative', serif; font-size: 1.15rem;
+  color: var(--gold-light); margin-bottom: 0.9rem; line-height: 1.25;
+}
+.scripture-text {
+  font-size: 0.92rem; line-height: 1.82;
+  color: var(--text-body); margin-bottom: 1rem;
+}
+.scripture-text:last-child { margin-bottom: 0; }
+.scripture-list {
+  list-style: none; margin: 0 0 1rem 0; padding: 0;
+}
+.scripture-list li {
+  font-size: 0.88rem; line-height: 1.7;
+  color: var(--text-body);
+  padding: 0.5rem 0 0.5rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(200,140,40,0.12);
+}
+.scripture-list li:last-child { border-bottom: none; }
+.scripture-list li::before {
+  content: '◆';
+  position: absolute; left: 0; top: 0.5rem;
+  color: var(--gold); font-size: 0.6rem;
+}
+.scripture-list strong {
+  color: var(--saffron-light);
+  font-family: 'Cinzel', serif; font-weight: 600;
+  font-size: 0.92rem; letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════
+   33 DEVAS BLOCK
+═══════════════════════════════════════════ */
+.devas-block {
+  background: rgba(30,12,0,0.65);
+  border: 1px solid var(--border-strong);
+  padding: 2.5rem 2rem;
+  margin: 2rem 0 3rem;
+  position: relative;
+  text-align: center;
+}
+.devas-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--saffron));
+}
+.devas-label {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 0.8rem;
+}
+.devas-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--gold-light); margin-bottom: 1rem; line-height: 1.3;
+}
+.devas-intro {
+  font-size: 1rem; line-height: 1.85;
+  color: var(--text-body); font-style: italic;
+  max-width: 660px; margin: 0 auto 2rem;
+}
+.devas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem; margin-bottom: 2rem; text-align: left;
+}
+.deva-group {
+  background: rgba(15,5,0,0.6);
+  border: 1px solid var(--border);
+  padding: 1.4rem 1.3rem;
+  position: relative;
+}
+.deva-num {
+  position: absolute; top: 0.6rem; right: 1rem;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2rem; color: rgba(240,192,80,0.18);
+  line-height: 1;
+}
+.deva-group-title {
+  font-family: 'Cinzel', serif; font-size: 0.85rem;
+  color: var(--saffron-light); margin-bottom: 0.7rem;
+  letter-spacing: 0.04em;
+}
+.deva-group-text {
+  font-size: 0.86rem; line-height: 1.7;
+  color: var(--text-body);
+}
+.deva-group-text strong {
+  color: var(--gold-light); font-weight: 600;
+}
+.devas-total {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem; color: var(--text-body);
+  margin-bottom: 1.2rem; letter-spacing: 0.02em;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.devas-total span {
+  color: var(--saffron-light);
+}
+.devas-total strong {
+  color: var(--gold-light); font-size: 1.1rem;
+  margin-left: 0.3rem;
+}
+.devas-note {
+  font-size: 0.88rem; line-height: 1.8;
+  color: var(--text-muted); font-style: italic;
+  max-width: 700px; margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  text-align: center; padding: 3.5rem 2rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.footer-om { font-size: 2rem; color: var(--gold); opacity: 0.4; margin-bottom: 0.8rem; display: block; }
+.footer-name {
+  font-family: 'Cinzel Decorative', serif; font-size: 1rem;
+  color: rgba(240,192,80,0.4); margin-bottom: 0.5rem;
+}
+.footer-text {
+  font-family: 'Cinzel', serif; font-size: 0.62rem;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: rgba(200,140,40,0.3);
+}
+.footer-credit {
+  margin-top: 2rem; padding-top: 1.8rem;
+  border-top: 1px solid var(--border);
+  max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.footer-author {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--text-body);
+  margin-bottom: 0.5rem;
+}
+.footer-author span {
+  font-family: 'Cinzel Decorative', serif; font-style: normal;
+  color: var(--gold-light); letter-spacing: 0.05em;
+}
+.footer-feedback {
+  font-size: 0.82rem; line-height: 1.7;
+  color: var(--text-muted); font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(4,1,0,0.94); z-index: 1000;
+  overflow-y: auto; padding: 2rem 1rem;
+  backdrop-filter: blur(6px);
+}
+.modal-overlay.open { display: block; }
+.modal-box {
+  max-width: 760px; margin: 0 auto;
+  background: rgba(14,5,0,0.99);
+  border: 1px solid var(--border-strong);
+  position: relative;
+}
+.modal-banner { height: 4px; }
+.modal-art-wrap {
+  width: 100%; padding: 3.5rem 2rem;
+  display: flex; justify-content: center; align-items: center;
+  background: rgba(8,3,0,0.55);
+  border-bottom: 1px solid var(--border);
+  position: relative; min-height: 180px;
+}
+.modal-art-pattern {
+  position: absolute; inset: 0; opacity: 0.03;
+  background-image: repeating-conic-gradient(rgba(200,140,40,1) 0deg 10deg, transparent 10deg 20deg);
+  pointer-events: none;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: rgba(232,99,10,0.1);
+  border: 1px solid var(--border);
+  color: var(--gold-light); font-family: 'Cinzel', serif;
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  padding: 0.4rem 0.85rem; cursor: pointer;
+  transition: all 0.2s; z-index: 2;
+}
+.modal-close:hover { background: rgba(232,99,10,0.25); }
+.modal-body { padding: 2.4rem 2.5rem; }
+@media(max-width:520px){ .modal-body { padding: 1.6rem; } }
+
+.modal-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.5rem,4vw,2rem); line-height: 1.2; margin-bottom: 0.3rem;
+}
+.modal-epithet {
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1.6rem;
+}
+.mantra-box {
+  background: rgba(200,140,40,0.06);
+  border: 1px solid rgba(200,140,40,0.22);
+  padding: 1.1rem 1.4rem; margin-bottom: 2rem; text-align: center;
+}
+.mantra-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted); display: block; margin-bottom: 0.5rem;
+}
+.mantra-text {
+  font-style: italic; font-size: 1.05rem;
+  color: var(--gold-light); line-height: 1.65;
+}
+.m-sec {
+  font-family: 'Cinzel', serif; font-size: 0.63rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+}
+.m-text {
+  font-size: 0.96rem; line-height: 1.88;
+  color: var(--text-body); margin-bottom: 2rem;
+}
+.m-facts {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.9rem; margin-bottom: 2rem;
+}
+@media(max-width:500px){ .m-facts { grid-template-columns: 1fr; } }
+.m-fact-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted); display: block; margin-bottom: 0.15rem;
+}
+.m-fact-val { font-size: 0.92rem; color: rgba(253,248,238,0.82); }
+.stories-list { list-style: none; }
+.story-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.story-item:last-child { border-bottom: none; }
+.story-title {
+  font-family: 'Cinzel', serif; font-size: 0.83rem;
+  color: var(--saffron-light); margin-bottom: 0.42rem;
+}
+.story-text { font-size: 0.9rem; line-height: 1.82; color: var(--text-body); }
+</style>
+</head>
+<body>
+
+<!-- ═══ BACKGROUND ═══ -->
+<div class="bg" id="bg"></div>
+
+<div class="site">
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<header class="hero">
+  <span class="hero-eyebrow">The Divine Encyclopedia of Hinduism</span>
+  <div class="om-wrap">
+    <div class="om-glow"></div>
+    <div class="om-halo r3"></div>
+    <div class="om-halo r2"></div>
+    <div class="om-halo r1"></div>
+    <span class="om">ॐ</span>
+  </div>
+  <h1 class="hero-name">Kalpavriksha</h1>
+  <p class="hero-sanskrit">कल्पवृक्ष &nbsp;·&nbsp; The Wish-Fulfilling Tree of the Gods</p>
+  <p class="hero-meaning">In ancient lore, the Kalpavriksha grants any knowledge to those who seek it with a pure heart</p>
+  <div class="hero-divider">
+    <div class="hero-divider-line"></div>
+    <div class="hero-divider-gem"></div>
+    <div class="hero-divider-line"></div>
+  </div>
+  <p class="hero-desc">
+    <em style="display:block;font-size:1.1rem;color:var(--gold-light);margin-bottom:1.2rem;letter-spacing:0.04em;">
+      Asato Mā Sadgamaya &nbsp;·&nbsp; Tamaso Mā Jyotirgamaya &nbsp;·&nbsp; Mṛtyormā Amṛtaṁ Gamaya
+    </em>
+    "Lead me from the unreal to the real, from darkness to light, from death to immortality."
+    These ancient words from the Brihadaranyaka Upanishad have guided seekers for over three thousand years —
+    a perfect prayer for anyone setting out to understand the vast, luminous tradition of Sanatan Dharma.
+  </p>
+  <p class="hero-desc2">
+    Whether you have grown up with these stories or are discovering them for the first time,
+    Kalpavriksha is your sanctuary. Explore the gods, the myths, the philosophies, and the sacred traditions
+    of the world's oldest living spiritual civilization — Sanatan Dharma, the Eternal Way.
+  </p>
+  <span class="scroll-cue">↓ &nbsp; Navigate the Cosmos &nbsp; ↓</span>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <button class="nav-btn active" data-page="cosmos">The Cosmos</button>
+  <button class="nav-btn" data-page="trimurti">The Trimurti</button>
+  <button class="nav-btn" data-page="devi">The Devi</button>
+  <button class="nav-btn" data-page="avatars">Avatars of Vishnu</button>
+  <button class="nav-btn" data-page="pantheon">The Pantheon</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: THE COSMOS
+═══════════════════════════════════════════ -->
+<div class="page active" id="page-cosmos">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">In the Beginning</span>
+    <h2 class="sec-title">The Hindu Cosmos</h2>
+    <p class="sec-intro">
+      Hinduism does not speak of a single moment of creation but of infinite cycles — each universe born, sustained,
+      and dissolved, only to be reborn. Cosmologists estimate the universe to be 13.8 billion years old;
+      the Puranas place one day of Brahma at 4.32 billion years. The resonance is not coincidence — it is wonder.
+    </p>
+    <p class="sec-body">
+      The Hindu view of time is cyclical, not linear. There is no absolute beginning, no absolute end — only the eternal rhythm
+      of Brahma creating, Vishnu sustaining, and Shiva dissolving. Each cycle is called a Kalpa; each Kalpa contains
+      fourteen Manvantaras; each Manvantara holds seventy-one Mahayugas. Within each Mahayuga, consciousness itself
+      descends — from the pure awareness of the Satya Yuga through progressively denser ages until the present Kali Yuga,
+      when the divine is most hidden and the seeking most urgent.
+    </p>
+  </div>
+
+  <div class="cosmos-grid">
+    <div class="cosmos-card">
+      <span class="cosmos-card-num">I</span>
+      <h3 class="cosmos-card-title">Brahman — The Ultimate Reality</h3>
+      <p class="cosmos-card-text">
+        Before all gods, before creation itself, there was Brahman — not a deity but the infinite, self-existent consciousness
+        that underlies and pervades everything. Neither male nor female, neither being nor non-being, Brahman is the source
+        from which all existence emerges and into which it returns. Every deity, every soul, every atom is an expression of
+        this one boundless reality. The great Vedic declaration <em>Tat Tvam Asi</em> — "Thou art That" — reminds every soul
+        that its deepest nature is not separate from Brahman but identical with it. All of Hindu philosophy is, at its core,
+        an exploration of this single truth.
+      </p>
+    </div>
+    <div class="cosmos-card">
+      <span class="cosmos-card-num">II</span>
+      <h3 class="cosmos-card-title">The Cosmic Egg — Hiranyagarbha</h3>
+      <p class="cosmos-card-text">
+        From Brahman arose the golden womb — Hiranyagarbha, the Cosmic Egg. Within it floated the first stirring of
+        differentiated creation. The Rigveda describes this primordial seed as "the one breath that breathed by its own power."
+        When it burst open, half became the sky (Dyaus) and half became the earth (Prithvi), and within that space all life
+        took form. This moment marked the beginning of one Kalpa — a cosmic day of Brahma lasting 4.32 billion years.
+        When that day ends, Brahma sleeps, and all creation dissolves. When he wakes, a new universe begins.
+      </p>
+    </div>
+    <div class="cosmos-card">
+      <span class="cosmos-card-num">III</span>
+      <h3 class="cosmos-card-title">The Four Yugas — Cosmic Ages</h3>
+      <p class="cosmos-card-text">
+        Hindu cosmology organizes time into vast cycles. One Mahayuga spans 4.32 million years across four ages:
+        <em>Satya Yuga</em> (1,728,000 years — the golden age of truth and virtue, when beings live for thousands of years
+        and dharma stands on four legs); <em>Treta Yuga</em> (1,296,000 years — where dharma begins to decline, avatars appear
+        to guide humanity); <em>Dvapara Yuga</em> (864,000 years — further moral diminishment, the age of Krishna);
+        and <em>Kali Yuga</em> (432,000 years — our current age of darkness and confusion, which began in 3102 BCE
+        with the passing of Krishna). We are approximately 5,126 years into Kali Yuga.
+      </p>
+    </div>
+    <div class="cosmos-card">
+      <span class="cosmos-card-num">IV</span>
+      <h3 class="cosmos-card-title">The Three Worlds — Triloka</h3>
+      <p class="cosmos-card-text">
+        The universe comprises three realms: <em>Svarga</em> — the heavenly planes, home of the Devas, ruled by Indra from his
+        palace in Amaravati; <em>Martya</em> — the mortal realm of Earth, where karma is enacted and liberation can be earned
+        through the precious gift of human birth; and <em>Patala</em> — the netherworlds beneath, home to the Nagas and
+        other beings of great power. Beyond these three worlds exist higher planes of consciousness: Mahar, Jana, Tapas,
+        and ultimately <em>Satya Loka</em> — the plane of Brahma himself — which dissolves at the end of each cosmic cycle,
+        only to be reborn again in the next great dawn.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <div class="sec-head">
+    <span class="sec-label">Sacred Literature</span>
+    <h2 class="sec-title">The Scriptures of Sanatan Dharma</h2>
+    <p class="sec-intro">
+      Hinduism's spiritual wisdom is carried in an extraordinary body of literature — from the ancient Vedas heard
+      by sages in meditation to the beloved epics that teach dharma through story.
+    </p>
+  </div>
+  <div class="scripture-grid">
+    <div class="scripture-card">
+      <span class="scripture-era">c. 1500–1200 BCE &nbsp;·&nbsp; Shruti</span>
+      <h3 class="scripture-title">The Four Vedas</h3>
+      <p class="scripture-text">The Vedas are the foundational texts of Hinduism and among the oldest religious scriptures in the world. The name "Veda" comes from the Sanskrit root <em>vid</em>, meaning "to know" — they are the original deposits of sacred knowledge. They were not composed but "heard" (<em>shruti</em>) by ancient sages (<em>rishis</em>) in states of deep meditation, then preserved orally for millennia with extraordinary mathematical precision through complex memorization techniques.</p>
+      <ul class="scripture-list">
+        <li><strong>Rigveda</strong> — The oldest, with 1,028 hymns (10,552 verses) addressed to deities like Indra, Agni, Varuna, and Soma. Contains the famous Nasadiya Sukta (Hymn of Creation) and the Purusha Sukta.</li>
+        <li><strong>Samaveda</strong> — A collection of hymns from the Rigveda set to musical chants. The origin of Indian classical music. 1,875 verses.</li>
+        <li><strong>Yajurveda</strong> — Prose mantras and formulas used by priests during fire sacrifices (<em>yajnas</em>). Divided into Shukla (white) and Krishna (black) Yajurveda.</li>
+        <li><strong>Atharvaveda</strong> — The most diverse — contains hymns, spells, healing prayers, philosophical reflections, and earliest references to Ayurveda. 730 hymns.</li>
+      </ul>
+      <p class="scripture-text">Each Veda has four sections: <em>Samhitas</em> (hymns), <em>Brahmanas</em> (ritual commentaries), <em>Aranyakas</em> (forest treatises), and <em>Upanishads</em> (philosophical conclusions). The Vedas are considered <em>apaurusheya</em> — not of human authorship — and are the ultimate authority for all orthodox Hindu schools.</p>
+    </div>
+    <div class="scripture-card">
+      <span class="scripture-era">c. 800–200 BCE &nbsp;·&nbsp; Vedanta — "End of the Vedas"</span>
+      <h3 class="scripture-title">The Upanishads</h3>
+      <p class="scripture-text">The philosophical crown of the Vedas — 108 principal texts (with 13 considered most important) exploring the deepest questions of existence: What is the ultimate reality? What is the true self? What is the relationship between the individual and the cosmic? The name <em>Upanishad</em> means "to sit down near" — referring to students sitting at the feet of an enlightened teacher to receive secret teaching.</p>
+      <ul class="scripture-list">
+        <li><strong>Brihadaranyaka Upanishad</strong> — The oldest and longest. Contains the famous prayer "Asato Mā Sadgamaya" and the dialogue between sage Yajnavalkya and his wife Maitreyi on the nature of immortality.</li>
+        <li><strong>Chandogya Upanishad</strong> — Source of the great <em>Mahavakya</em> "Tat Tvam Asi" — "Thou art That" — declaring the identity of the individual soul with the universal.</li>
+        <li><strong>Katha Upanishad</strong> — The conversation between young Nachiketa and Yama, the god of death, exploring what survives death.</li>
+        <li><strong>Mandukya Upanishad</strong> — Only 12 verses, but considered the most concise statement of non-dualistic philosophy. Explores the syllable AUM.</li>
+        <li><strong>Isha, Mundaka, Prashna, Aitareya, Taittiriya, Kena, Shvetashvatara</strong> — Each offers unique philosophical insight.</li>
+      </ul>
+      <p class="scripture-text">The Upanishads gave rise to <em>Vedanta</em> — the most influential philosophical school in Hindu history. The "four great sayings" (<em>Mahavakyas</em>) — Prajnanam Brahma, Aham Brahmasmi, Tat Tvam Asi, Ayam Atma Brahma — distill their entire teaching: pure consciousness is the only reality.</p>
+    </div>
+    <div class="scripture-card">
+      <span class="scripture-era">c. 400 BCE – 400 CE &nbsp;·&nbsp; Itihasa — "Thus it was"</span>
+      <h3 class="scripture-title">The Mahabharata</h3>
+      <p class="scripture-text">The world's longest epic poem — 100,000 verses (roughly seven times the combined length of the Iliad and Odyssey) — composed by the sage Veda Vyasa with Lord Ganesha as his scribe. It narrates the great war between two branches of the Bharata dynasty: the five Pandavas (sons of Pandu) and the hundred Kauravas (sons of Dhritarashtra), culminating in the cataclysmic 18-day battle at Kurukshetra.</p>
+      <ul class="scripture-list">
+        <li><strong>18 Parvas (Books)</strong> — From Adi Parva (the beginnings of the dynasty) through Stree Parva (the lamentation of women after the war) to Svargarohana Parva (ascent to heaven).</li>
+        <li><strong>Bhagavad Gita</strong> — 700 verses contained within Bhishma Parva. Krishna's discourse to Arjuna on the battlefield. Considered Hinduism's single most influential text.</li>
+        <li><strong>Vishnu Sahasranama</strong> — The thousand names of Vishnu, contained in the Anushasana Parva. Chanted daily by millions.</li>
+        <li><strong>Yaksha Prashna</strong> — The riddles asked by a celestial being to Yudhishthira, including the famous question: "What is the greatest wonder?" Answer: "Day after day countless creatures die, yet the living wish to live forever."</li>
+      </ul>
+      <p class="scripture-text">The Mahabharata is said to contain everything that exists in the world: <em>"Yad ihasti tad anyatra, yannehasti na tat kvachit"</em> — "What is here may be found elsewhere; what is not here cannot be found anywhere." Beyond a war story, it is a vast meditation on dharma, duty, fate, and the limits of human righteousness.</p>
+    </div>
+    <div class="scripture-card">
+      <span class="scripture-era">c. 500–100 BCE &nbsp;·&nbsp; Adi Kavya — "The First Poem"</span>
+      <h3 class="scripture-title">The Ramayana</h3>
+      <p class="scripture-text">Composed by the sage Valmiki — considered the first poet (<em>Adi Kavi</em>) in human history — the Ramayana narrates the life of Rama, the seventh avatar of Vishnu. The story unfolds across 24,000 verses divided into seven books (<em>Kandas</em>): from Rama's birth in Ayodhya through his marriage to Sita, his fourteen-year forest exile, Sita's abduction by Ravana, the great war in Lanka, and finally Rama's coronation as the ideal king.</p>
+      <ul class="scripture-list">
+        <li><strong>Bala Kanda</strong> — Rama's birth and youth; the breaking of Shiva's bow to win Sita's hand.</li>
+        <li><strong>Ayodhya Kanda</strong> — The fateful boons of Kaikeyi; Rama's exile.</li>
+        <li><strong>Aranya Kanda</strong> — Life in the Dandaka forest; the abduction of Sita.</li>
+        <li><strong>Kishkindha Kanda</strong> — Alliance with the monkey king Sugriva; meeting of Hanuman.</li>
+        <li><strong>Sundara Kanda</strong> — Hanuman's leap to Lanka; the most beloved book, recited weekly by devotees.</li>
+        <li><strong>Yuddha Kanda</strong> — The great war; the death of Ravana; Sita's reunion with Rama.</li>
+        <li><strong>Uttara Kanda</strong> — Rama's reign (Ram Rajya) and final ascent.</li>
+      </ul>
+      <p class="scripture-text">The Ramayana has been retold across South and Southeast Asia in countless versions: Tulsidas's <em>Ramcharitmanas</em> (Hindi), Kamban's <em>Iramavataram</em> (Tamil), the Indonesian <em>Kakawin Ramayana</em>, the Thai <em>Ramakien</em>, and many more. It has shaped art, dance, ethics, and governance for three thousand years.</p>
+    </div>
+    <div class="scripture-card">
+      <span class="scripture-era">c. 300–1500 CE &nbsp;·&nbsp; Smriti — "That which is remembered"</span>
+      <h3 class="scripture-title">The 18 Mahapuranas</h3>
+      <p class="scripture-text">The Puranas ("ancient stories") are encyclopedic texts that made Vedic philosophy accessible through vivid narrative, mythology, and devotional poetry. They cover the <em>Pancha Lakshana</em> (five topics): creation of the universe, dissolution and re-creation, genealogies of gods and sages, the cycles of cosmic time (Manvantaras), and the histories of solar and lunar dynasties.</p>
+      <ul class="scripture-list">
+        <li><strong>Brahma Puranas</strong> (5) — Brahma, Padma, Brahmanda, Brahma Vaivarta, Bhavishya — focused on creation.</li>
+        <li><strong>Vishnu Puranas</strong> (5) — Vishnu, Bhagavata, Narada, Garuda, Padma — glorifying Vishnu. The <strong>Bhagavata Purana</strong> (especially Book 10, narrating Krishna's life) is the most beloved of all Puranas.</li>
+        <li><strong>Shiva Puranas</strong> (5) — Shiva, Linga, Skanda, Vayu, Agni — celebrating Shiva. The <em>Skanda Purana</em> is the longest of all Puranas.</li>
+        <li><strong>Other</strong> — Markandeya (contains the Devi Mahatmya — central text of Shakti worship), Bhavishya, Kurma — diverse themes.</li>
+      </ul>
+      <p class="scripture-text">The Puranas also contain detailed temple-building instructions, pilgrimage guides (Tirtha Mahatmyas), and practical guidance on ethics and rituals. They are the bridge between the abstract metaphysics of the Vedas and the lived devotional life of Hindus.</p>
+    </div>
+    <div class="scripture-card">
+      <span class="scripture-era">c. 500–1500 CE &nbsp;·&nbsp; Agama Shastra</span>
+      <h3 class="scripture-title">Agamas, Tantras &amp; The Bhagavad Gita</h3>
+      <p class="scripture-text">A vast body of texts focused on temple ritual, meditation, mantra, and esoteric spiritual practice. Where the Vedas emphasize fire sacrifice (<em>yajna</em>), the Agamas emphasize temple worship (<em>puja</em>) — and they gave rise to the elaborate tradition of Hindu temple architecture, iconography, and ritual that continues unbroken to this day.</p>
+      <ul class="scripture-list">
+        <li><strong>Shaiva Agamas</strong> (28 main texts) — Guide the worship of Shiva, temple construction, and tantric meditation practices.</li>
+        <li><strong>Vaishnava Pancharatra and Vaikhanasa</strong> — Govern Vishnu temple worship across India.</li>
+        <li><strong>Shakta Tantras</strong> — Explore the divine feminine; sources include Mahanirvana Tantra, Kularnava Tantra, and many others. Foundational for goddess worship.</li>
+        <li><strong>The Bhagavad Gita</strong> — Though contained within the Mahabharata, the Gita stands alone as Hinduism's most translated and studied text. 700 verses in 18 chapters covering the four paths of yoga: Karma (action), Bhakti (devotion), Jnana (knowledge), and Dhyana (meditation).</li>
+        <li><strong>Yoga Sutras of Patanjali</strong> — 196 concise aphorisms codifying the eightfold path of meditation (Ashtanga Yoga).</li>
+        <li><strong>Brahma Sutras</strong> — Badarayana's systematic exposition of Vedanta philosophy.</li>
+      </ul>
+      <p class="scripture-text">Together, these texts give Hindu spiritual life its astonishing range — from the priestly fire rituals of the Vedas, to the contemplative inquiry of the Upanishads, to the mythic devotion of the Puranas, to the embodied tantric practice of the Agamas. Every temperament and every stage of life finds its own path.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: TRIMURTI
+═══════════════════════════════════════════ -->
+<div class="page" id="page-trimurti">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">The Holy Trinity</span>
+    <h2 class="sec-title">The Trimurti</h2>
+    <p class="sec-intro">
+      The great cosmic functions — creation, preservation, and dissolution — are embodied in three supreme deities.
+      Together they form the Trimurti, the threefold manifestation of Brahman's activity in the universe.
+    </p>
+    <p class="sec-body">
+      The concept of the Trimurti is one of Hinduism's most elegant philosophical insights: that the universe requires
+      not just a creator but a preserver and a destroyer — because without dissolution, creation would stagnate,
+      and without preservation, creation would collapse before it could mature. These three are not rivals but partners
+      in the one great cosmic dance, each essential, each incomplete without the others.
+      Each god of the Trimurti has a consort who embodies his Shakti — his activating divine energy:
+      Brahma with Saraswati (knowledge), Vishnu with Lakshmi (prosperity), and Shiva with Parvati (power).
+    </p>
+  </div>
+  <div class="gods-grid" id="grid-trimurti"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: DEVI
+═══════════════════════════════════════════ -->
+<div class="page" id="page-devi">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">The Divine Feminine</span>
+    <h2 class="sec-title">The Devi — Shakti</h2>
+    <p class="sec-intro">
+      The universe could not exist without the Divine Feminine. Shakti is not merely a goddess
+      but the primordial energy — the very power by which Brahman becomes creation.
+      Without Shakti, Shiva is a corpse. Without the goddess, the gods are without function.
+    </p>
+    <p class="sec-body">
+      In the Devi Mahatmya — one of Hinduism's most important texts — it is declared that the goddess
+      alone pervades the entire universe. She is Mahadevi, the Great Goddess, whose many forms
+      address every aspect of existence: Saraswati for wisdom, Lakshmi for abundance, Durga for protection,
+      Kali for liberation. She is simultaneously the gentle mother and the terrible warrior, the creator
+      of illusion (Maya) and the one who cuts through it. To know the goddess in all her forms
+      is to understand the full range of divine reality.
+    </p>
+  </div>
+  <div class="gods-grid" id="grid-devi"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: AVATARS
+═══════════════════════════════════════════ -->
+<div class="page" id="page-avatars">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">Descents of the Preserver</span>
+    <h2 class="sec-title">The Dashavatar — Ten Avatars of Vishnu</h2>
+    <p class="sec-intro">
+      Whenever dharma declines and evil threatens to overwhelm creation, Vishnu descends to Earth in a new form.
+      "Yada yada hi dharmasya glanir bhavati Bharata" — "Whenever there is a decline of righteousness,
+      O Bharata, I manifest myself." — Bhagavad Gita, Chapter 4, Verse 7.
+    </p>
+    <p class="sec-body">
+      The ten avatars of Vishnu — the Dashavatar — trace a remarkable arc that modern scholars have noted
+      parallels the theory of evolution: from ocean life (Matsya the fish) to amphibious life (Kurma the tortoise)
+      to mammalian life (Varaha the boar) to the half-human Narasimha, to the short Vamana, to the forest-dwelling
+      Parashurama, to the civilized ideal kings Rama and Balarama, to the fully realized divine Krishna,
+      and finally to the prophesied Kalki yet to come. Whether or not this parallel is intentional, it speaks
+      to the depth and prescience of the Hindu philosophical imagination.
+    </p>
+  </div>
+  <div class="gods-grid" id="grid-avatars"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PANTHEON
+═══════════════════════════════════════════ -->
+<div class="page" id="page-pantheon">
+<div class="section">
+  <div class="sec-head">
+    <span class="sec-label">The Wider Cosmos</span>
+    <h2 class="sec-title">The Hindu Pantheon</h2>
+    <p class="sec-intro">
+      A common misconception is that Hinduism has "33 million gods" — but the actual Vedic teaching is far more elegant.
+      The Yajurveda speaks of <em>Trayastrimsha Koti</em> — thirty-three categories (<em>koti</em>) of divine beings —
+      each governing a fundamental force of nature or cosmic principle.
+    </p>
+    <p class="sec-body">
+      Hinduism's apparent polytheism is, at its philosophical core, a sophisticated monism. Every deity is understood
+      as a form or aspect of the one Brahman. Worshipping Ganesha, Hanuman, or Indra is not worshipping a separate god
+      but approaching the same infinite reality through a form the human mind can grasp.
+      <em>"Ekam sat vipra bahudha vadanti"</em> — "Truth is one; the wise call it by many names" — Rigveda 1.164.46.
+    </p>
+  </div>
+
+  <!-- 33 Devas Breakdown -->
+  <div class="devas-block">
+    <span class="devas-label">The Vedic Pantheon</span>
+    <h3 class="devas-title">The Trayastrimsha — The Thirty-Three Devas</h3>
+    <p class="devas-intro">
+      The Vedas group the gods into four categories totaling thirty-three. These are the original Vedic Devas
+      who govern the cosmic forces — light, fire, wind, water, time, and the elements that make life possible.
+    </p>
+    <div class="devas-grid">
+      <div class="deva-group">
+        <span class="deva-num">12</span>
+        <h4 class="deva-group-title">Adityas — Solar Gods</h4>
+        <p class="deva-group-text">The twelve sons of the goddess Aditi, each representing one month of the year and one aspect of the sun's annual journey: <strong>Vivasvan, Aryaman, Pushan, Tvashta, Savitr, Bhaga, Dhata, Vidhata, Varuna, Mitra, Shakra (Indra),</strong> and <strong>Urukrama (Vishnu)</strong>. They are the lords of light, order, and cosmic justice.</p>
+      </div>
+      <div class="deva-group">
+        <span class="deva-num">11</span>
+        <h4 class="deva-group-title">Rudras — Storm Gods</h4>
+        <p class="deva-group-text">The eleven forms of Rudra (the precursor of Shiva), representing the breath of life and the fierce forces of destruction and renewal: <strong>Hara, Bahurupa, Tryambaka, Aparajita, Vrishakapi, Shambhu, Kapardin, Raivata, Mrigavyadha, Sharva,</strong> and <strong>Kapali</strong>. They govern the storms and the inner pranas (life-breaths) of all beings.</p>
+      </div>
+      <div class="deva-group">
+        <span class="deva-num">8</span>
+        <h4 class="deva-group-title">Vasus — Elemental Gods</h4>
+        <p class="deva-group-text">The eight attendants of Indra, each governing one element of nature: <strong>Apa</strong> (water), <strong>Dhruva</strong> (the pole star), <strong>Soma</strong> (the moon), <strong>Dhara</strong> (earth), <strong>Anila</strong> (wind), <strong>Anala/Agni</strong> (fire), <strong>Pratyusha</strong> (dawn), and <strong>Prabhasa</strong> (light). Bhishma of the Mahabharata was an incarnation of Dyaus, replaced in later lists by Prabhasa.</p>
+      </div>
+      <div class="deva-group">
+        <span class="deva-num">2</span>
+        <h4 class="deva-group-title">Ashvini Kumaras — Twin Healers</h4>
+        <p class="deva-group-text">The divine twins <strong>Nasatya</strong> and <strong>Dasra</strong> — celestial physicians, sons of the sun god Surya. They ride a golden chariot at dawn and twilight and are the gods of medicine, healing, and the restoration of youth. Nakula and Sahadeva of the Pandavas were their sons.</p>
+      </div>
+    </div>
+    <p class="devas-total">
+      <span>12 Adityas</span> &nbsp;+&nbsp; <span>11 Rudras</span> &nbsp;+&nbsp; <span>8 Vasus</span> &nbsp;+&nbsp; <span>2 Ashvini Kumaras</span> &nbsp;=&nbsp; <strong>33 Devas</strong>
+    </p>
+    <p class="devas-note">
+      Some lists substitute <em>Prajapati</em> (the lord of creatures) and <em>Vashatkara</em> (the personification of sacrifice) for the Ashvinis.
+      Beyond these 33, the broader Puranic tradition added countless beloved deities — Ganesha, Hanuman, Kartikeya, the goddesses, and the Trimurti themselves —
+      who are not part of the original 33 but are central to popular worship today. Below are some of the most beloved.
+    </p>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <div class="sec-head" style="margin-top:1rem">
+    <span class="sec-label">The Beloved Deities</span>
+    <h2 class="sec-title">Gods of Devotion &amp; Daily Life</h2>
+    <p class="sec-intro">
+      These deities — though not part of the original Vedic 33 — are among the most worshipped today.
+      Each has a unique place in the heart of Hindu devotional life.
+    </p>
+  </div>
+  <div class="gods-grid" id="grid-pantheon"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer">
+  <span class="footer-om">ॐ</span>
+  <p class="footer-name">Kalpavriksha</p>
+  <p class="footer-text">Sarve Bhavantu Sukhinah &nbsp;·&nbsp; May All Beings Be Happy &nbsp;·&nbsp; Sanatan Dharma</p>
+  <div class="footer-credit">
+    <p class="footer-author">Made with devotion by <span>Shashank Guda</span></p>
+    <p class="footer-feedback">
+      A work in progress, lovingly maintained. &nbsp;·&nbsp;
+      Open to criticism, corrections, and contributions — reach out anytime.
+    </p>
+  </div>
+</footer>
+
+</div><!-- end .site -->
+
+<!-- ═══════════════════════════════════════════
+     MODAL
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-banner" id="mbanner"></div>
+    <div class="modal-art-wrap">
+      <div class="modal-art-pattern"></div>
+      <button class="modal-close" id="modal-close">✕ Close</button>
+      <div id="mart" style="transform:scale(1.55)"></div>
+    </div>
+    <div class="modal-body">
+      <h2 class="modal-name" id="mname"></h2>
+      <p class="modal-epithet" id="mepithet"></p>
+      <div class="mantra-box">
+        <span class="mantra-label">Sacred Mantra</span>
+        <p class="mantra-text" id="mmantra"></p>
+      </div>
+      <div id="mcontent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+const DATA = {
+  trimurti: [
+    {
+      id:'brahma', name:'Brahma', epithet:'The Creator of All Worlds',
+      c:['#E8A020','#7A4800'],
+      mantra:'Aum Brahmadevaya Namaha — I bow to the Creator God, the source of all knowledge and form.',
+      summary:'The four-headed god of creation who brought forth the universe from his mind, mouth, and being. Though supreme in cosmic function, Brahma is paradoxically the least worshipped of the great gods — a reminder that creation, once set in motion, must be sustained and ultimately transformed.',
+      attrs:['Creation','Knowledge','The Four Vedas','Cosmic Time','Brahmaloka'],
+      origin:'Brahma emerged from the lotus that grew from the navel of the sleeping Vishnu at the dawn of each cosmic cycle. He is described in the Puranas as the first being of differentiated consciousness — the architect of everything that exists. With four faces turned in the four cardinal directions, he simultaneously composed the four Vedas, perceiving all of reality at once. His four arms hold the Vedas, a water pot (kamandalu), a ladle for sacred fire, and prayer beads. In some accounts Brahma first created water, then placed a seed in it; the seed became a golden egg from which he himself emerged — hence his epithet Hiranyagarbha, "born of the golden womb."',
+      facts:{Consort:'Saraswati (goddess of knowledge)','Sacred Mount':'Hamsa — the divine swan','Primary Weapon':'Kamandalu (sacred water pot)','Sacred Text':'The Four Vedas','Celestial Abode':'Brahmaloka, also called Satyaloka','Iconography':'Four heads facing all directions, four arms, red or golden complexion, white beard','Number of Temples':'Only one major temple — Pushkar, Rajasthan'},
+      stories:[
+        {title:'The Birth of Brahma from Vishnu\'s Navel',text:'At the beginning of each universe, Vishnu reclines on the cosmic serpent Adishesha, floating on the primordial ocean of cosmic milk. From his navel grows a thousand-petaled lotus, and from that lotus Brahma is born. Seeing nothing but water and darkness, Brahma meditates for a thousand divine years before receiving wisdom and purpose. He then creates the 14 worlds, all living beings, the laws of nature, and the cycle of time itself — from his mind, from his speech, and from different parts of his body. The ten great sages (Prajapatis) are his mind-born sons, tasked with populating the cosmos.'},
+        {title:'Why Brahma Has Almost No Temples',text:'Once, Brahma and Vishnu fell into argument over who was truly supreme. At that moment, a blazing pillar of light appeared — Shiva, in the form of an infinite Jyotirlinga stretching from the earth\'s floor to the heaven\'s ceiling. Both searched for its end: Vishnu dug downward as a boar for a thousand years; Brahma flew upward as a swan. Vishnu returned and admitted defeat. But Brahma encountered a Ketaki flower drifting downward and bribed it to bear false witness that he had found the top. Shiva saw through the deception and cursed Brahma: he would never be worshipped in temples. The Ketaki flower was also cursed — never to be used in worship. To this day, Brahma has only one major temple in all of India, at Pushkar in Rajasthan.'},
+        {title:'Brahma Creates the Vedas Through Music',text:'At the moment of creation, Brahma perceived the universe in his mind as infinite potential but found no instrument through which to give it order. He meditated on his consort Saraswati, who manifested from his tongue playing the veena — the divine lute. From her music arose the sacred syllable AUM, which became the primordial sound of creation. From AUM came the four Vedas; from the Vedas came Sanskrit, the language of the gods; from Sanskrit came all human language. This is why music and learning are considered sacred acts in Hindu tradition — they participate in the original creative act.'}
+      ]
+    },
+    {
+      id:'vishnu', name:'Vishnu', epithet:'The Preserver & Protector of All Dharma',
+      c:['#2A7AAF','#0A2E4A'],
+      mantra:'Om Namo Narayanaya — I bow to Narayana, the refuge and sustainer of all beings.',
+      summary:'The cosmic preserver who maintains the balance of creation through love, wisdom, and strategic intervention. Whenever the balance of the universe is threatened, Vishnu descends in an avatar — a divine embodiment perfectly suited to restore what has been lost.',
+      attrs:['Preservation','Dharma','Compassion','The Ten Avatars','Vaikuntha'],
+      origin:'Vishnu exists in the eternal state of Yoga Nidra — cosmic yogic sleep — reclining on Adishesha, the infinite serpent whose thousand hoods shelter him, floating on the primordial ocean of milk called the Kshira Sagara. He is both immanent (dwelling in all hearts as the Antaryami, the Inner Witness) and transcendent (beyond all creation). His consort Lakshmi, seated at his feet, embodies the wealth and beauty of the manifest world. He is known by a thousand names — the Vishnu Sahasranama — each capturing a different facet of his infinite nature. His blue or dark complexion represents the infinite sky and the unfathomable depth of the cosmic ocean.',
+      facts:{Consort:'Lakshmi (goddess of wealth and grace)','Sacred Mount':'Garuda — the divine eagle-king','Primary Weapons':'Sudarshana Chakra (spinning discus), Panchajanya (conch shell), Kaumodaki (mace), Sharanga (bow)','Sacred Text':'Bhagavata Purana, Vishnu Purana, Vishnu Sahasranama','Celestial Abode':'Vaikuntha — a plane of pure consciousness beyond samsara','Iconography':'Blue or dark complexion, four arms, yellow Pitambara garment, Shrivatsa mark on chest','Avatars':'Ten principal avatars (Dashavatar) across all cosmic ages'},
+      stories:[
+        {title:'The Churning of the Cosmic Ocean — Samudra Manthan',text:'When the gods lost their power after being cursed by the sage Durvasa for disrespecting a garland of sacred flowers, Vishnu advised them to churn the cosmic ocean of milk with Mount Mandara as a churning rod and Vasuki the serpent king as a rope — with the demons as unwitting partners in the labor. As they churned, fourteen divine treasures arose, including the physician Dhanvantari bearing the amrita (nectar of immortality), the wish-fulfilling tree Kalpavriksha, and the goddess Lakshmi herself — who immediately chose Vishnu as her eternal consort. When demons seized the amrita, Vishnu took the enchanting form of Mohini — a supernaturally beautiful woman — and tricked the demons into surrendering it, distributing the nectar to the gods and restoring their power.'},
+        {title:'Gajendra Moksha — The Elephant\'s Liberation',text:'The elephant king Gajendra, lord of a great herd, was seized by a massive crocodile in a sacred lotus lake while leading his family to drink. He fought with all his strength for a thousand years as his family watched helplessly. When his strength finally failed and he knew death was near, he abandoned all pride and called out to Vishnu alone — not as a king demanding rescue but as a soul surrendering completely, holding up a lotus in offering. Vishnu, who had been sleeping in Vaikuntha, instantly awoke, mounted Garuda, and flew to Earth so fast that his garments were still being arranged as he arrived. He severed the crocodile\'s head with his Sudarshana Chakra and granted Gajendra liberation on the spot. This story remains the supreme illustration of Saranagati — absolute surrender to God.'},
+        {title:'Vishnu Protects the Devotee Prahlada',text:'The demon king Hiranyakashipu had obtained a boon making him immune to death by man or beast, by day or night, inside or outside, on earth or in the sky, by any weapon. He declared himself God and forbade the worship of Vishnu. But his own young son Prahlada refused to stop chanting Vishnu\'s name. Hiranyakashipu subjected the boy to every torture — poison, fire, serpents, trampling by elephants — but Vishnu protected him each time. Finally, the king demanded: "Where is your god? Is he in this pillar?" He struck the pillar and it split open — and from it emerged Narasimha, the man-lion avatar of Vishnu, who slew the king at dusk (neither day nor night), in a doorway (neither inside nor outside), holding him on his lap (neither earth nor sky), tearing him with his claws (no weapon). Every condition of the boon was circumvented.'}
+      ]
+    },
+    {
+      id:'shiva', name:'Shiva', epithet:'The Destroyer · The Auspicious One · Mahadeva',
+      c:['#7B4EC0','#2A1240'],
+      mantra:'Om Namah Shivaya — I bow to Shiva, the auspicious one; the lord who dwells within all beings as their inner self.',
+      summary:'The destroyer and transformer of the cosmos — simultaneously the wildest and the most ascetic of all gods. Shiva is paradox incarnate: destroyer and creator, householder and hermit, gentle father and terrifying cosmic dancer. He is the god of yogis, poets, and outcasts.',
+      attrs:['Destruction','Transformation','Deep Meditation','The Third Eye','Mount Kailash'],
+      origin:'Shiva\'s origins are among the deepest in Indian religion — stretching back to the proto-Shiva figure of the Indus Valley Civilization (2600–1900 BCE), where a horned, meditating figure surrounded by animals appears on the Pashupati seal. In the Vedas he appears as Rudra — the fierce, howling storm god associated with both destruction and healing, wild forests and medicine. The name "Rudra" means "the howler" or "the red one." Over millennia, multiple traditions — Vedic, tribal, Tantric, and Puranic — merged into the complex figure of Mahadeva, the Great God. He is simultaneously the Adi Yogi (the first practitioner of yoga), Nataraja (the cosmic dancer), and the supreme Linga — the formless, infinite pillar of consciousness.',
+      facts:{Consort:'Parvati (also Sati in her previous birth)','Sacred Mount':'Nandi — the great white bull','Primary Weapons':'Trishula (trident), Pinaka bow, Pashupatastra (cosmic weapon)','Sacred Text':'Shiva Purana, Linga Purana, Skanda Purana','Celestial Abode':'Mount Kailash in the Himalayas','Iconography':'White ash-smeared body, crescent moon in matted hair, Ganga flowing from his locks, cobra around neck, third eye on forehead, blue throat (Neelakantha)','Sacred Symbol':'The Shivalinga — the formless infinite represented as a pillar of light'},
+      stories:[
+        {title:'Shiva Swallows the Cosmic Poison Halahala',text:'During the churning of the cosmic ocean, before any of the divine treasures arose, a terrible poison called Halahala emerged from the depths — so potent that its fumes began exterminating all living beings, divine and mortal alike. Neither the Devas nor the Asuras could approach it; even Brahma and Vishnu were at a loss. The gods turned to Shiva in desperation. Moved by pure compassion for all beings, Shiva descended to the ocean, gathered the entire Halahala in his cupped hands, and drank it in a single swallow. His consort Parvati, watching in alarm, grabbed his throat to prevent the poison from descending into his stomach. The poison remained held in his throat, turning it a deep blue-black forever. This is why Shiva is called Neelakantha — the Blue-Throated One — and why the color blue in Hindu iconography often signals the divine absorption of suffering on behalf of all.'},
+        {title:'The Dance of Nataraja — Lord of the Cosmic Dance',text:'In the Tillai forest (modern Chidambaram in Tamil Nadu), a group of arrogant sages believed they could perform rituals to attain supernatural powers without surrendering their egos. Shiva arrived disguised as a beautiful beggar, Vishnu as a beautiful woman. The sages\' wives fell under Shiva\'s enchantment; furious, the sages sent a tiger, a serpent, and a malevolent dwarf-demon named Apasmara (representing ignorance and delusion) against him. Shiva skinned the tiger effortlessly, draped the serpent around his neck, and placed his foot on Apasmara. Then he began the Ananda Tandava — the dance of eternal bliss. His drum (damaru) beat out the rhythm of creation; his fire represented dissolution; his raised foot offered liberation to all who saw. This dance, frozen in the great bronze Nataraja sculptures, is the universe\'s ongoing heartbeat.'},
+        {title:'The Wedding of Shiva and Parvati',text:'After Sati — Shiva\'s first wife and a daughter of Daksha — immolated herself when Daksha publicly humiliated Shiva at a great sacrifice, Shiva went mad with grief. For years he wandered the cosmos carrying Sati\'s body, scorching everything with his sorrow. Vishnu used his Sudarshana Chakra to cut Sati\'s body into 51 pieces which fell to Earth and became the Shakti Peethas — the power seats of the goddess, which are sacred pilgrimage sites to this day. Sati was eventually reborn as Parvati, daughter of the Himalayas, with the specific mission of winning Shiva back. She performed increasingly extreme austerities in the Himalayas until even Shiva\'s seated meditation was disturbed. Their eventual wedding was attended by all the gods and became one of the great cosmic events — the union of consciousness (Shiva) and energy (Shakti) that sustains the universe.'}
+      ]
+    }
+  ],
+
+  devi: [
+    {
+      id:'saraswati', name:'Saraswati', epithet:'Goddess of Knowledge, Music, Arts & Wisdom',
+      c:['#4A90B8','#1A3A5A'],
+      mantra:'Om Aim Saraswatyai Namaha — I bow to Saraswati, the bestower of knowledge, speech, and all the arts.',
+      summary:'The radiant goddess of learning, music, poetry, and wisdom — she who flows through all creative and intellectual endeavor. Where Lakshmi is the goal, Saraswati is the path; where wealth can be hoarded, wisdom must flow freely.',
+      attrs:['Wisdom','Music','Learning','Eloquence','The Arts','Speech'],
+      origin:'Saraswati is one of the oldest Vedic goddesses, originally the personification and deity of the Saraswati River — the great river of northwestern India that nourished the earliest Vedic civilization before it dried up sometime after 1900 BCE. The Rigveda praises her as the best of mothers, best of rivers, best of goddesses, flowing through the world with her purifying current. As the physical river disappeared, she became fully identified with the inner river of knowledge, speech, and consciousness. She is called Vac — the goddess of sacred speech — for it is through her that the Vedas were revealed to the ancient sages.',
+      facts:{Consort:'Brahma (the Creator)','Sacred Mount':'Hamsa (divine swan) or peacock','Sacred Objects':'Veena (divine lute), palm-leaf manuscripts, prayer beads, water pot','Sacred Text':'Saraswati Purana, Saraswati Stotra','Festival':'Vasant Panchami (fifth day of spring)','Iconography':'White-clad, four arms, seated on white lotus, serene expression, crescent moon adorning her head'},
+      stories:[
+        {title:'Saraswati Creates Language and the Vedas',text:'At the beginning of creation, Brahma had formed the structure of the universe but found it silent and purposeless — no being could communicate, no truth could be transmitted, reality had no way to know itself. He prayed deeply to his consort Saraswati, and she manifested from his tongue playing her veena. Her music resonated through all existence at the frequency of AUM — the primordial sound — and from that vibration emerged Sanskrit, the language of the gods. From Sanskrit came the four Vedas; from the Vedas came all sacred knowledge; from sacred knowledge came the possibility of liberation. All language, all music, all mathematics, all science flows ultimately from Saraswati\'s first song at the dawn of creation.'},
+        {title:'The Rivalry Between Saraswati and Lakshmi',text:'There is an old saying in India: "Where Lakshmi dwells, Saraswati often departs; where Saraswati dwells, Lakshmi may be scarce." This reflects a deeply observed human truth — that the pursuit of wealth and the pursuit of wisdom often pull in opposite directions. A scholar absorbed in books may not accumulate riches; a merchant focused on profit may not cultivate wisdom. The two goddesses are said to be rivals, each jealous of the devotion given to the other. Yet they are both aspects of the same divine feminine — and the rare individual who unites wealth with wisdom, who serves both goddesses without letting either diminish the other, is considered truly blessed.'},
+        {title:'Vasant Panchami — The Festival of Saraswati',text:'Every year on the fifth day of the spring month of Magha, students across India celebrate Saraswati Puja. Books, musical instruments, pens, and tools of craft are placed at the goddess\'s feet and worshipped. Students abstain from study for the day — honoring the source of knowledge by resting in it rather than grasping at it. Yellow, the color of mustard flowers blooming across the fields in early spring, is worn by devotees and offered to the goddess, symbolizing the warm brightness of awakened intelligence. In Bengal this festival is celebrated with particular joy, with beautifully decorated clay statues of Saraswati installed in every school and home.'}
+      ]
+    },
+    {
+      id:'lakshmi', name:'Lakshmi', epithet:'Goddess of Wealth, Fortune, Beauty & Grace',
+      c:['#C9840A','#5C3A00'],
+      mantra:'Om Shreem Mahalakshmiyei Namaha — I bow to the great Lakshmi, bestower of all abundance and auspiciousness.',
+      summary:'The luminous goddess of wealth, prosperity, and divine grace — the one who brings both material abundance and spiritual fortune. Lakshmi is a living presence, not a mere symbol: she cannot be forced to stay but chooses her dwelling, remaining only where virtue, diligence, and cleanliness reside.',
+      attrs:['Wealth','Fortune','Beauty','Fertility','Auspiciousness','Grace'],
+      origin:'Lakshmi arose from the churning of the cosmic ocean during the Samudra Manthan, emerging on a fully-bloomed lotus flower in the midst of the primordial waters, radiating an unearthly golden light. Both the Devas and Asuras fell immediately under her spell and sought to claim her. But she turned and placed a garland around the neck of Vishnu, choosing him as her eternal consort. Her choice was not arbitrary — Vishnu\'s nature of preservation and dharmic order is the perfect environment for prosperity to dwell. She is his eternal companion across all his avatars: as Sita she accompanies Rama, as Rukmini and Radha she accompanies Krishna. Without Lakshmi, Vishnu\'s preservation of the world would have no beauty or abundance to protect.',
+      facts:{Consort:'Vishnu (the Preserver)','Sacred Mount':'Owl (Uluka) or white elephant; she rides a lotus','Sacred Objects':'Golden lotus flowers, gold coins falling from hand, water pot, bilva fruit','Sacred Text':'Lakshmi Purana, Sri Suktam, Kanakadhara Stotra','Festival':'Diwali (Festival of Lights) — the night Lakshmi walks the Earth','Iconography':'Four arms, red or gold saree, rising from or seated on lotus, coins pouring from one hand'},
+      stories:[
+        {title:'Lakshmi and the Sage Durvasa — How the Gods Lost Their Power',text:'The sage Durvasa, famous for his volcanic temper, was once given a divine garland of ever-fresh flowers by a celestial nymph. He encountered Indra, the king of the gods, riding his elephant Airavata, and offered him the garland as a blessing. Indra carelessly tossed it onto his elephant\'s head; the elephant, irritated, threw it to the ground and trampled it. Durvasa was enraged — the garland was infused with Lakshmi\'s presence — and cursed Indra: Lakshmi herself would leave the three worlds. Immediately, abundance drained from the cosmos. Crops withered, rivers ran thin, the gods grew weak. This is the incident that led to the Samudra Manthan — the churning of the cosmic ocean — through which Lakshmi was eventually recovered.'},
+        {title:'Diwali — The Night Lakshmi Walks the Earth',text:'According to the most widespread tradition of Diwali, on the new-moon night of the month of Kartika, Lakshmi descends from Vaikuntha and walks the Earth, seeking homes worthy of her blessing. She is drawn to light — the rows of oil lamps (diyas) that devotees place in every window, doorstep, and rooftop serve as her guiding stars. She enters homes that are clean, ordered, and joyful. She lingers where gratitude is expressed and generosity practiced. She departs quickly from homes filled with pride, greed, laziness, or conflict. This is why the cleaning and decorating of homes before Diwali is not merely traditional housekeeping but a sacred act of invitation — preparing a home worthy of the goddess herself.'},
+        {title:'Kanakadhara Stotra — Adi Shankaracharya Invokes Lakshmi',text:'The great philosopher Adi Shankaracharya, as a young student on his begging rounds, came to a woman\'s home and she had nothing to offer him — not even a single gooseberry (amla). Rather than send a brahmin student away empty-handed, she gave him the one gooseberry she found in her home. The boy was so moved by her poverty and her generosity that he composed the Kanakadhara Stotra — 21 verses of praise to Lakshmi — on the spot. As he sang, a shower of golden gooseberries rained down from the sky into the woman\'s home, transforming her poverty into abundance forever. This story captures the essence of Lakshmi: she responds not to those who are already wealthy but to those who give what little they have with a full heart.'}
+      ]
+    },
+    {
+      id:'durga', name:'Durga', epithet:'The Invincible — Warrior Mother of the Universe',
+      c:['#A83232','#4A1010'],
+      mantra:'Om Dum Durgayei Namaha — I bow to Durga, the invincible one who removes all suffering and fear.',
+      summary:'Born from the combined radiance of all the gods when they were defeated and powerless, Durga is the supreme warrior goddess — she whom no demon can overcome and no force can stop. She is the universe\'s ultimate protective power made manifest.',
+      attrs:['Victory','Courage','Protection','Justice','Warrior Strength','Motherhood'],
+      origin:'When the demon Mahishasura obtained a boon from Brahma that no male being — man, god, or demon — could kill him, he invaded the heavens, defeated all the gods, and declared himself ruler of the three worlds. The defeated Devas gathered before Brahma, Vishnu, and Shiva in desperation. At the sight of the gods\' helplessness, a divine anger arose simultaneously in all three — and from their bodies streamed blazing rivers of divine energy that merged into one overwhelming brilliance. From that confluence of all divine power a goddess arose — Durga. Each god gave her a weapon from his own arsenal: Shiva his trident, Vishnu his chakra, Indra his thunderbolt, Varuna his conch, Agni his fire weapon, Himavan his lion. Thus armed with the power of all the gods combined, she rode to war.',
+      facts:{Consort:'None — she is independent, an aspect of Parvati but sovereign','Sacred Mount':'Simha (lion) or tiger','Primary Weapons':'Ten weapons, one in each hand including trident, chakra, sword, bow, mace, shield','Sacred Text':'Devi Mahatmya (also called Durga Saptashati or Chandi Path)','Festival':'Navratri (nine nights) and Durga Puja (especially in Bengal)','Iconography':'Ten arms, radiant golden complexion, warrior posture on lion, weapons blazing'},
+      stories:[
+        {title:'The Slaying of Mahishasura — The Victory of Shakti',text:'Durga\'s lion carried her across the sky to the demon king Mahishasura\'s forces and she engaged his vast army single-handedly, slaughtering demons by the thousands while her lion tore through others. General after general fell: Chikshura, Chamara, Asiloma, Vidalaksha — each was destroyed. Finally Mahishasura himself entered the battle, shapeshifting frantically — from his buffalo demon form to a lion, then to a man wielding a sword, then to an elephant, then back to a buffalo. Each time Durga matched and surpassed him. Finally she pinned him to the earth with her foot, drove her trident into his chest, and severed his head with her sword. The gods rained flowers on her from heaven. This battle — immortalized in the Devi Mahatmya — is reenacted symbolically every year during Navratri and Durga Puja.'},
+        {title:'Durga Creates Kali to Destroy Raktabija',text:'In the campaign against the demon army, two particularly dangerous generals — Chanda and Munda — attacked Durga\'s forces. From the anger on Durga\'s forehead, a terrifying black goddess burst forth: Kali, with wild hair, blood-red tongue extended, wearing a garland of skulls. She consumed Chanda and Munda and was named Chamunda by Durga. Later, the demon Raktabija ("blood-seed") posed an even greater challenge: each drop of his blood that fell on the ground sprouted a new demon identical to him. As he was wounded, thousands of duplicates filled the battlefield. Kali solved this by spreading her tongue across the entire field, catching every drop of blood before it could touch the earth, drinking the demon army out of existence until Raktabija himself fell.'}
+      ]
+    },
+    {
+      id:'kali', name:'Kali', epithet:'The Dark Mother — Goddess of Time, Death & Liberation',
+      c:['#7030A0','#1A0035'],
+      mantra:'Om Krim Kalikayei Namaha — I bow to Kali, the power of time and transformation, the liberator of souls.',
+      summary:'The most misunderstood of all Hindu goddesses and the most profoundly compassionate. Kali is not the goddess of death — she is the goddess who destroys what is false: ego, illusion, and the fear of dissolution. Her fearsome appearance is medicine for the soul.',
+      attrs:['Time','Liberation','Dissolution of Ego','Cosmic Transformation','Raw Power'],
+      origin:'Kali burst from the forehead of the goddess Durga during the great battle against the demons, or in other accounts emerged from the darkest rage of Parvati herself when her patience with evil finally broke. Her name derives from "Kala" — time — for she is the one who devours even time itself. She is black as the sky before creation because she contains all potential within her. Her iconography is deliberately terrifying: wild matted hair streaming in all directions, eyes red with fury, tongue extended and dripping blood, a garland of 52 severed heads (representing the 52 letters of the Sanskrit alphabet, all manifestations of divine speech), a skirt of severed arms, and holding a sword, a severed head, and making gestures of blessing and protection.',
+      facts:{Consort:'Shiva (she stands upon him)','Sacred Mount':'None — she dances and stands freely','Primary Weapons':'Khadga (sword), severed head, skull cup of blood, Abhaya mudra (gesture of protection)','Sacred Text':'Mahanirvana Tantra, Karpuradistotram, Kalika Purana','Festival':'Kali Puja (night of Diwali in Bengal and Odisha)','Iconography':'Blue-black complexion, naked or minimally clothed, wild hair, four arms, standing on prostrate Shiva'},
+      stories:[
+        {title:'Kali and Raktabija — The Tongue That Saved the Universe',text:'The demon Raktabija had obtained the boon that each drop of his blood that fell to Earth would instantly multiply into a fully-armed demon identical to himself. The gods\' weapons could cut him endlessly but each wound only multiplied him — the battlefield was filling with thousands of Raktabija duplicates threatening to overwhelm existence itself. The situation seemed hopeless. Durga called forth Kali. The dark goddess spread her enormous tongue to cover the entire battlefield — and as the gods struck Raktabija, every drop of his blood landed on Kali\'s tongue and was swallowed before touching the earth. No duplicates could form. Drinking demon after demon, Kali finally swallowed the original Raktabija himself. The extended red tongue is now Kali\'s most recognized image — not a sign of aggression but of the compassionate cosmic absorption of all that threatens existence.'},
+        {title:'Why Kali Stands on Shiva',text:'After the battle, Kali\'s bloodlust became a cosmic crisis. Drunk on demon blood, she began dancing wildly across the three worlds, her feet shaking the foundations of creation itself. The gods could not stop her. Even Vishnu stepped before her but she trampled him underfoot. Finally, Shiva lay down quietly in her path. When her foot touched the body of her husband, Kali stopped — shocked and ashamed. She stuck out her tongue in an expression of mortification. The image captures the deepest Tantric philosophy: Shakti (dynamic cosmic energy, represented by Kali) is the active power of the universe, but without Shiva (pure consciousness) to rest upon, it becomes destructive. Consciousness without energy cannot act; energy without consciousness cannot be directed. Together they are the whole.'},
+        {title:'Kali as the Compassionate Dark Mother',text:'In the Tantric tradition — especially in Bengal — Kali is worshipped not as a goddess of fear but as the most tender and accessible of all deities. The great Bengali saint Ramakrishna Paramahamsa experienced Kali as the Divine Mother in the most intimate and loving way — he would speak to her, laugh with her, weep in her presence. He wrote: "She is my Divine Mother. I see her pervading the whole world. She is the embodiment of Brahman. She is pure knowledge, pure bliss, pure consciousness." Her terrible form is not meant to frighten devotees but to destroy their fear — if you can love the most terrifying face of the Divine, you have truly overcome the deepest fear of all, which is the fear of death and dissolution.'}
+      ]
+    }
+  ],
+
+  avatars: [
+    {
+      id:'matsya', name:'Matsya', epithet:'The Divine Fish — First Avatar of Vishnu',
+      c:['#1A7C8A','#0A2A30'],
+      mantra:'Om Matsyaya Namaha — I bow to Matsya, the divine fish who carried creation through the great deluge.',
+      summary:'At the end of the last cosmic age, when the sacred Vedas were stolen into the ocean\'s depths and a great flood threatened to erase all creation, Vishnu descended as a great divine fish — guiding humanity and divine wisdom through the waters of dissolution.',
+      attrs:['Salvation','The Great Flood','Protection of the Vedas','New Beginning'],
+      origin:'Matsya is the first of Vishnu\'s ten principal avatars, corresponding mythologically and (according to some interpretations) evolutionarily to the emergence of life from primordial waters. The avatar narrative describes a cosmic reset between world-ages: the demon Shankhasura had stolen the Vedas from Brahma while he slept and hidden them in the ocean. Without the Vedas, creation had no guiding wisdom. Simultaneously, the great sage Manu received a tiny fish in his hands while performing ritual ablutions in a river — a fish that would grow to encompass the entire ocean.',
+      facts:{Form:'Giant divine fish with golden scales, or a fish-bodied man with four arms','Era':'End of the previous Kalpa (cosmic cycle)','Mission':'Retrieved the Vedas from the demon Shankhasura; rescued Manu and the seeds of life from the Great Flood','Symbolic Significance':'Evolution of life from primordial ocean; divine consciousness present from the first stirring of life','Location of Worship':'Nagalapuram, Andhra Pradesh has the primary Matsya temple'},
+      stories:[
+        {title:'Manu and the Great Flood',text:'The sage Manu was performing his morning rituals at a river when he found a tiny fish in his cupped hands. The fish spoke: "Please protect me; I am young and small and the large fish will eat me." Moved, Manu put the fish in a clay pot. It outgrew the pot overnight. He moved it to a larger vessel; it outgrew that. He moved it to a pond, then a lake, then a river, then finally to the ocean — and even there it continued to grow until it filled the entire sea. Revealing himself as Vishnu, the fish then warned Manu: a great flood was coming that would submerge all the three worlds. He instructed Manu to build an ark and gather within it the seven great sages (Saptarishi), seeds of all plants, and pairs of all animals. When the flood came, Matsya pulled the ark through the raging waters on a rope tied to his golden horn, while Vishnu himself slew the demon Shankhasura in the ocean depths and recovered the Vedas from his belly. When the waters receded, Manu and his cargo repopulated the new world.'}
+      ]
+    },
+    {
+      id:'kurma', name:'Kurma', epithet:'The Cosmic Tortoise — Second Avatar of Vishnu',
+      c:['#2A6B5A','#0A2A24'],
+      mantra:'Om Kurmaaya Namaha — I bow to Kurma, the steady foundation that supports all of creation.',
+      summary:'When Mount Mandara threatened to sink into the cosmic ocean during the great churning, Vishnu descended as a colossal tortoise and offered his back as the eternal pivot. Kurma represents the unshakeable foundation beneath all cosmic activity.',
+      attrs:['Stability','Cosmic Foundation','Patience','Endurance','Support'],
+      origin:'Kurma is the second of Vishnu\'s ten principal avatars and corresponds — in the evolutionary interpretation of the Dashavatar — to the emergence of amphibious life that moves between water and land. The story is set during the Samudra Manthan, the churning of the ocean of milk, after the gods had lost their power to Durvasa\'s curse and required the nectar of immortality. To churn the cosmic ocean, the gods used Mount Mandara as a churning rod and Vasuki the serpent king as the rope. But the mountain, with no foundation, began sinking. Vishnu descended as Kurma — a tortoise the size of a continent — and dove to the ocean floor.',
+      facts:{Form:'A giant divine tortoise with a shell large enough to support a mountain','Era':'Satya Yuga, during the Samudra Manthan','Mission':'Supported Mount Mandara during the churning of the cosmic ocean','Symbolic Significance':'The unshakeable foundation beneath all activity; the patience required for great endeavors','Famous Temple':'Srikurmam, Andhra Pradesh — one of the rare Kurma temples in India'},
+      stories:[
+        {title:'The Great Churning of the Cosmic Ocean',text:'After Durvasa\'s curse stripped the gods of their power and immortality, Vishnu instructed them to make a temporary truce with the demons (Asuras) to churn the cosmic ocean of milk for the nectar of immortality (Amrita). They placed Mount Mandara in the ocean as a churning rod, wound Vasuki the great serpent around it as a rope, and began pulling — the gods on one side, the demons on the other. But the mountain had nothing to rest on and began sinking into the ocean. Vishnu took the form of Kurma the cosmic tortoise and dove beneath the mountain, offering his enormous shell as the pivot point. For a thousand years the churning continued on Kurma\'s back. From the cosmic ocean emerged the divine physician Dhanvantari carrying the pot of Amrita, the goddess Lakshmi, the wish-fulfilling cow Kamadhenu, the moon, the celestial elephant Airavata, and ten other divine treasures. Kurma supported them all in silence.'}
+      ]
+    },
+    {
+      id:'varaha', name:'Varaha', epithet:'The Cosmic Boar — Third Avatar of Vishnu',
+      c:['#7A2A2A','#3A1010'],
+      mantra:'Om Varahaya Namaha — I bow to Varaha, the boar who lifted the Earth from the cosmic abyss.',
+      summary:'When the demon Hiranyaksha stole the Earth and dragged her to the depths of the cosmic ocean, Vishnu descended as a magnificent boar — diving into the primordial waters to slay the demon and lift the Earth back into existence on his tusks.',
+      attrs:['Rescue of the Earth','Cosmic Strength','Sacrifice','Yajna','Restoration'],
+      origin:'Varaha is the third avatar of Vishnu — the form Vishnu took when the Earth itself was in mortal danger. The demon Hiranyaksha (brother of Hiranyakashipu, who would later be slain by Narasimha) had performed extreme austerities and obtained a boon of immense power. With this power he stole the Earth (personified as the goddess Bhudevi) and dragged her down into the Garbhodaka — the cosmic ocean at the bottom of the universe. With the Earth missing, all dharma collapsed; the very physical foundation of life was gone. The gods turned to Vishnu, who manifested from Brahma\'s nostril as a tiny boar that grew to the size of a mountain within moments.',
+      facts:{Form:'A giant boar, or a boar-headed man with four arms, holding the Earth on his tusks','Era':'Satya Yuga','Mission':'Rescue the goddess Bhudevi (Earth) from the demon Hiranyaksha; restore the cosmos','Symbolic Significance':'Divine intervention to save the very ground of existence; the boar as a symbol of yajna (sacred sacrifice)','Famous Temples':'Sri Mushnam (Tamil Nadu), Tirumala (Andhra Pradesh)'},
+      stories:[
+        {title:'Varaha Lifts the Earth from the Cosmic Ocean',text:'Vishnu emerged from Brahma\'s nostril as a tiny boar — small enough to fit in a palm — but within moments grew to cosmic proportions, his body filling the sky, his tusks gleaming like silver crescents. He plunged into the cosmic ocean and descended through layers of darkness until he found Hiranyaksha holding the Earth captive in the abyss. The battle between them lasted a thousand years — a war fought in the primordial waters beneath all worlds. Finally, Varaha pierced Hiranyaksha through the chest with his tusk and killed him. He then placed Bhudevi gently on his tusks and ascended slowly through the cosmic waters, restoring the Earth to her proper place in the universe. As he rose, Varaha taught Bhudevi the science of cosmic geography — describing the seven continents, seven oceans, and the cosmic mountains — knowledge later preserved in the Varaha Purana.'}
+      ]
+    },
+    {
+      id:'narasimha', name:'Narasimha', epithet:'The Man-Lion — Fourth Avatar of Vishnu',
+      c:['#A84020','#3A1008'],
+      mantra:'Om Namo Narasimhaya — I bow to Narasimha, the fearless protector of devotees, destroyer of all evil.',
+      summary:'Half-man, half-lion — the most ferocious of all Vishnu\'s avatars. Narasimha descended specifically to protect the child devotee Prahlada from his own demon father, demonstrating that divine protection has no limit: Vishnu dwells even within a stone pillar if that is where his devotee calls him.',
+      attrs:['Divine Protection','Devotion Rewarded','Fierceness','Justice','Invincibility'],
+      origin:'The demon king Hiranyakashipu had performed extreme austerities and received from Brahma an elaborate boon: he could not be killed by man or animal, by day or by night, inside or outside a building, on the earth or in the sky, by any weapon held in the hand. Believing himself invincible and immortal, he declared himself the only God and demanded that all beings worship him alone. His own son, the pure-hearted child Prahlada, refused — insisting that Vishnu was the true supreme deity. After every attempt to murder Prahlada failed — poison, fire, drowning, trampling by elephants — Hiranyakashipu confronted his son directly.',
+      facts:{Form:'Half-man, half-lion — the upper body of a lion, the lower body of a man','Era':'Satya Yuga','Mission':'Protect the devotee Prahlada; slay Hiranyakashipu and circumvent every condition of his boon','Key Teaching':'Divine protection is absolute — Vishnu dwells everywhere and responds to sincere devotion','Famous Temple':'Ahobilam, Andhra Pradesh — the site where Narasimha is said to have appeared'},
+      stories:[
+        {title:'The Pillar That Split Open',text:'Hiranyakashipu finally confronted young Prahlada: "You claim Vishnu is everywhere — is he in this pillar?" "Yes, father," said Prahlada quietly, "he is everywhere." The demon king struck the pillar with his fist in fury — and it split open with a sound that shook the three worlds. From inside the pillar burst Narasimha — not fully man and not fully lion, a form that Brahma\'s boon had not anticipated. It was at dusk — neither day nor night. The battle took place in a doorway — neither inside nor outside. Narasimha lifted Hiranyakashipu onto his lap — neither earth nor sky. He tore the demon apart with his bare claws — no weapon in his hand. Every impossible condition of the boon was precisely, impossibly satisfied. Prahlada knelt before Narasimha and the enraged god-lion finally calmed at the touch of his devotee\'s pure love.'}
+      ]
+    },
+    {
+      id:'vamana', name:'Vamana', epithet:'The Dwarf Brahmin — Fifth Avatar of Vishnu',
+      c:['#C9920A','#5A4000'],
+      mantra:'Om Vamanaya Namaha — I bow to Vamana, who measured the cosmos in three steps.',
+      summary:'When the noble but overreaching demon king Bali came to rule all three worlds, Vishnu descended as a small dwarf Brahmin boy — and with a single request for three paces of land, expanded to cosmic size and reclaimed the entire universe in three strides.',
+      attrs:['Humility','Cosmic Stride','Strategy','The Three Worlds','Boons'],
+      origin:'Vamana is the fifth avatar of Vishnu and the first to appear in fully human form. The story is set during Satya Yuga. The demon king Mahabali (grandson of Prahlada and an unusually virtuous Asura) had performed extraordinary austerities and conquered all three worlds — including the heavens — through merit, generosity, and devotion. Bali was not evil; he was just, generous, and beloved by his subjects. But the gods had been displaced and dharma was unbalanced. The gods appealed to Vishnu, who chose the most elegant solution: rather than slay Bali, he would humble him through Bali\'s own virtue of generosity. He was born to the sage Kashyapa and his wife Aditi as a tiny Brahmin boy — Vamana, the dwarf.',
+      facts:{Form:'A short Brahmin boy with parasol, water pot, and staff','Era':'Satya Yuga','Mission':'Reclaim the three worlds from the demon king Bali without killing him','Key Symbolism':'The infinite contained in the smallest form; cosmic stride (Trivikrama)','Famous Temple':'Thrikkakara, Kerala — the festival of Onam celebrates Bali\'s annual return'},
+      stories:[
+        {title:'The Three Steps That Measured the Universe',text:'Vamana arrived at Bali\'s great sacrifice as a small Brahmin boy holding only a wooden umbrella and a water pot. Bali, famous for never refusing a Brahmin\'s request, welcomed him warmly and asked what he wished. "Only three paces of land, measured by my own feet," said Vamana. Bali laughed at the modesty of the request and agreed despite his guru Shukracharya warning him this was Vishnu in disguise. The moment Bali poured the water of consent over Vamana\'s hand, the small boy began to grow. He grew past the trees, past the clouds, past the sun and moon, until his form spanned all of existence — Trivikrama, the cosmic strider. His first step covered the entire Earth. His second step covered all the heavens. He paused: "Where shall I place my third step, King Bali? Your kingdom is gone." Bali, magnificent in his defeat, knelt and offered his own head. Vishnu placed his foot gently on Bali\'s crown, pushing him into the netherworld of Patala — but blessed him: Bali would rule there as a great king, and would be permitted to return to Earth once each year to visit his beloved subjects. That annual return is celebrated as Onam in Kerala.'}
+      ]
+    },
+    {
+      id:'parashurama', name:'Parashurama', epithet:'The Warrior-Brahmin with the Axe — Sixth Avatar of Vishnu',
+      c:['#7A3010','#3A1408'],
+      mantra:'Om Parashuramaya Namaha — I bow to Parashurama, the warrior-sage who restored balance through the axe.',
+      summary:'A Brahmin born among sages but trained as a warrior, Parashurama descended in an age when the warrior caste had grown corrupt and tyrannical. Wielding the great axe given by Shiva himself, he cleared the world of unjust kings twenty-one times.',
+      attrs:['Justice','Warrior Sage','The Sacred Axe','Restoration of Dharma','Immortality'],
+      origin:'Parashurama (literally "Rama with the axe") is the sixth avatar of Vishnu and one of the seven Chiranjeevis — beings believed to be still alive on Earth, awaiting their role in future events. He was born as the youngest son of the sage Jamadagni and Renuka in the Treta Yuga. While he was raised as a Brahmin in his family\'s ashram, his nature was that of a fierce warrior. He performed deep austerities and pleased Shiva, who personally trained him in martial arts and gave him the divine axe Vidyudabhi — capable of cutting through anything in the universe. He is also considered the guru who trained Bhishma, Drona, and Karna of the Mahabharata.',
+      facts:{Form:'A fierce Brahmin warrior with matted hair, bare-chested, axe in hand','Era':'Treta Yuga','Mission':'Destroy the tyrannical Kshatriya kings who had abandoned dharma — twenty-one times','Sacred Weapon':'Parashu (the divine axe given by Shiva)','Status':'Chiranjeevi — believed to be still alive in the Mahendra mountains','Notable Disciples':'Bhishma, Dronacharya, and Karna of the Mahabharata'},
+      stories:[
+        {title:'The Vow Against the Wicked Kings',text:'King Kartavirya Arjuna — a thousand-armed warrior king — visited the ashram of Parashurama\'s father, sage Jamadagni. The sage hosted him lavishly with the help of the divine wish-fulfilling cow Kamadhenu. Coveting the magical cow, the king attempted to seize her by force. When Jamadagni refused, the king\'s men killed the sage and stole the cow. Parashurama returned home to find his father\'s body. His grief turned into a vow that would shake the world: he would rid the Earth of unjust Kshatriya rulers. He pursued Kartavirya Arjuna and killed him, then, in a wider campaign against all tyrannical kings, circled the Earth twenty-one times — once for each of the twenty-one times the Kshatriya class would regrow into corruption — slaughtering unjust rulers. Eventually he performed penance for the violence and retired to the Mahendra mountains, where he is said to still meditate to this day, awaiting the call of dharma.'}
+      ]
+    },
+    {
+      id:'rama', name:'Rama', epithet:'The Ideal King — Seventh Avatar of Vishnu',
+      c:['#2A7020','#0A3000'],
+      mantra:'Sri Ram Jai Ram Jai Jai Ram — Victory to Ram, the divine king of righteousness, refuge of all beings.',
+      summary:'The perfect human — ideal son, ideal husband, ideal king, ideal warrior. Rama\'s life, narrated in the Ramayana, is the supreme model of how dharma must be lived even through unbearable personal loss. He is the answer to the question: what does a life fully devoted to righteousness look like?',
+      attrs:['Dharma','Perfect Kingship','Honor','Loyalty','The Ideal Human'],
+      origin:'Rama was born as the eldest son of King Dasharatha of Ayodhya, a city of incomparable beauty on the banks of the Sarayu River, during the Treta Yuga. He was the seventh avatar of Vishnu, born specifically in human form to defeat the demon king Ravana of Lanka — who had received Brahma\'s boon that he could not be killed by any god, demon, or supernatural being. The boon had no provision for humans because Ravana considered humans beneath his notice. Vishnu therefore took birth as a mortal man.',
+      facts:{Consort:'Sita (an incarnation of Lakshmi)','Sacred Weapon':'Kodanda (divine bow), Brahmastra, Agneyastra','Sacred Text':'Valmiki Ramayana, Ramcharitmanas (Tulsidas), Adhyatma Ramayana','Celestial Abode':'Saketa (divine Ayodhya)','Depicted':'Blue-green complexion, bow in hand, yellow dhoti, mark of Shaivite ash on forehead','Era':'Treta Yuga','His Age of Rule':'Ram Rajya — considered the ideal of just and compassionate governance'},
+      stories:[
+        {title:'The Exile of Rama',text:'On the eve of Rama\'s coronation as the crown prince of Ayodhya — a day the entire kingdom had prepared for with joy — his stepmother Kaikeyi, manipulated by her maidservant Manthara\'s jealousy, called in two boons her husband Dasharatha had once promised her during a great battle in which she had saved his life. She asked for the throne for her own son Bharata and fourteen years of forest exile for Rama. Dasharatha was destroyed by the demand — he had already announced Rama\'s coronation and could not retract it without losing his honor. Rama, hearing the situation, immediately agreed to exile, saying that his father\'s word must be honored above all else. This single act of his — accepting catastrophic personal loss without complaint or bitterness to preserve his father\'s honor — established his character as the paradigm of dharma for all of Hindu civilization.'},
+        {title:'The Lanka War and the Defeat of Ravana',text:'Ravana, the ten-headed demon king of Lanka, had abducted Sita while she was alone in the forest during the fourteen-year exile. Rama and Lakshmana searched all of India until the monkey king Sugriva\'s general Hanuman leapt across the ocean to Lanka and located Sita imprisoned in Ravana\'s Ashoka grove, refusing Ravana\'s every inducement to become his queen. Rama built a bridge of floating stones across the ocean — Ram Setu — with the help of the vanara (monkey) army, invaded Lanka, and engaged in a cosmic war lasting many days. Finally, the sage Agastya appeared and revealed to Rama the Aditya Hridayam — a hymn to the sun — and the divine weapon Brahmastra. Rama fired the Brahmastra, containing within it the power of wind, fire, and the weight of Mount Meru, into Ravana\'s chest, finally ending the demon\'s long career of terror. Sita was freed, Rama\'s exile was complete, and they returned to Ayodhya on the divine chariot Pushpaka — their arrival celebrated as the first Diwali, the Festival of Lights.'}
+      ]
+    },
+    {
+      id:'krishna', name:'Krishna', epithet:'The Divine Enchanter — Eighth Avatar of Vishnu',
+      c:['#2A3FA0','#080F3A'],
+      mantra:'Hare Krishna Hare Krishna Krishna Krishna Hare Hare, Hare Rama Hare Rama Rama Rama Hare Hare — The Maha Mantra, the great liberation chant of the age of Kali.',
+      summary:'The most complete avatar — in whom Vishnu descended not just to accomplish a mission but to reveal the full depth of divine love. Playful child, passionate youth, strategic king, and cosmic philosopher, Krishna is the beloved of every heart who sees him for what he truly is.',
+      attrs:['Divine Love','The Bhagavad Gita','Cosmic Play','Wisdom','The Flute'],
+      origin:'Krishna was born at midnight on the eighth day of the dark fortnight of the month of Sravana, the son of Devaki and Vasudeva, imprisoned in the dungeon of Mathura by Devaki\'s tyrant brother Kamsa. Kamsa had been warned by a celestial voice that Devaki\'s eighth child would kill him, so he had imprisoned the couple and murdered each child as it was born. On the night of Krishna\'s birth, all guards fell into a supernatural sleep, all doors opened of their own accord, the chains on Vasudeva\'s hands fell off, and the flooding Yamuna River parted to let Vasudeva carry the infant across to the village of Gokul. There, the baby was exchanged with a newborn girl — who, when Kamsa tried to dash her against a stone, flew into the sky and declared: "Your destroyer is already born and safe!"',
+      facts:{Consort:'Rukmini (his wife and queen), Satyabhama, and 16,108 others; Radha is his divine eternal love','Sacred Weapon':'Sudarshana Chakra, Panchajanya (conch), Kaumodaki (mace), Sharanga (bow)','Sacred Text':'Bhagavad Gita, Bhagavata Purana (especially Books 10 and 11), Harivamsa','Celestial Abode':'Goloka (divine Vrindavan), Vaikuntha','Depicted':'Blue-black complexion, peacock feather in crown, yellow Pitambara garment, flute at lips','Era':'End of Dvapara Yuga (beginning of Kali Yuga)','His Teachings':'The Bhagavad Gita — 700 verses; the most influential philosophical text in Hindu history'},
+      stories:[
+        {title:'The Childhood of Krishna in Vrindavan',text:'Krishna\'s childhood in the pastoral world of Vrindavan is the most beloved narrative in all of Hinduism — a world so saturated with divine presence that even the trees, rivers, and cows participate in the play of God. He stole butter from the clay pots hung from the ceilings of neighbors\' homes (earning the eternal name Makhan Chor, the butter thief) and when caught, ate the evidence and blamed his friends. He subdued the great serpent Kaliya who had poisoned the Yamuna River by dancing on his hoods in the middle of the river until the serpent surrendered and was driven away. He uprooted an entire mountain — Govardhan Hill — and held it aloft on his little finger for seven days like an umbrella, sheltering every villager and animal from the vengeful storms of the god Indra, whom he had challenged by redirecting the village\'s worship away from the heavenly king. He played his flute in the forests and all of Vrindavan — humans, animals, trees, rivers — fell into states of transcendent delight. This world of Vrindavan, saturated with the presence of Krishna, is considered by Vaishnavas to be the supreme spiritual experience available to a human soul.'},
+        {title:'The Bhagavad Gita — The Song of the Lord',text:'At the battle of Kurukshetra, with two vast armies facing each other — the Pandavas on one side, the Kauravas on the other — the warrior-prince Arjuna, positioned in his chariot by his charioteer Krishna, looked across at the opposing army and saw his beloved grandfather Bhishma, his revered teacher Drona, his cousins and childhood companions. He was overcome with grief and dropped his bow. He told Krishna he could not fight — he would rather die than kill his own kin, even in a righteous cause. Krishna\'s response became the Bhagavad Gita — eighteen chapters covering the entirety of Hindu philosophy: the immortality of the Atman, the nature of the three gunas (modes of nature), the four paths to liberation, the science of karma, the nature of time and creation, and finally the revelation of Krishna\'s cosmic form (Vishwarupa) — showing Arjuna that the entire universe, all its beings and all its epochs, exist within the form of the Lord. "I am the Self seated in the heart of all creatures," Krishna declared. "I am the beginning, middle, and end of all beings."'},
+        {title:'The Rasa Lila — The Cosmic Dance of Love',text:'On full-moon autumn nights in Vrindavan, when the Yamuna River ran silver and the forest was filled with the fragrance of night-blooming jasmine, Krishna would play his flute — and its sound was said to be irresistible to every soul that heard it. The gopis (cowherd women) left their sleeping families and came to the forest, drawn by a longing that was not of this world. In the clearing by the river, Krishna multiplied himself — creating as many Krishnas as there were gopis — so that each woman danced with her own Krishna, each believing she alone had his complete and undivided attention. This dance, the Rasa Lila, is the subject of the most sublime poetry in Sanskrit literature. Theologians of the Bhakti tradition do not interpret it as a romance but as the highest spiritual metaphor: each gopi represents an individual soul (jivatman), and Krishna is the supreme soul (Paramatman). The irresistible pull of his flute is the call of the divine to the soul to abandon the small world of ego and merge in the ocean of love.'}
+      ]
+    },
+    {
+      id:'buddha', name:'Buddha', epithet:'The Awakened One — Ninth Avatar of Vishnu',
+      c:['#C97A0A','#5A3500'],
+      mantra:'Om Buddhaya Namaha — I bow to Buddha, the compassionate one who taught the path of awakening.',
+      summary:'In Vaishnava tradition, Vishnu took the form of Siddhartha Gautama, the founder of Buddhism, to teach compassion, non-violence, and the futility of empty ritual. Buddha is the avatar who descended not to fight but to awaken — through profound teaching alone.',
+      attrs:['Compassion','Non-Violence','Awakening','Wisdom','Teaching'],
+      origin:'The inclusion of Buddha as Vishnu\'s ninth avatar is one of the most theologically interesting moments in Hindu thought. Around the 8th–10th centuries CE, as Buddhism declined in India and Hinduism reabsorbed many of its philosophical insights, the Hindu tradition incorporated Buddha as an avatar of Vishnu — a remarkable act of theological generosity that recognized his teachings as a genuine descent of the divine. The Bhagavata Purana describes Buddha as having appeared at the beginning of Kali Yuga to teach compassion and turn humanity away from the violence of empty animal sacrifice. Born as Siddhartha Gautama, prince of the Shakya kingdom in Lumbini (in present-day Nepal) around 563 BCE, he renounced his royal life after seeing the realities of old age, sickness, and death, and attained enlightenment under the Bodhi tree in Bodh Gaya.',
+      facts:{Form:'A seated meditator with eyes half-closed in compassion','Era':'Beginning of Kali Yuga (historically around 6th century BCE)','Mission':'Teach ahimsa (non-violence), the Four Noble Truths, and the Eightfold Path','Birthplace':'Lumbini (present-day Nepal)','Enlightenment Site':'Bodh Gaya, India — under the Bodhi tree','Note':'Some Vaishnava traditions name Balarama as the ninth avatar instead, particularly the Gaudiya Vaishnava school'},
+      stories:[
+        {title:'The Renunciation of Prince Siddhartha',text:'Prince Siddhartha was born to King Suddhodana and Queen Maya in the kingdom of Kapilavastu and raised in unparalleled luxury — his father, warned by a sage that the prince might become either a great king or a great spiritual teacher, sealed him away from all suffering. But on four chariot rides outside the palace, Siddhartha encountered the Four Sights that no luxury could prevent: an old man, a sick man, a corpse, and a wandering ascetic radiating peace. He understood that pleasure could not protect anyone from suffering. At twenty-nine, leaving his sleeping wife Yashodhara and infant son Rahula, he rode out of the palace at midnight, exchanged his princely robes for a beggar\'s simple cloth, and disappeared into the forest. For six years he sought truth through extreme austerities — nearly starving himself to death. He finally rejected both luxury and extreme self-denial, choosing the Middle Way, and sat beneath the Bodhi tree determined not to rise until he understood the nature of suffering. After 49 days of meditation, at dawn, he attained nirvana — complete awakening. He spent the next 45 years teaching the path he had discovered.'}
+      ]
+    },
+    {
+      id:'kalki', name:'Kalki', epithet:'The Future Savior — Tenth and Final Avatar of Vishnu',
+      c:['#9A7010','#3A2800'],
+      mantra:'Om Kleem Krishnaaya Namaha — I invoke the coming avatar, the one who will ride at the end of darkness to restore the light.',
+      summary:'The only avatar of Vishnu who has not yet appeared. At the end of Kali Yuga — when darkness, deception, and spiritual confusion have reached their absolute peak — Kalki will descend on a white horse with a blazing sword to end the age and begin creation\'s next golden morning.',
+      attrs:['Prophecy','The End of Kali Yuga','Renewal','Cosmic Justice','The New Dawn'],
+      origin:'Kalki is described in extraordinary detail in the Kalki Purana and the Bhagavata Purana — remarkable for a being who has not yet arrived. He will be born in the village of Shambhala (some identify this with a village in Uttar Pradesh, India; others consider it a transcendent realm) to a Brahmin family. His father\'s name will be Vishnuyasha ("the glory of Vishnu") and his mother\'s name Sumati ("good mind"). He will have a white horse named Devadatta — a gift from the god Indra — and a sword that blazes with divine fire. He will travel the Earth with the speed of the wind and the fury of justice.',
+      facts:{Form:'A young warrior on a white horse wielding a blazing sword','Mount':'Devadatta — a divine white horse, gift of Indra','Weapon':'Nandaka — a blazing divine sword','Birth Location':'Shambhala village','Parents':'Vishnuyasha (father) and Sumati (mother)','Status':'Prophesied — has not yet appeared','Mission':'End Kali Yuga; destroy the armies of darkness; restore dharma; begin new Satya Yuga'},
+      stories:[
+        {title:'The Prophecy of Kalki from the Bhagavata Purana',text:'The Bhagavata Purana (Book 12, Chapter 2) describes the signs that will precede Kalki\'s arrival: rulers will become bandits taxing the people while offering no protection; people will abandon their parents and teachers; men and women will live together merely by agreement and part ways at will; beauty will be the only standard for choosing a partner; wealth will be the only measure of virtue; a man will be considered good only if he is wealthy and considered holy only if he belongs to the right group; dishonesty will become the universal principle of business; a man who can maintain his family will be regarded as expert in all matters. When these signs have fully manifested — when virtue has been squeezed from the world entirely — Kalki will descend. Like a comet, he will ride Devadatta and sweep across the Earth, punishing the wicked kings who have been plundering humanity. After this great cleansing, the world will fall into darkness and then reawaken — as Satya Yuga, the new golden age, will dawn.'}
+      ]
+    }
+  ],
+
+  pantheon: [
+    {
+      id:'ganesha', name:'Ganesha', epithet:'The Remover of Obstacles — Lord of All Beginnings',
+      c:['#D07018','#5A2800'],
+      mantra:'Om Gam Ganapataye Namaha — I bow to Ganesha, the lord of all beginnings, remover of obstacles, bestower of wisdom.',
+      summary:'The elephant-headed son of Shiva and Parvati — the first god invoked before every prayer, every ceremony, every new undertaking. Ganesha embodies the wisdom that overcomes obstacles not by brute force but by intelligence and right approach.',
+      attrs:['New Beginnings','Wisdom','Removing Obstacles','Arts','Prosperity','Good Fortune'],
+      origin:'Ganesha\'s birth has multiple accounts in different Puranas — the most beloved being that Parvati, while Shiva was away on long meditation, created a boy from the sandalwood paste and turmeric she used for her own bath, breathed life into him, and set him as a guard at her door. When Shiva returned and this unknown boy refused him entry, Shiva — not recognizing his own son, whom he had never seen — severed the boy\'s head in anger. Parvati\'s grief was so total, so cosmic, that she threatened to destroy all creation. Shiva, realizing his catastrophic error, sent his ganas (attendants) to bring back the head of the first living being they found lying with its head pointing north — they returned with an elephant\'s head. Shiva placed it on the boy\'s body and restored him to life with even greater vitality than before, declaring him Ganapati — the lord of all his ganas — and the god who must be worshipped before all others.',
+      facts:{Consort:'Riddhi (prosperity) and Siddhi (spiritual accomplishment)','Sacred Mount':'Mushika — a mouse or large rat','Sacred Objects':'Modaka (sweet dumpling), Parashu (axe), broken tusk, laddoo','Sacred Text':'Ganesha Purana, Mudgala Purana','Festival':'Ganesh Chaturthi (ten-day festival in August-September)','Iconography':'Elephant head, one broken tusk, large belly, four arms, mouse at his feet'},
+      stories:[
+        {title:'The Race Around the World',text:'The divine sage Narada once brought the gods a single fruit — the Jnana Phala, the fruit of all wisdom and knowledge — and declared it must go to the worthiest. Shiva and Parvati decided to give it to whichever of their sons, Kartikeya or Ganesha, could circle the entire universe three times first. Kartikeya immediately mounted his peacock and blazed off across the cosmos at supernatural speed. Ganesha considered the challenge. He then walked slowly around his parents three times and sat down. When Kartikeya returned and objected, Ganesha explained: "You are my entire world. You are the source of all creation, sustenance, and dissolution. In you, all universes exist. To circle you three times is to circle everything that is." Shiva and Parvati were overwhelmed. Ganesha received the fruit. Intelligence, not speed. The right understanding of what matters, not mere effort.'},
+        {title:'How Ganesha Wrote the Mahabharata',text:'The sage Veda Vyasa had composed the entire Mahabharata in his mind — one hundred thousand verses of extraordinary complexity — but needed a scribe capable of writing at the speed of his dictation without ever pausing. He approached Brahma, who suggested Ganesha. Ganesha agreed to serve as scribe on one condition: Vyasa must dictate without stopping — if Vyasa paused even once, Ganesha would stop writing and leave. Vyasa agreed, but added his own condition: Ganesha must not write down any verse without first fully understanding its meaning. Ganesha agreed. The dictation began. Whenever Vyasa needed a moment to compose a particularly intricate verse — a verse with seven layers of meaning, a verse that concealed a future prophecy within a description of a battle — he would dictate an especially complex or paradoxical stanza. Ganesha would pause, his pen still, turning the verse over in his cosmic mind. In that pause, Vyasa would compose the next several verses. By this mutual covenant of challenge and understanding, the world\'s longest poem was written. It is said that anyone who truly understands a single verse of the Mahabharata has understood all of dharma.'}
+      ]
+    },
+    {
+      id:'hanuman', name:'Hanuman', epithet:'The Divine Devotee — Lord of Strength, Courage & Service',
+      c:['#9E3D00','#3A1500'],
+      mantra:'Om Ham Hanumate Namaha — I bow to Hanuman, the embodiment of devotion, strength, and selfless service to the divine.',
+      summary:'The greatest devotee in all of Hinduism and the most beloved divine servant. Hanuman is the supreme example of what complete, ego-free devotion to God makes possible — a being of infinite strength who uses every particle of it in service, never for himself.',
+      attrs:['Supreme Devotion','Infinite Strength','Selfless Service','Courage','Immortality','Loyalty'],
+      origin:'Hanuman is the son of Vayu, the wind god, and Anjana, an apsara who had been cursed to live as a female monkey until she bore a child of Shiva\'s spiritual essence. As a child, Hanuman saw the rising sun and, thinking it a ripe fruit, leapt from Earth toward the sky to eat it. As he approached, Rahu (who causes solar eclipses) complained to Indra that Hanuman was interfering with his territory. Indra struck Hanuman with his thunderbolt and the child fell unconscious to the earth. Vayu, the wind god-father, was so devastated and furious that he withdrew all wind from the three worlds — and immediately all living beings began to choke and die. The gods rushed to Vayu and apologized, reviving Hanuman, and each bestowed a boon: Brahma gave him immunity from the Brahmastra weapon and long life; Indra gave him immunity to his own thunderbolt; Shiva gave him longevity and immortality; Agni gave him immunity to fire; Varuna to water; Surya to heat; Yama to disease and his own weapons; and Vishnu gave him eternal service to Rama. The child who would have been slain was instead rendered indestructible.',
+      facts:{Parents:'Vayu (the wind god) and Anjana','Sacred Mount':'None — Hanuman flies under his own divine power','Primary Weapons':'Gada (iron mace), his own fists and body, entire mountains','Sacred Text':'Hanuman Chalisa (by Tulsidas), Sundarakanda (from the Ramayana)','Festival':'Hanuman Jayanti (birthday celebration); Tuesday and Saturday are his sacred days','Iconography':'Monkey face and tail, orange or red-tinted skin, carrying mountain or mace, sometimes tearing open his chest to reveal Rama-Sita inside','Status':'Chiranjeevi — one of the seven immortals; said to be present wherever the Ramayana is chanted'},
+      stories:[
+        {title:'The Leap Across the Ocean',text:'When the search for Sita seemed hopeless — the ocean stretched impossibly wide between India and Lanka and no being seemed capable of crossing it — the bear king Jambavan reminded Hanuman of his forgotten powers. As a child, Hanuman had been cursed by sages whose meditations he had disturbed playfully: he would forget his own divine strength until reminded of it by another. At Jambavan\'s words, Hanuman felt his power surge back through his body like a tidal wave. He climbed to the summit of Mount Mahendra, roared a war cry that shook the three worlds, and expanded to cosmic size. His leap across the ocean scattered the waves for miles on either side. On the way, he was tested by a mountain that rose from the sea offering rest, a sea-goddess who tried to swallow him, and the demoness Simhika who caught his shadow to trap him. He defeated each and finally landed in Lanka — having crossed an ocean in a single breath of devotion to Rama.'},
+        {title:'Hanuman Burns Lanka',text:'After finding Sita in the Ashoka grove and delivering Rama\'s ring to her as proof, Hanuman allowed himself to be captured by Ravana\'s son Indrajit — not because he could be captured but because he chose to be, wanting to deliver a message directly to Ravana. He was dragged before the demon king, shrank his tail into a tall coiled throne on which he sat at Ravana\'s own eye level, and delivered Rama\'s ultimatum: return Sita or face destruction. Ravana ordered Hanuman\'s tail set alight. Hanuman let the demons wrap his tail in oil-soaked cloth and set it on fire — then let himself be paraded through Lanka\'s streets as a trophy. He waited until he had seen enough of the city\'s layout and defenses. Then he expanded to enormous size, snapped his bonds, and leapt from rooftop to rooftop across Lanka\'s golden towers, setting the entire city ablaze with his burning tail. He flew back across the ocean, extinguished his tail in the sea, and returned to Rama to report that Lanka was mapped and Sita was alive.'},
+        {title:'The Open Heart of Hanuman',text:'After the war was won and all had returned to Ayodhya for Rama\'s coronation, Queen Sita offered Hanuman a pearl necklace from around her own neck as a gift of gratitude. Hanuman accepted it with the deepest reverence. But then he began examining each pearl carefully with his teeth, biting them one by one and discarding them. Shocked courtiers asked what he was doing. He replied simply: "I am checking whether Rama\'s name is in them. If Rama\'s name is not in them, they are worthless." A courtier laughed: "And does Rama\'s name exist in you?" Hanuman tore open his own chest without hesitation — and inside, on every sinew and fiber of his heart, on every blood vessel, on the very marrow of his bones, were engraved the names Ram and Sita. The court fell silent. This image — Hanuman with his chest open, the divine couple written on his heart — is the most sacred image in the Bhakti tradition.'}
+      ]
+    },
+    {
+      id:'indra', name:'Indra', epithet:'King of the Gods — Lord of Heaven, Thunder & Rain',
+      c:['#1A508A','#071A30'],
+      mantra:'Om Indraya Namaha — I bow to Indra, the sovereign of the heavens, the wielder of the thunderbolt, bringer of rain and life.',
+      summary:'The mightiest warrior-god of the Vedic age — king of Svarga, commander of the Devas, and master of storms and rain. Indra\'s trajectory across Hindu scripture is also the story of how the Vedic heroic ideal was gradually displaced by the devotional ideals of the Puranic age.',
+      attrs:['Thunder','Rain','Heaven','Kingship','War','Cosmic Order'],
+      origin:'Indra is the most hymned deity in the Rigveda — over 250 of its 1,028 hymns are addressed to him, compared to a few dozen for Varuna or Agni. He was the great champion-god of the Vedic age: a thundering warrior who feasted on Soma (the sacred ritual drink), carried his thunderbolt Vajra, rode his white elephant Airavata, and embodied the roaring energy of the monsoon storms on which all agriculture — and therefore all civilization — depended. Over time, as the Puranic tradition developed, Indra\'s stature was subtly diminished: he became a divine king prone to pride, sensuality, and fear, repeatedly humbled by greater sages and by Krishna. This evolution reflects a theological shift from the heroic warrior-god ideal of the Vedas to the devotional mystical ideal of the Puranas.',
+      facts:{Consort:'Shachi, also called Indrani or Paulomi','Sacred Mount':'Airavata — the great white four-tusked elephant; also the horse Uchchaihshravas','Primary Weapon':'Vajra — the thunderbolt forged from the bones of the sage Dadhichi','Sacred Text':'Rigveda (250+ hymns), Indra Upanishad','Celestial Abode':'Amaravati — the city of the immortals in Svarga','Iconography':'Crowned king, white complexion, four arms, Vajra in one hand, riding Airavata or sitting on throne','Number of Indras':'The position of Indra rotates — each cosmic cycle has a new Indra'},
+      stories:[
+        {title:'Indra Slays Vritra — The Freeing of the Waters',text:'In one of the Rigveda\'s most ancient and mythologically rich narratives, the cosmic serpent-demon Vritra (from the root "vr" meaning "to obstruct") had swallowed all the world\'s waters, holding them in its vast body and causing universal drought, death of crops, and the extinction of life. The entire cosmos was drying out. No god could face Vritra, whose body stretched across mountains. Indra was summoned. The sage Dadhichi agreed to sacrifice himself — giving his bones to be fashioned into the thunderbolt Vajra, the only weapon that could slay the demon. Armed with this weapon made of a saint\'s sacrifice, Indra confronted Vritra and, after a battle that shook the mountains, split the demon\'s body from head to tail. The imprisoned waters of the world poured out — rivers ran again, rains fell, and the world was reborn. This myth is one of the oldest creation narratives in all of Hindu scripture.'},
+        {title:'Krishna and the Defeat of Indra\'s Pride',text:'Every year, the village of Vrindavan performed a great puja to Indra — the god of rain — to ensure good monsoons for their cattle. The young Krishna, perhaps twelve years old, questioned the tradition: why worship Indra? He had done nothing specific for this village. Their cattle grazed on the slopes of Mount Govardhan. Their lives depended on the hill, not on some distant heavenly king. He suggested they worship Govardhan Hill instead and feast in its honor. Indra, watching from heaven, was incensed by this challenge to his authority. He commanded the clouds of final dissolution (samvartaka megha) to rain on Vrindavan — not the gentle monsoon but a catastrophic supernatural deluge meant to wash the village out of existence as punishment. For seven days the storms raged without pause. Krishna simply lifted Mount Govardhan with one finger and held it like an enormous umbrella over every villager, every cow, every tree of Vrindavan, keeping them perfectly dry. On the seventh day, Indra finally descended, bowed before the child, and admitted that he had been defeated not by greater force but by greater truth.'}
+      ]
+    },
+    {
+      id:'kartikeya', name:'Kartikeya', epithet:'Lord of War — Commander of the Divine Army',
+      c:['#8A1A2A','#3A0A10'],
+      mantra:'Om Saravana Bhava — I take refuge in Saravanabhava, the divine son born of the sacred reed forest, lord of all warriors.',
+      summary:'The six-faced god of war and divine commander — born of cosmic fire and raised by the six Pleiades star-mothers, Kartikeya is the embodiment of the disciplined, fearless warrior who fights for dharma with the same precision and purity as a sage meditates for truth.',
+      attrs:['War','Courage','Divine Strategy','Youth','Victory','Leadership'],
+      origin:'Kartikeya\'s extraordinary birth was itself a cosmic operation. The gods needed a general specifically capable of destroying Tarakasura — a demon so powerful that his boon specified only "the son of Shiva" could kill him. But Shiva was in eternal meditation after Sati\'s death and showed no inclination toward marriage. The god of love Kama was sent to pierce Shiva\'s heart with his arrow of desire — and for this violation of Shiva\'s meditation, Kama was burned to ash by Shiva\'s third eye. Yet the deed was done: Shiva\'s divine energy (tejas) was released. It was so overwhelming that no being in the three worlds could contain it without burning up, so it was placed in the Ganges, then in a sacred reed forest called Sharavana, where it became six babies simultaneously. The six Krittikas (the Pleiades star-sisters) nursed the six infants with their six pairs of breasts. When Parvati embraced all six children with maternal longing, they merged into one being with six faces and twelve arms. He was named Skanda, Kartikeya, Murugan, Subrahmanya — and he would grow up to be the greatest warrior the cosmos had ever seen.',
+      facts:{Parents:'Shiva and Parvati (mother); the six Krittikas (foster mothers)','Sacred Mount':'Mayura — the divine peacock whose tail contains a thousand eyes','Primary Weapon':'Vel — the divine golden lance given by Parvati; said to be indestructible and unfailing','Sacred Text':'Skanda Purana (one of the largest of the 18 major Puranas)','Celestial Abode':'Kailash and Kraunchadri Mountain','Iconography':'Six heads (Shanmukha), twelve arms, young and eternally youthful, riding peacock, lance in hand','Regional Name':'In South India he is Murugan — the most beloved deity of Tamil civilization'},
+      stories:[
+        {title:'Kartikeya Defeats Tarakasura and Reclaims Heaven',text:'Armed with the Vel — the divine lance that Parvati herself had forged and charged with all her shakti — and appointed as commander in chief of the divine army (Devasenap-ati), Kartikeya led the gods to war against Tarakasura\'s demon forces. The battle was cosmic in scale — divine weapons clashed across all three worlds, rivers ran backward, mountains cracked, and the stars scattered. In single combat, Kartikeya faced Tarakasura. The demon was formidable, powerful beyond any ordinary being — but he had never faced an opponent who was born specifically to destroy him, who carried the divine will of all the gods within his lance. Kartikeya hurled the Vel at Tarakasura, and it split the demon\'s chest and returned to his hand. With Tarakasura\'s death, the demons fled and the gods reclaimed their heavenly realm. Kartikeya\'s victory is celebrated particularly in South India, where the festival of Skanda Sashti commemorates the battle every year.'},
+        {title:'Why Kartikeya Rules the South',text:'When the divine sage Narada brought a single fruit of supreme knowledge to Shiva and Parvati, they decided it would go to whichever of their sons could circle the universe three times first. Kartikeya flew off on his peacock at supernatural speed. Ganesha walked slowly around his parents three times — for he understood that his parents were the universe — and received the fruit. Kartikeya returned to find Ganesha already declared the winner. He was furious. He felt it was unfair. In his anger he left Mount Kailash and flew south, settling on the Palani Hills in what is now Tamil Nadu. Shiva and Parvati came to console him, but he remained. He told them he needed nothing — not even the fruit of knowledge — because the guru\'s foot was itself the highest knowledge: "Pazham nee, nee!" (You yourself are the ripe fruit of wisdom). He remains in the south to this day, which is why Murugan-worship is the dominant spiritual current of Tamil civilization — the god who chose to dwell among them as his people.'}
+      ]
+    }
+  ]
+};
+
+/* ═══════════════════════════════════════════
+   SVG ICON GENERATOR
+═══════════════════════════════════════════ */
+function makeSVG(id, c) {
+  const p = c[0], d = c[1];
+  const icons = {
+    brahma: `<circle cx="60" cy="44" r="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".85"/><path d="M46 44Q60 34 74 44Q60 54 46 44" fill="${p}" fill-opacity=".25"/><line x1="60" y1="30" x2="60" y2="22" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="60" cy="20" r="3" fill="${p}" fill-opacity=".8"/><path d="M34 70L34 90M86 70L86 90M46 90L74 90" stroke="${p}" stroke-width="1.4" stroke-opacity=".7" fill="none"/><circle cx="41" cy="48" r="2" fill="${p}" fill-opacity=".9"/><circle cx="79" cy="48" r="2" fill="${p}" fill-opacity=".9"/><circle cx="60" cy="36" r="2" fill="${p}" fill-opacity=".9"/><circle cx="60" cy="58" r="2" fill="${p}" fill-opacity=".9"/>`,
+    vishnu: `<ellipse cx="60" cy="42" rx="13" ry="17" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".85"/><path d="M50 36Q60 27 70 36" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="60" cy="27" r="4" fill="${p}" fill-opacity=".3" stroke="${p}" stroke-width=".8"/><path d="M28 54L40 49M92 54L80 49M28 65L40 70M92 65L80 70" stroke="${p}" stroke-width="1.5" stroke-opacity=".7"/><path d="M60 60L60 90M44 90L76 90" stroke="${p}" stroke-width="1.5" stroke-opacity=".65"/><circle cx="28" cy="54" r="5" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><path d="M25 51L31 57M25 57L31 51" stroke="${p}" stroke-width="1" stroke-opacity=".8"/>`,
+    shiva: `<ellipse cx="60" cy="44" rx="12" ry="15" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M48 40Q60 28 72 40" fill="none" stroke="${p}" stroke-width="2" stroke-opacity=".9"/><path d="M54 27Q60 19 66 27" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/><circle cx="60" cy="17" r="3" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><ellipse cx="60" cy="44" rx="2.5" ry="1.5" fill="${p}" fill-opacity=".9"/><path d="M44 62L39 49L33 62M76 62L81 49L87 62" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".7"/><rect x="51" y="62" width="18" height="26" rx="2" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".6"/><path d="M46 92L74 92" stroke="${p}" stroke-width="1.4" stroke-opacity=".7"/>`,
+    saraswati: `<ellipse cx="60" cy="42" rx="11" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M29 64Q30 53 40 50L60 58L80 50Q90 53 91 64" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".7"/><path d="M34 67Q45 60 55 64Q65 68 76 60Q86 56 89 67" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".6"/><path d="M34 71L34 90M86 71L86 90M40 90Q60 96 80 90" fill="none" stroke="${p}" stroke-width="1.1" stroke-opacity=".6"/><circle cx="60" cy="28" r="5" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/>`,
+    lakshmi: `<ellipse cx="60" cy="44" rx="11" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M52 56Q60 60 68 56L73 90L47 90Z" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M29 54Q34 41 45 44Q41 58 47 61" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M91 54Q86 41 75 44Q79 58 73 61" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><circle cx="37" cy="61" r="6" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><circle cx="83" cy="61" r="6" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/>`,
+    durga: `<ellipse cx="60" cy="40" rx="12" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M19 49L35 44M101 49L85 44M23 63L39 57M97 63L81 57M21 77L38 71M99 77L82 71M29 90L45 82M91 90L75 82" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M50 55Q60 59 70 55L71 90L49 90Z" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/>`,
+    kali: `<ellipse cx="60" cy="40" rx="12" ry="13" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M47 46Q38 37 41 29M73 46Q82 37 79 29" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M47 53L37 49M73 53L83 49M44 64L33 67M76 64L87 67" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/><path d="M52 56Q60 62 68 56L65 90L55 90Z" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M54 43Q60 47 66 43" fill="none" stroke="${p}" stroke-width="2" stroke-opacity=".9"/>`,
+    matsya: `<path d="M18 60Q45 39 80 55Q91 60 100 54L95 60L100 66Q91 60 80 65Q45 81 18 60Z" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="34" cy="58" r="3" fill="${p}" fill-opacity=".8"/><path d="M54 51L60 47M65 49L71 45M54 69L60 73M65 71L71 75" stroke="${p}" stroke-width="1" stroke-opacity=".6"/>`,
+    kurma: `<ellipse cx="60" cy="62" rx="32" ry="22" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><ellipse cx="60" cy="62" rx="32" ry="22" fill="${p}" fill-opacity=".08"/><path d="M40 50L34 38M80 50L86 38M40 76L32 88M80 76L88 88" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/><circle cx="32" cy="38" r="3" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><circle cx="88" cy="38" r="3" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><path d="M60 40L60 28M58 30L60 24L62 30" stroke="${p}" stroke-width="1.5" stroke-opacity=".7" fill="none"/><path d="M48 56Q60 50 72 56M48 64Q60 70 72 64" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".6"/>`,
+    varaha: `<ellipse cx="60" cy="50" rx="20" ry="16" fill="none" stroke="${p}" stroke-width="1.3" stroke-opacity=".9"/><path d="M44 56Q40 70 50 72M76 56Q80 70 70 72" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M40 48L30 42M40 54L30 58M80 48L90 42M80 54L90 58" stroke="${p}" stroke-width="1.3" stroke-opacity=".8"/><circle cx="50" cy="48" r="1.5" fill="${p}"/><circle cx="70" cy="48" r="1.5" fill="${p}"/><path d="M55 55L57 60M65 55L63 60" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="60" cy="24" r="10" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".8"/><path d="M52 22Q60 18 68 22M52 26Q60 30 68 26" fill="none" stroke="${p}" stroke-width=".8" stroke-opacity=".5"/><path d="M44 90L76 90M50 76L50 90M70 76L70 90" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/>`,
+    narasimha: `<ellipse cx="60" cy="38" rx="16" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M44 34Q52 24 60 26Q68 24 76 34" fill="none" stroke="${p}" stroke-width="2" stroke-opacity=".9"/><path d="M48 38L44 44M72 38L76 44" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/><path d="M48 55L48 90M72 55L72 90M48 90L72 90" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M30 62L40 56M90 62L80 56M28 74L40 68M92 74L80 68" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/>`,
+    vamana: `<ellipse cx="60" cy="44" rx="9" ry="11" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M52 58Q60 62 68 58L70 84L50 84Z" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M42 60Q40 70 42 78M78 60Q80 70 78 78" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M52 84L48 96M68 84L72 96" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M40 30L80 30L60 14Z" fill="none" stroke="${p}" stroke-width="1.4" stroke-opacity=".8"/><path d="M60 14L60 30" stroke="${p}" stroke-width=".8" stroke-opacity=".6"/><circle cx="34" cy="65" r="4" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M34 69L34 80" stroke="${p}" stroke-width=".8" stroke-opacity=".6"/>`,
+    parashurama: `<ellipse cx="60" cy="40" rx="11" ry="13" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M50 30Q60 18 70 30Q68 22 60 20Q52 22 50 30" fill="none" stroke="${p}" stroke-width="1.3" stroke-opacity=".8"/><path d="M48 54L48 90M72 54L72 90M48 90L72 90" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M30 56L40 50" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M18 38L30 50L24 56L12 44Z" fill="${p}" fill-opacity=".25" stroke="${p}" stroke-width="1.4" stroke-opacity=".9"/><path d="M30 50L40 60" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M58 24L61 31M62 24L59 31" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/>`,
+    rama: `<ellipse cx="60" cy="40" rx="11" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M49 55L49 90M71 55L71 90M49 90L71 90" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M28 50Q39 39 49 55" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M28 50Q28 41 37 39" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="30" cy="41" r="2" fill="${p}" fill-opacity=".8"/><path d="M58 24L61 31M62 24L59 31" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/>`,
+    krishna: `<ellipse cx="60" cy="42" rx="12" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M49 25Q60 17 71 25Q73 19 68 17" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M52 57Q60 62 68 57L67 90L53 90Z" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M37 55Q37 47 42 49L48 57" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><circle cx="37" cy="55" r="1.5" fill="${p}" fill-opacity=".8"/><path d="M83 55Q83 47 78 49L72 57" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/>`,
+    buddha: `<ellipse cx="60" cy="40" rx="12" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><circle cx="60" cy="24" r="4" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".7"/><path d="M52 40Q60 44 68 40" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><circle cx="54" cy="38" r="1" fill="${p}"/><circle cx="66" cy="38" r="1" fill="${p}"/><path d="M40 78Q60 70 80 78L80 90L40 90Z" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M48 70L42 76M72 70L78 76" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M52 60Q60 64 68 60" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".5"/><circle cx="60" cy="78" r="6" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".6"/>`,
+    kalki: `<path d="M29 75Q45 50 60 44Q76 38 91 44Q80 55 70 59Q81 57 91 65Q75 68 60 75Q44 82 29 75Z" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><circle cx="39" cy="72" r="5" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><circle cx="39" cy="79" r="5" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><path d="M64 29L53 55M64 29L76 52" stroke="${p}" stroke-width="2" stroke-opacity=".9"/>`,
+    ganesha: `<circle cx="60" cy="50" r="18" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M42 38Q29 19 21 34Q27 50 42 44" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M78 38Q91 19 99 34Q93 50 78 44" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M42 58Q40 70 51 75Q60 79 69 75Q80 70 78 58" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".8"/><path d="M55 52Q58 63 56 71" fill="none" stroke="${p}" stroke-width="2" stroke-opacity=".9"/><path d="M47 91L73 91" stroke="${p}" stroke-width="1.5" stroke-opacity=".7"/>`,
+    hanuman: `<ellipse cx="60" cy="40" rx="13" ry="15" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M73 34Q83 27 81 38Q79 48 70 44" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".8"/><path d="M50 57L50 85M70 57L70 85M50 85L70 85" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M40 67L50 63M80 67L70 63" stroke="${p}" stroke-width="1.5" stroke-opacity=".7"/><path d="M50 85Q55 96 60 101Q65 96 76 90Q82 96 71 101" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".8"/>`,
+    indra: `<ellipse cx="60" cy="40" rx="12" ry="14" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/><path d="M47 27Q54 19 60 21Q66 19 73 27" fill="none" stroke="${p}" stroke-width="2" stroke-opacity=".9"/><path d="M31 57L19 39L25 41M31 57L27 37L33 40" fill="none" stroke="${p}" stroke-width="1.5" stroke-opacity=".9"/><path d="M50 57L50 90M70 57L70 90M50 90L70 90" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/>`,
+    kartikeya: `<circle cx="48" cy="38" r="8" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><circle cx="60" cy="35" r="8" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><circle cx="72" cy="38" r="8" fill="none" stroke="${p}" stroke-width="1" stroke-opacity=".8"/><path d="M52 50Q60 56 68 50L70 90L50 90Z" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".7"/><path d="M57 17L60 34M63 17L60 34" stroke="${p}" stroke-width="2" stroke-opacity=".9"/><circle cx="60" cy="15" r="4" fill="none" stroke="${p}" stroke-width="1.2" stroke-opacity=".9"/>`
+  };
+  const body = icons[id] || `<circle cx="60" cy="60" r="30" fill="none" stroke="${p}" stroke-width="1.5"/>`;
+  return `<svg viewBox="0 0 120 120" class="god-svg">
+    <defs><radialGradient id="rg${id}" cx="50%" cy="38%"><stop offset="0%" stop-color="${p}" stop-opacity=".42"/><stop offset="100%" stop-color="${d}" stop-opacity=".07"/></radialGradient></defs>
+    <circle cx="60" cy="60" r="56" fill="url(#rg${id})" stroke="${p}" stroke-width=".5" stroke-opacity=".3"/>
+    ${body}
+  </svg>`;
+}
+
+/* ═══════════════════════════════════════════
+   RENDER CARD
+═══════════════════════════════════════════ */
+function renderCard(god, section) {
+  const card = document.createElement('div');
+  card.className = 'god-card';
+  card.innerHTML = `
+    <div class="god-banner" style="background:linear-gradient(90deg,${god.c[0]},${god.c[1]})"></div>
+    <div class="god-art" style="background:linear-gradient(145deg,${god.c[1]}28,${god.c[0]}10)">${makeSVG(god.id, god.c)}</div>
+    <div class="god-body">
+      <h3 class="god-name" style="color:${god.c[0]}">${god.name}</h3>
+      <p class="god-epithet">${god.epithet}</p>
+      <div class="god-mantra">${god.mantra}</div>
+      <p class="god-summary">${god.summary}</p>
+      <div class="god-attrs">${god.attrs.map(a=>`<span class="attr">${a}</span>`).join('')}</div>
+      <button class="read-btn" data-sec="${section}" data-id="${god.id}">Read Full Story &amp; Mythology ↗</button>
+    </div>`;
+  card.querySelector('.read-btn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    openModal(this.dataset.sec, this.dataset.id);
+  });
+  return card;
+}
+
+// Populate grids
+['trimurti','devi','avatars','pantheon'].forEach(sec => {
+  const el = document.getElementById('grid-' + sec);
+  if (el) DATA[sec].forEach(g => el.appendChild(renderCard(g, sec)));
+});
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('page-' + name);
+  if (pg) pg.classList.add('active');
+  if (btn) btn.classList.add('active');
+  const nav = document.getElementById('nav');
+  if (nav) window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
+}
+
+// Wire nav buttons via event listeners (not inline onclick)
+document.querySelectorAll('.nav-btn[data-page]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    showPage(this.dataset.page, this);
+  });
+});
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+function openModal(section, id) {
+  const god = DATA[section].find(g => g.id === id);
+  if (!god) return;
+  document.getElementById('mbanner').style.background = `linear-gradient(90deg,${god.c[0]},${god.c[1]})`;
+  document.getElementById('mart').innerHTML = makeSVG(god.id, god.c);
+  document.getElementById('mname').style.color = god.c[0];
+  document.getElementById('mname').textContent = god.name;
+  document.getElementById('mepithet').textContent = god.epithet;
+  document.getElementById('mmantra').textContent = god.mantra;
+
+  let html = `<p class="m-sec">Origin &amp; Divine Nature</p><p class="m-text">${god.origin}</p>`;
+
+  if (god.facts && Object.keys(god.facts).length) {
+    html += `<p class="m-sec">Divine Attributes &amp; Sacred Details</p><div class="m-facts">`;
+    Object.entries(god.facts).forEach(([k,v]) => {
+      html += `<div><span class="m-fact-label">${k}</span><span class="m-fact-val">${v}</span></div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (god.stories && god.stories.length) {
+    html += `<p class="m-sec">Sacred Stories &amp; Mythology</p><ul class="stories-list">`;
+    god.stories.forEach(s => {
+      html += `<li class="story-item"><p class="story-title">↦ ${s.title}</p><p class="story-text">${s.text}</p></li>`;
+    });
+    html += `</ul>`;
+  }
+
+  document.getElementById('mcontent').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Modal event listeners
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ═══════════════════════════════════════════
+   BACKGROUND RINGS
+═══════════════════════════════════════════ */
+const bg = document.getElementById('bg');
+[300, 430, 570, 710, 870, 1040, 1220].forEach(r => {
+  const d = document.createElement('div');
+  d.className = 'bg-ring';
+  d.style.cssText = `width:${r}px;height:${r}px`;
+  bg.appendChild(d);
+});
+</script>
+</body>
+</html>

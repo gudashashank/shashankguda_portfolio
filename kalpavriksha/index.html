@@ -7,6 +7,8 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230D0500'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-size='72' font-family='serif' fill='%23F0C050'%3E%E0%A5%90%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Kalpavriksha — A divine encyclopedia of Hindu cosmology, mythology, scriptures, and the gods. Explore Sanatan Dharma.">
 <meta name="theme-color" content="#0D0500">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
@@ -24,8 +26,8 @@ html { scroll-behavior: smooth; font-size: 16px; }
   --cream: #FDF8EE;
   --border: rgba(200,140,40,0.28);
   --border-strong: rgba(200,140,40,0.55);
-  --text-body: rgba(253,248,238,0.72);
-  --text-muted: rgba(200,160,100,0.65);
+  --text-body: rgba(253,248,238,0.92);
+  --text-muted: rgba(230,200,160,0.78);
   --card-bg: rgba(22,9,0,0.88);
   --section-bg: rgba(14,5,0,0.6);
 }
@@ -159,31 +161,136 @@ body {
   font-size: clamp(2.8rem, 7vw, 5.5rem);
   color: var(--gold-light);
   letter-spacing: 0.05em; line-height: 1.05;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
-.hero-sanskrit {
-  font-family: 'Cinzel', serif; font-size: clamp(0.8rem, 1.6vw, 1rem);
-  letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--saffron-light); margin-bottom: 0.55rem;
+
+/* HOVER REVEAL — for hero name and other elements */
+.hover-reveal-wrap {
+  cursor: help;
+  position: relative;
+  display: inline-block;
 }
-.hero-meaning {
-  font-family: 'EB Garamond', serif; font-style: italic;
-  font-size: 0.95rem; color: var(--gold-dim); margin-bottom: 2.8rem;
-  letter-spacing: 0.08em;
+.hover-reveal {
+  display: block;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--saffron-light);
+  margin-top: 0.5rem;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s, max-height 0.4s;
+  text-transform: none;
 }
-.hero-divider {
-  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; width: 100%; max-width: 520px;
+.hover-reveal-wrap:hover .hover-reveal {
+  opacity: 1;
+  max-height: 4rem;
 }
-.hero-divider-line { flex: 1; height: 1px; background: var(--border-strong); }
-.hero-divider-gem { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
-.hero-desc {
-  max-width: 660px; font-size: 1.15rem; line-height: 1.9;
-  color: var(--text-body); font-style: italic; margin-bottom: 1.8rem;
+
+/* HERO PURPOSE — clear statement of what this site is */
+.hero-purpose {
+  max-width: 680px;
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: rgba(253,248,238,0.92);
+  margin: 0 auto 2.8rem;
+  font-weight: 400;
 }
-.hero-desc2 {
-  max-width: 600px; font-size: 1rem; line-height: 1.85;
-  color: var(--text-muted); margin-bottom: 3rem;
+.hero-purpose strong {
+  color: var(--gold-light);
+  font-weight: 600;
 }
+.hero-purpose em {
+  color: var(--saffron-light);
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* INVOCATION — Sanskrit prayer block */
+.invocation {
+  max-width: 700px;
+  margin: 0 auto 2.8rem;
+  padding: 1.8rem 2rem;
+  background: rgba(20,8,0,0.6);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.invocation-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 1.2rem;
+}
+.invocation-stanzas {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+}
+.stanza {
+  cursor: help;
+  display: inline-block;
+  position: relative;
+  padding: 0.15rem 0.4rem;
+  border-bottom: 1px dashed rgba(240,192,80,0.3);
+  transition: color 0.3s, border-color 0.3s;
+}
+.stanza:hover {
+  color: var(--cream);
+  border-bottom-color: var(--saffron-light);
+}
+.stanza::after {
+  content: attr(data-meaning);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(8,3,0,0.98);
+  border: 1px solid var(--border-strong);
+  color: var(--cream);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem;
+  font-style: normal;
+  white-space: nowrap;
+  padding: 0.5rem 0.85rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 10;
+  letter-spacing: 0.02em;
+}
+.stanza:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+.stanza-sep { color: var(--text-muted); margin: 0 0.3rem; }
+.invocation-source {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.invocation-hint {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--gold-dim);
+}
+
 .scroll-cue {
   font-family: 'Cinzel', serif; font-size: 0.68rem;
   letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
@@ -220,6 +327,277 @@ body {
 }
 
 /* ═══════════════════════════════════════════
+   SACRED GEOGRAPHY — LEAFLET MAP
+═══════════════════════════════════════════ */
+.map-container {
+  background: rgba(20,8,0,0.7);
+  border: 1px solid var(--border-strong);
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.map-container::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--saffron));
+}
+#leaflet-map {
+  width: 100%; height: 540px;
+  border: 1px solid var(--border);
+  background: #1a0a00;
+}
+/* Leaflet popup theming */
+.leaflet-popup-content-wrapper {
+  background: rgba(15,5,0,0.98) !important;
+  color: var(--cream) !important;
+  border: 1px solid var(--border-strong);
+  border-radius: 2px !important;
+  font-family: 'EB Garamond', serif !important;
+}
+.leaflet-popup-content {
+  margin: 16px 18px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  min-width: 220px; max-width: 320px;
+}
+.leaflet-popup-tip {
+  background: rgba(15,5,0,0.98) !important;
+  border: 1px solid var(--border-strong) !important;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--gold-light) !important;
+  font-size: 20px !important;
+  padding: 8px 8px 0 0 !important;
+}
+.popup-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.15rem; margin-bottom: 0.2rem;
+  display: block;
+}
+.popup-meta {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--saffron); margin-bottom: 0.7rem;
+  display: block;
+}
+.popup-text {
+  color: rgba(253,248,238,0.88); font-size: 0.92rem;
+}
+.map-legend {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 1.5rem;
+  margin-top: 1.2rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.legend-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-body);
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* Sacred site marker (custom Leaflet divIcon) */
+.sacred-marker {
+  width: 18px !important; height: 18px !important;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+  animation: marker-pulse 2.5s ease-in-out infinite;
+}
+@keyframes marker-pulse {
+  0%,100% { transform: scale(1); opacity: 0.95; }
+  50%      { transform: scale(1.2); opacity: 1; }
+}
+
+/* GEO CATEGORY CARDS */
+.geo-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.geo-cat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.geo-cat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.geo-cat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 12px 36px rgba(200,100,0,0.18);
+}
+.geo-cat-num {
+  position: absolute; top: 0.6rem; right: 1.1rem;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5rem; color: rgba(240,192,80,0.12);
+  line-height: 1;
+}
+.geo-cat-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem; color: var(--gold-light);
+  margin-bottom: 0.2rem; line-height: 1.2;
+}
+.geo-cat-sub {
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--saffron-light); margin-bottom: 1rem;
+}
+.geo-cat-text {
+  font-size: 0.95rem; line-height: 1.78;
+  color: rgba(253,248,238,0.88);
+  margin-bottom: 1.2rem;
+}
+.geo-cat-hint {
+  display: block;
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--saffron);
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+  transition: color 0.3s, border-color 0.3s;
+}
+.geo-cat-card:hover .geo-cat-hint {
+  color: var(--gold-light);
+  border-top-color: var(--saffron);
+}
+
+/* GEO CATEGORY MODAL */
+.geo-modal-list {
+  list-style: none; margin: 0; padding: 0;
+}
+.geo-modal-list li {
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.geo-modal-list li:last-child { border-bottom: none; }
+.geo-modal-list .geo-marker {
+  flex-shrink: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  margin-top: 0.5rem;
+  background: var(--saffron);
+}
+.geo-modal-list strong {
+  display: block;
+  color: var(--saffron-light);
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem; letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+.geo-modal-list span {
+  color: rgba(253,248,238,0.85); font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   PAGES
+═══════════════════════════════════════════ */
+.journey-bar {
+  background: rgba(8,3,0,0.85);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  overflow-x: auto;
+}
+.journey-inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  min-width: max-content;
+}
+.journey-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  transition: opacity 0.3s;
+  opacity: 0.45;
+  min-width: 110px;
+}
+.journey-step:hover { opacity: 0.85; }
+.journey-step.active { opacity: 1; }
+.journey-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  color: var(--saffron);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s;
+}
+.journey-step.active .journey-num {
+  background: var(--saffron);
+  color: var(--cream);
+  border-color: var(--saffron);
+  box-shadow: 0 0 16px rgba(232,99,10,0.5);
+}
+.journey-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+}
+.journey-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: rgba(230,200,160,0.65);
+  letter-spacing: 0.02em;
+}
+.journey-line {
+  flex: 0 0 24px;
+  align-self: center;
+  height: 1px;
+  background: var(--border);
+  margin-top: -1.2rem;
+}
+@media (max-width: 720px) {
+  .journey-step { min-width: 90px; padding: 0.4rem 0.4rem; }
+  .journey-sub { display: none; }
+  .journey-line { flex: 0 0 16px; }
+}
+
+/* ═══════════════════════════════════════════
+   NARRATIVE CONNECTOR — at top of each page
+═══════════════════════════════════════════ */
+.narrative-thread {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(232,99,10,0.06);
+  border-left: 3px solid var(--saffron);
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(253,248,238,0.9);
+}
+.narrative-thread::before {
+  content: '◇ ';
+  color: var(--saffron-light);
+  margin-right: 0.3rem;
+}
+
+/* ═══════════════════════════════════════════
    PAGES
 ═══════════════════════════════════════════ */
 .page { display: none; }
@@ -248,12 +626,12 @@ body {
   color: var(--gold-light); line-height: 1.25; margin-bottom: 1.1rem;
 }
 .sec-intro {
-  font-size: 1.08rem; line-height: 1.88; color: var(--text-body);
-  font-style: italic; max-width: 680px; margin: 0 auto 1.2rem;
+  font-size: 1.18rem; line-height: 1.85; color: rgba(253,248,238,0.95);
+  font-style: italic; max-width: 720px; margin: 0 auto 1.2rem;
 }
 .sec-body {
-  font-size: 0.97rem; line-height: 1.85; color: var(--text-muted);
-  max-width: 680px; margin: 0 auto;
+  font-size: 1.05rem; line-height: 1.85; color: rgba(230,210,180,0.85);
+  max-width: 720px; margin: 0 auto;
 }
 
 /* ═══════════════════════════════════════════
@@ -307,6 +685,17 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  justify-content: center;
+}
+/* When fewer cards, center them */
+.gods-grid.centered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gods-grid.centered .god-card {
+  flex: 0 1 320px;
+  min-width: 280px;
 }
 
 /* ═══════════════════════════════════════════
@@ -317,8 +706,10 @@ body {
   border: 1px solid var(--border);
   display: flex; flex-direction: column;
   transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  outline: none;
 }
-.god-card:hover {
+.god-card:hover, .god-card:focus {
   transform: translateY(-5px);
   border-color: var(--border-strong);
   box-shadow: 0 12px 48px rgba(200,100,0,0.18);
@@ -336,43 +727,59 @@ body {
 }
 .god-name {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 1.25rem; line-height: 1.25; margin-bottom: 0.28rem;
+  font-size: 1.4rem; line-height: 1.2; margin-bottom: 0.3rem;
 }
 .god-epithet {
-  font-family: 'Cinzel', serif; font-size: 0.63rem;
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
   letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--text-muted); margin-bottom: 1rem;
+  color: var(--saffron-light); margin-bottom: 1rem; opacity: 0.85;
 }
 .god-mantra {
-  background: rgba(200,140,40,0.07);
+  background: rgba(200,140,40,0.08);
   border-left: 2px solid var(--gold);
-  padding: 0.6rem 0.9rem; margin-bottom: 1rem;
-  font-style: italic; font-size: 0.88rem;
-  color: var(--gold-light); line-height: 1.55;
+  padding: 0.7rem 0.95rem; margin-bottom: 1.1rem;
+  font-style: italic; font-size: 0.92rem;
+  color: var(--gold-light); line-height: 1.6;
 }
 .god-summary {
-  font-size: 0.91rem; line-height: 1.78;
-  color: var(--text-body); margin-bottom: 1rem; flex: 1;
+  font-size: 0.98rem; line-height: 1.78;
+  color: rgba(253,248,238,0.92);
+  margin-bottom: 1.2rem; flex: 1;
 }
-.god-attrs {
-  display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem;
+.card-hint {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+  transition: border-color 0.3s;
 }
-.attr {
-  font-family: 'Cinzel', serif; font-size: 0.6rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.22rem 0.6rem;
-  border: 1px solid var(--border); color: var(--text-muted);
+.god-card:hover .card-hint { border-top-color: var(--saffron); }
+.hint-text {
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.3s;
 }
-.read-btn {
-  background: none;
+.god-card:hover .hint-text { color: var(--saffron-light); }
+.hint-arrow {
+  color: var(--saffron); font-size: 1rem;
+  transition: transform 0.3s;
+}
+.god-card:hover .hint-arrow { transform: translate(3px, -3px); }
+
+/* MODAL ATTRIBUTES */
+.m-attrs {
+  display: flex; flex-wrap: wrap; gap: 0.45rem;
+  margin-bottom: 2rem;
+}
+.m-attr {
+  font-family: 'Cinzel', serif; font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
   border: 1px solid var(--border-strong);
+  background: rgba(232,99,10,0.05);
   color: var(--saffron-light);
-  font-family: 'Cinzel', serif; font-size: 0.67rem;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  padding: 0.55rem 1rem; cursor: pointer;
-  transition: all 0.22s; width: 100%; margin-top: auto;
 }
-.read-btn:hover { background: rgba(232,99,10,0.1); border-color: var(--saffron); color: var(--gold-light); }
 
 /* ═══════════════════════════════════════════
    CONCEPTS
@@ -534,158 +941,6 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   SACRED GEOGRAPHY
-═══════════════════════════════════════════ */
-.geo-map-wrap {
-  background: rgba(20,8,0,0.7);
-  border: 1px solid var(--border-strong);
-  padding: 2rem;
-  margin-bottom: 2rem;
-  position: relative;
-}
-.geo-map-wrap::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--saffron));
-}
-.geo-map-header {
-  text-align: center; margin-bottom: 1rem;
-}
-.geo-map-label {
-  font-family: 'Cinzel', serif; font-size: 0.65rem;
-  letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--text-muted);
-}
-.geo-map {
-  width: 100%; max-width: 500px;
-  height: auto; display: block; margin: 0 auto;
-}
-.sacred-site-dot {
-  cursor: pointer;
-  transition: all 0.3s;
-  filter: drop-shadow(0 0 4px rgba(232,99,10,0.5));
-}
-.sacred-site-dot:hover {
-  filter: drop-shadow(0 0 10px rgba(240,192,80,0.9));
-  transform-origin: center;
-}
-.sacred-site-dot.active {
-  filter: drop-shadow(0 0 14px rgba(240,192,80,1));
-}
-.sacred-site-label {
-  font-family: 'EB Garamond', serif;
-  font-size: 9px; fill: rgba(253,248,238,0.65);
-  pointer-events: none;
-  transition: fill 0.3s;
-}
-.sacred-site-dot:hover + .sacred-site-label,
-.sacred-site-dot.active + .sacred-site-label {
-  fill: var(--gold-light);
-  font-weight: 600;
-}
-.geo-legend {
-  display: flex; flex-wrap: wrap;
-  justify-content: center; gap: 1.2rem;
-  margin-top: 1.5rem; padding-top: 1.2rem;
-  border-top: 1px solid var(--border);
-}
-.legend-item {
-  display: flex; align-items: center; gap: 0.5rem;
-  font-family: 'Cinzel', serif; font-size: 0.68rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--text-body);
-}
-.legend-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  display: inline-block;
-}
-
-.geo-detail {
-  background: rgba(15,5,0,0.7);
-  border: 1px solid var(--border);
-  padding: 1.8rem 2rem;
-  min-height: 100px;
-  margin-bottom: 3rem;
-  transition: border-color 0.3s;
-}
-.geo-detail.has-content { border-color: var(--border-strong); }
-.geo-detail-prompt {
-  text-align: center;
-  font-family: 'Cinzel', serif;
-  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 1rem 0;
-}
-.geo-detail-name {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.4rem; color: var(--gold-light);
-  margin-bottom: 0.3rem; line-height: 1.2;
-}
-.geo-detail-meta {
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem; letter-spacing: 0.25em;
-  text-transform: uppercase; color: var(--saffron);
-  margin-bottom: 1.1rem;
-}
-.geo-detail-text {
-  font-size: 0.95rem; line-height: 1.85;
-  color: var(--text-body);
-}
-
-.geo-categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-.geo-cat-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  padding: 1.8rem;
-  position: relative;
-  transition: border-color 0.3s;
-}
-.geo-cat-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--saffron), var(--gold));
-}
-.geo-cat-card:hover { border-color: var(--border-strong); }
-.geo-cat-num {
-  position: absolute; top: 0.8rem; right: 1.2rem;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 2.2rem; color: rgba(240,192,80,0.12);
-  line-height: 1;
-}
-.geo-cat-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.1rem; color: var(--gold-light);
-  margin-bottom: 0.8rem; line-height: 1.3;
-  padding-right: 2.5rem;
-}
-.geo-cat-text {
-  font-size: 0.92rem; line-height: 1.8;
-  color: var(--text-body); margin-bottom: 1.1rem;
-}
-.geo-cat-list {
-  list-style: none; margin: 0; padding: 0;
-}
-.geo-cat-list li {
-  font-size: 0.86rem; line-height: 1.7;
-  color: var(--text-body);
-  padding: 0.45rem 0 0.45rem 1.1rem;
-  position: relative;
-  border-bottom: 1px solid rgba(200,140,40,0.1);
-}
-.geo-cat-list li:last-child { border-bottom: none; }
-.geo-cat-list li::before {
-  content: '◆';
-  position: absolute; left: 0; top: 0.5rem;
-  color: var(--gold); font-size: 0.55rem;
-}
-.geo-cat-list strong {
-  color: var(--saffron-light); font-family: 'Cinzel', serif;
-  font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em;
-}
-
-/* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
 .footer {
@@ -837,28 +1092,34 @@ body {
     <div class="om-halo r1"></div>
     <span class="om">ॐ</span>
   </div>
-  <h1 class="hero-name">Kalpavriksha</h1>
-  <p class="hero-sanskrit">कल्पवृक्ष &nbsp;·&nbsp; The Wish-Fulfilling Tree of the Gods</p>
-  <p class="hero-meaning">In ancient lore, the Kalpavriksha grants any knowledge to those who seek it with a pure heart</p>
-  <div class="hero-divider">
-    <div class="hero-divider-line"></div>
-    <div class="hero-divider-gem"></div>
-    <div class="hero-divider-line"></div>
+
+  <h1 class="hero-name hover-reveal-wrap">
+    Kalpavriksha
+    <span class="hover-reveal">कल्पवृक्ष · The Wish-Fulfilling Tree</span>
+  </h1>
+
+  <!-- Clear, simple statement of purpose -->
+  <p class="hero-purpose">
+    A guided journey through the gods, myths, and philosophies of <strong>Sanatan Dharma</strong> —
+    the world's oldest living spiritual tradition. <br/>
+    Whether you've grown up with these stories or are discovering them for the first time,
+    start with <em>The Cosmos</em> and walk forward.
+  </p>
+
+  <!-- Sanskrit invocation, with per-stanza hover-reveal -->
+  <div class="invocation">
+    <span class="invocation-label">An Opening Prayer</span>
+    <div class="invocation-stanzas">
+      <span class="stanza" data-meaning="Lead me from the unreal to the real">Asato Mā Sadgamaya</span>
+      <span class="stanza-sep">·</span>
+      <span class="stanza" data-meaning="From darkness to light">Tamaso Mā Jyotirgamaya</span>
+      <span class="stanza-sep">·</span>
+      <span class="stanza" data-meaning="From death to immortality">Mṛtyormā Amṛtaṁ Gamaya</span>
+    </div>
+    <p class="invocation-source">— Brihadaranyaka Upanishad &nbsp;·&nbsp; <span class="invocation-hint">hover over each line for meaning</span></p>
   </div>
-  <p class="hero-desc">
-    <em style="display:block;font-size:1.1rem;color:var(--gold-light);margin-bottom:1.2rem;letter-spacing:0.04em;">
-      Asato Mā Sadgamaya &nbsp;·&nbsp; Tamaso Mā Jyotirgamaya &nbsp;·&nbsp; Mṛtyormā Amṛtaṁ Gamaya
-    </em>
-    "Lead me from the unreal to the real, from darkness to light, from death to immortality."
-    These ancient words from the Brihadaranyaka Upanishad have guided seekers for over three thousand years —
-    a perfect prayer for anyone setting out to understand the vast, luminous tradition of Sanatan Dharma.
-  </p>
-  <p class="hero-desc2">
-    Whether you have grown up with these stories or are discovering them for the first time,
-    Kalpavriksha is your sanctuary. Explore the gods, the myths, the philosophies, and the sacred traditions
-    of the world's oldest living spiritual civilization — Sanatan Dharma, the Eternal Way.
-  </p>
-  <span class="scroll-cue">↓ &nbsp; Navigate the Cosmos &nbsp; ↓</span>
+
+  <span class="scroll-cue">↓ &nbsp; Begin the Journey &nbsp; ↓</span>
 </header>
 
 <!-- ═══════════════════════════════════════════
@@ -874,10 +1135,57 @@ body {
 </nav>
 
 <!-- ═══════════════════════════════════════════
+     JOURNEY MAP — shows where you are in the arc
+═══════════════════════════════════════════ -->
+<div class="journey-bar" id="journey-bar">
+  <div class="journey-inner">
+    <div class="journey-step" data-step="cosmos">
+      <span class="journey-num">1</span>
+      <span class="journey-label">The Cosmos</span>
+      <span class="journey-sub">Where it all begins</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="trimurti">
+      <span class="journey-num">2</span>
+      <span class="journey-label">The Trimurti</span>
+      <span class="journey-sub">Three faces of God</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="devi">
+      <span class="journey-num">3</span>
+      <span class="journey-label">The Devi</span>
+      <span class="journey-sub">The divine feminine</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="avatars">
+      <span class="journey-num">4</span>
+      <span class="journey-label">Avatars</span>
+      <span class="journey-sub">God walks among us</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="pantheon">
+      <span class="journey-num">5</span>
+      <span class="journey-label">The Pantheon</span>
+      <span class="journey-sub">Gods of daily life</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="geography">
+      <span class="journey-num">6</span>
+      <span class="journey-label">Sacred Land</span>
+      <span class="journey-sub">Where heaven meets Earth</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
      PAGE: THE COSMOS
 ═══════════════════════════════════════════ -->
 <div class="page active" id="page-cosmos">
 <div class="section">
+  <p class="narrative-thread">
+    Every great story needs a beginning. Before we meet the gods, we must understand the stage on which they appear —
+    the vast cyclical universe of Hindu cosmology, where time, space, and consciousness unfold in patterns of unimaginable scale.
+  </p>
   <div class="sec-head">
     <span class="sec-label">In the Beginning</span>
     <h2 class="sec-title">The Hindu Cosmos</h2>
@@ -1043,6 +1351,10 @@ body {
 ═══════════════════════════════════════════ -->
 <div class="page" id="page-trimurti">
 <div class="section">
+  <p class="narrative-thread">
+    Now that we know the universe is born, sustained, and dissolved in endless cycles —
+    who performs these three great acts? Meet the Trimurti: the threefold face of God in cosmic motion.
+  </p>
   <div class="sec-head">
     <span class="sec-label">The Holy Trinity</span>
     <h2 class="sec-title">The Trimurti</h2>
@@ -1059,7 +1371,7 @@ body {
       Brahma with Saraswati (knowledge), Vishnu with Lakshmi (prosperity), and Shiva with Parvati (power).
     </p>
   </div>
-  <div class="gods-grid" id="grid-trimurti"></div>
+  <div class="gods-grid centered" id="grid-trimurti"></div>
 </div>
 </div>
 
@@ -1068,6 +1380,10 @@ body {
 ═══════════════════════════════════════════ -->
 <div class="page" id="page-devi">
 <div class="section">
+  <p class="narrative-thread">
+    But the Trimurti do not act alone. Beside each god stands his Shakti — the divine feminine energy without which
+    no creation, preservation, or transformation could occur. Without Shakti, even Shiva is said to be a corpse.
+  </p>
   <div class="sec-head">
     <span class="sec-label">The Divine Feminine</span>
     <h2 class="sec-title">The Devi — Shakti</h2>
@@ -1085,7 +1401,7 @@ body {
       is to understand the full range of divine reality.
     </p>
   </div>
-  <div class="gods-grid" id="grid-devi"></div>
+  <div class="gods-grid centered" id="grid-devi"></div>
 </div>
 </div>
 
@@ -1094,6 +1410,10 @@ body {
 ═══════════════════════════════════════════ -->
 <div class="page" id="page-avatars">
 <div class="section">
+  <p class="narrative-thread">
+    The gods exist in their celestial realms — but what happens when evil grows strong on Earth and the world needs saving?
+    Vishnu, the preserver, descends. These are his ten avatars: divine descents into our world, in forms we can recognize.
+  </p>
   <div class="sec-head">
     <span class="sec-label">Descents of the Preserver</span>
     <h2 class="sec-title">The Dashavatar — Ten Avatars of Vishnu</h2>
@@ -1111,7 +1431,7 @@ body {
       to the depth and prescience of the Hindu philosophical imagination.
     </p>
   </div>
-  <div class="gods-grid" id="grid-avatars"></div>
+  <div class="gods-grid centered" id="grid-avatars"></div>
 </div>
 </div>
 
@@ -1120,6 +1440,11 @@ body {
 ═══════════════════════════════════════════ -->
 <div class="page" id="page-pantheon">
 <div class="section">
+  <p class="narrative-thread">
+    Beyond the great gods and their avatars lies a wider pantheon — the deities of nature, wisdom, courage, and daily life.
+    These are the gods Hindus actually pray to most often: Ganesha before any endeavor, Hanuman in times of fear,
+    Indra for rain, Kartikeya for victory. They are how the divine becomes intimate.
+  </p>
   <div class="sec-head">
     <span class="sec-label">The Wider Cosmos</span>
     <h2 class="sec-title">The Hindu Pantheon</h2>
@@ -1186,7 +1511,7 @@ body {
       Each has a unique place in the heart of Hindu devotional life.
     </p>
   </div>
-  <div class="gods-grid" id="grid-pantheon"></div>
+  <div class="gods-grid centered" id="grid-pantheon"></div>
 </div>
 </div>
 
@@ -1195,169 +1520,87 @@ body {
 ═══════════════════════════════════════════ -->
 <div class="page" id="page-geography">
 <div class="section">
+  <p class="narrative-thread">
+    Finally, we descend from the realm of the gods to the land they walked.
+    For the Hindu, India itself is sacred — every river is a goddess, every mountain a god's home, every temple a doorway.
+    Pilgrimage (yatra) is meditation in motion.
+  </p>
   <div class="sec-head">
     <span class="sec-label">Tirtha — Crossings of the Divine</span>
     <h2 class="sec-title">Sacred Geography of India</h2>
     <p class="sec-intro">
-      In Hindu tradition, the land itself is sacred. The body of Bharat Mata — Mother India — is dotted with
-      thousands of <em>tirthas</em> (crossing places) where the divine touched the Earth, where gods walked,
-      where rivers descended from heaven, and where the goddess's body fell when it was cut into 51 pieces.
-    </p>
-    <p class="sec-body">
-      The act of pilgrimage (<em>yatra</em>) is one of the oldest and most beloved spiritual practices in Hinduism.
-      To physically walk the land where Rama walked, to bathe in the Ganga where Shiva caught her in his hair,
-      to climb the slopes of Govardhan where Krishna sheltered his villagers — these are not mere tourism but
-      a form of meditation in motion. The Puranas describe sacred geography in extraordinary detail because the land
-      is understood to be a living text — a scripture written in mountains, rivers, and stones.
+      Click any glowing marker on the map below to read the story of that holy site.
     </p>
   </div>
 
-  <!-- INTERACTIVE MAP -->
-  <div class="geo-map-wrap">
-    <div class="geo-map-header">
-      <span class="geo-map-label">Click any site to learn more</span>
+  <!-- REAL INTERACTIVE MAP -->
+  <div class="map-container">
+    <div id="leaflet-map"></div>
+    <div class="map-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#E8630A"></span>Char Dham · Four Abodes</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#C9920A"></span>Jyotirlinga · Shiva</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#A83232"></span>Shakti Peetha · Devi</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#2A7AAF"></span>Sapta Puri · Sacred Cities</div>
     </div>
-    <svg class="geo-map" viewBox="0 0 500 580" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="map-glow" cx="50%" cy="50%">
-          <stop offset="0%" stop-color="#E8630A" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#E8630A" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="site-glow">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- Stylized India outline -->
-      <path d="M 220 50 L 245 45 L 270 50 L 295 60 L 320 75 L 340 95 L 355 120 L 365 145 L 370 175 L 375 205 L 380 235 L 385 265 L 380 295 L 370 325 L 355 355 L 335 385 L 310 415 L 280 445 L 250 475 L 225 500 L 210 520 L 215 540 L 230 555 L 245 545 L 235 525 L 220 500 L 210 475 L 200 445 L 185 415 L 170 385 L 160 355 L 150 325 L 145 295 L 140 265 L 135 235 L 130 205 L 130 175 L 135 145 L 145 120 L 160 95 L 180 75 L 200 60 Z"
-        fill="url(#map-glow)" stroke="rgba(200,140,40,0.5)" stroke-width="1.5"/>
-
-      <!-- River Ganga (stylized) -->
-      <path d="M 180 90 Q 220 140 250 200 Q 280 260 310 320 Q 340 360 380 380"
-        fill="none" stroke="rgba(74,144,184,0.45)" stroke-width="2.5" stroke-dasharray="5,3"/>
-      <text x="290" y="225" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="rgba(74,144,184,0.7)">Ganga</text>
-
-      <!-- Himalayas (decorative ridge) -->
-      <path d="M 130 75 L 145 65 L 160 72 L 175 60 L 195 68 L 215 55 L 235 62 L 255 50 L 280 58 L 305 52 L 330 62 L 360 70"
-        fill="none" stroke="rgba(200,140,40,0.4)" stroke-width="1.5"/>
-      <text x="200" y="48" font-family="Cinzel, serif" font-size="9" letter-spacing="2" fill="rgba(200,140,40,0.6)">HIMALAYAS</text>
-
-      <!-- SACRED SITES (will be populated by JS) -->
-      <g id="sacred-sites"></g>
-    </svg>
-
-    <!-- Map Legend -->
-    <div class="geo-legend">
-      <div class="legend-item"><span class="legend-dot" style="background:#E8630A"></span> Char Dham (Four Abodes)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#C9920A"></span> Jyotirlinga (Shiva)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#A83232"></span> Shakti Peetha (Devi)</div>
-      <div class="legend-item"><span class="legend-dot" style="background:#2A7AAF"></span> Sapta Puri (Seven Cities)</div>
-    </div>
-  </div>
-
-  <!-- Selected Site Detail -->
-  <div class="geo-detail" id="geo-detail">
-    <p class="geo-detail-prompt">Select a sacred site on the map above to read its story.</p>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
 
-  <!-- SACRED CATEGORIES -->
   <div class="sec-head" style="margin-top:1rem">
     <span class="sec-label">The Great Pilgrimages</span>
     <h2 class="sec-title">Categories of Sacred Sites</h2>
     <p class="sec-intro">
-      Hindu sacred geography is organized into several traditional groupings, each representing a complete pilgrimage circuit.
+      Hindu pilgrimage is organized into traditional circuits. Click any category to explore.
     </p>
   </div>
 
   <div class="geo-categories">
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="chardham">
       <span class="geo-cat-num">04</span>
-      <h3 class="geo-cat-title">Char Dham — The Four Abodes</h3>
-      <p class="geo-cat-text">Established by the 8th-century philosopher Adi Shankaracharya, the Char Dham are the four cardinal abodes of God — one in each direction of India. Completing this pilgrimage was traditionally believed to grant moksha (liberation).</p>
-      <ul class="geo-cat-list">
-        <li><strong>Badrinath</strong> (North) — Vishnu's abode in the Himalayas, Uttarakhand</li>
-        <li><strong>Dwarka</strong> (West) — Krishna's golden city by the Arabian Sea, Gujarat</li>
-        <li><strong>Puri</strong> (East) — Jagannath (Krishna) temple by the Bay of Bengal, Odisha</li>
-        <li><strong>Rameswaram</strong> (South) — Where Rama built the bridge to Lanka, Tamil Nadu</li>
-      </ul>
+      <h3 class="geo-cat-title">Char Dham</h3>
+      <p class="geo-cat-sub">The Four Abodes</p>
+      <p class="geo-cat-text">Four cardinal abodes of God — one in each direction. Established by Adi Shankaracharya in the 8th century. Completing this pilgrimage was traditionally believed to grant moksha.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
 
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="jyotirlinga">
       <span class="geo-cat-num">12</span>
-      <h3 class="geo-cat-title">Jyotirlingas — Pillars of Light</h3>
-      <p class="geo-cat-text">Twelve places where Shiva manifested as an infinite pillar of cosmic light (Jyotirlinga). Each site is considered a self-manifested (svayambhu) form of Shiva, predating any temple built around it. Visiting all twelve is one of the most demanding Hindu pilgrimages.</p>
-      <ul class="geo-cat-list">
-        <li><strong>Somnath</strong> — Gujarat (the original, on the Arabian Sea)</li>
-        <li><strong>Mallikarjuna</strong> — Srisailam, Andhra Pradesh</li>
-        <li><strong>Mahakaleshwar</strong> — Ujjain, Madhya Pradesh</li>
-        <li><strong>Omkareshwar</strong> — Madhya Pradesh, on the Narmada</li>
-        <li><strong>Kedarnath</strong> — Uttarakhand Himalayas</li>
-        <li><strong>Bhimashankar</strong> — Maharashtra Western Ghats</li>
-        <li><strong>Kashi Vishwanath</strong> — Varanasi, Uttar Pradesh</li>
-        <li><strong>Trimbakeshwar</strong> — Nashik, Maharashtra</li>
-        <li><strong>Vaidyanath</strong> — Deoghar, Jharkhand</li>
-        <li><strong>Nageshwar</strong> — Dwarka, Gujarat</li>
-        <li><strong>Rameswaram</strong> — Tamil Nadu</li>
-        <li><strong>Grishneshwar</strong> — Maharashtra, near Ellora</li>
-      </ul>
+      <h3 class="geo-cat-title">Jyotirlingas</h3>
+      <p class="geo-cat-sub">Pillars of Light</p>
+      <p class="geo-cat-text">Twelve places where Shiva manifested as an infinite pillar of cosmic light. Each is self-manifested (svayambhu) — predating the temple built around it.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
 
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="shaktipeetha">
       <span class="geo-cat-num">51</span>
-      <h3 class="geo-cat-title">Shakti Peethas — The Goddess's Body</h3>
-      <p class="geo-cat-text">When the goddess Sati immolated herself at her father Daksha's sacrifice, the grief-mad Shiva carried her body across the cosmos. Vishnu used his Sudarshana Chakra to cut her body into 51 pieces, which fell to Earth — each spot became a Shakti Peetha, a power-seat of the Devi. The four most sacred are called Adi Shakti Peethas.</p>
-      <ul class="geo-cat-list">
-        <li><strong>Kamakhya</strong> — Assam (where her yoni fell — the most powerful)</li>
-        <li><strong>Kalighat</strong> — Kolkata, West Bengal (where her right toes fell)</li>
-        <li><strong>Vimala / Puri</strong> — Odisha (where her feet fell)</li>
-        <li><strong>Tara Tarini</strong> — Odisha (where her breasts fell)</li>
-        <li>...47 other sites across India, Pakistan, Bangladesh, Nepal, and Sri Lanka</li>
-      </ul>
+      <h3 class="geo-cat-title">Shakti Peethas</h3>
+      <p class="geo-cat-sub">The Goddess's Body</p>
+      <p class="geo-cat-text">Fifty-one sacred sites where pieces of the goddess Sati's body fell when Vishnu cut it apart with his chakra to free Shiva from his grief-mad wanderings.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
 
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="saptapuri">
       <span class="geo-cat-num">07</span>
-      <h3 class="geo-cat-title">Sapta Puri — The Seven Sacred Cities</h3>
-      <p class="geo-cat-text">Seven cities considered so spiritually charged that dying within their boundaries grants liberation. Each is associated with a major deity or moment of cosmic history.</p>
-      <ul class="geo-cat-list">
-        <li><strong>Ayodhya</strong> — Birthplace of Rama</li>
-        <li><strong>Mathura</strong> — Birthplace of Krishna</li>
-        <li><strong>Haridwar</strong> — Where Ganga enters the plains</li>
-        <li><strong>Varanasi (Kashi)</strong> — Shiva's eternal city; oldest continuously inhabited city</li>
-        <li><strong>Kanchipuram</strong> — Tamil Nadu, "city of a thousand temples"</li>
-        <li><strong>Ujjain</strong> — Site of Mahakaleshwar; one of the four Kumbh Mela cities</li>
-        <li><strong>Dwarka</strong> — Krishna's submerged kingdom</li>
-      </ul>
+      <h3 class="geo-cat-title">Sapta Puri</h3>
+      <p class="geo-cat-sub">Seven Sacred Cities</p>
+      <p class="geo-cat-text">Seven cities so spiritually charged that dying within their boundaries is said to grant liberation. Each is the home of a major deity or moment of cosmic history.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
 
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="rivers">
       <span class="geo-cat-num">07</span>
-      <h3 class="geo-cat-title">Sapta Sindhu — The Seven Sacred Rivers</h3>
-      <p class="geo-cat-text">Rivers in Hindu tradition are not metaphors but goddesses — living, conscious beings who descended from heaven for the benefit of humanity. Seven are considered most sacred.</p>
-      <ul class="geo-cat-list">
-        <li><strong>Ganga</strong> — Descended from heaven through Shiva's hair</li>
-        <li><strong>Yamuna</strong> — Sister of Yama; Krishna's beloved river</li>
-        <li><strong>Saraswati</strong> — The lost goddess-river, now flowing underground</li>
-        <li><strong>Godavari</strong> — The Ganga of the South</li>
-        <li><strong>Narmada</strong> — Older than the Ganga; born from Shiva's body</li>
-        <li><strong>Sindhu</strong> — The Indus, gave its name to Hindu civilization</li>
-        <li><strong>Kaveri</strong> — The sacred river of the Tamil land</li>
-      </ul>
+      <h3 class="geo-cat-title">Sapta Sindhu</h3>
+      <p class="geo-cat-sub">Seven Sacred Rivers</p>
+      <p class="geo-cat-text">Rivers in Hindu tradition are not metaphors but goddesses — living, conscious beings who descended from heaven for humanity's benefit.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
 
-    <div class="geo-cat-card">
+    <div class="geo-cat-card" data-cat="kumbh">
       <span class="geo-cat-num">04</span>
-      <h3 class="geo-cat-title">Kumbh Mela — The Great Gathering</h3>
-      <p class="geo-cat-text">Every twelve years, at four sites where drops of the nectar of immortality (Amrita) fell during the cosmic churning, the largest peaceful human gathering on Earth takes place — the Kumbh Mela. Bathing in the sacred rivers during specific astrological moments is believed to wash away all sins.</p>
-      <ul class="geo-cat-list">
-        <li><strong>Prayagraj</strong> — Confluence of Ganga, Yamuna, and the invisible Saraswati</li>
-        <li><strong>Haridwar</strong> — Where Ganga enters the plains</li>
-        <li><strong>Ujjain</strong> — On the Shipra River</li>
-        <li><strong>Nashik</strong> — On the Godavari River</li>
-      </ul>
+      <h3 class="geo-cat-title">Kumbh Mela</h3>
+      <p class="geo-cat-sub">The Great Gathering</p>
+      <p class="geo-cat-text">Every twelve years at four sites where drops of the cosmic nectar fell, the largest peaceful human gathering on Earth takes place. The 2025 Mahakumbh drew 660 million pilgrims.</p>
+      <span class="geo-cat-hint">Click to explore →</span>
     </div>
   </div>
 
@@ -1365,7 +1608,7 @@ body {
 </div>
 
 <!-- ═══════════════════════════════════════════
-     FOOTER (continues below)
+     FOOTER
 ═══════════════════════════════════════════ -->
 <footer class="footer">
   <span class="footer-om">ॐ</span>
@@ -1738,6 +1981,8 @@ function makeSVG(id, c) {
 function renderCard(god, section) {
   const card = document.createElement('div');
   card.className = 'god-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
   card.innerHTML = `
     <div class="god-banner" style="background:linear-gradient(90deg,${god.c[0]},${god.c[1]})"></div>
     <div class="god-art" style="background:linear-gradient(145deg,${god.c[1]}28,${god.c[0]}10)">${makeSVG(god.id, god.c)}</div>
@@ -1746,12 +1991,15 @@ function renderCard(god, section) {
       <p class="god-epithet">${god.epithet}</p>
       <div class="god-mantra">${god.mantra}</div>
       <p class="god-summary">${god.summary}</p>
-      <div class="god-attrs">${god.attrs.map(a=>`<span class="attr">${a}</span>`).join('')}</div>
-      <button class="read-btn" data-sec="${section}" data-id="${god.id}">Read Full Story &amp; Mythology ↗</button>
+      <div class="card-hint">
+        <span class="hint-text">Click to read full story</span>
+        <span class="hint-arrow">↗</span>
+      </div>
     </div>`;
-  card.querySelector('.read-btn').addEventListener('click', function(e) {
-    e.stopPropagation();
-    openModal(this.dataset.sec, this.dataset.id);
+  const openHandler = () => openModal(section, god.id);
+  card.addEventListener('click', openHandler);
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHandler(); }
   });
   return card;
 }
@@ -1795,7 +2043,11 @@ function openModal(section, id) {
   document.getElementById('mepithet').textContent = god.epithet;
   document.getElementById('mmantra').textContent = god.mantra;
 
-  let html = `<p class="m-sec">Origin &amp; Divine Nature</p><p class="m-text">${god.origin}</p>`;
+  let html = '';
+  if (god.attrs && god.attrs.length) {
+    html += `<div class="m-attrs">${god.attrs.map(a=>`<span class="m-attr">${a}</span>`).join('')}</div>`;
+  }
+  html += `<p class="m-sec">Origin &amp; Divine Nature</p><p class="m-text">${god.origin}</p>`;
 
   if (god.facts && Object.keys(god.facts).length) {
     html += `<p class="m-sec">Divine Attributes &amp; Sacred Details</p><div class="m-facts">`;
@@ -1831,96 +2083,226 @@ document.getElementById('modal').addEventListener('click', function(e) {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 /* ═══════════════════════════════════════════
-   SACRED GEOGRAPHY — SITES & MAP
+   SACRED GEOGRAPHY — Leaflet Map + Category Modal
 ═══════════════════════════════════════════ */
 const SACRED_SITES = [
-  // CHAR DHAM (Four Abodes) - color: saffron
-  {id:'badrinath', name:'Badrinath', x:235, y:78, color:'#E8630A', category:'Char Dham', state:'Uttarakhand',
-   text:'High in the Himalayas at 10,279 feet, Badrinath is the northern abode of Vishnu. The temple is built around a self-manifested black stone image of Vishnu in meditation pose. Closed for six months each winter when the road is buried in snow, the temple reopens each spring with great ceremony. Adi Shankaracharya re-established this temple in the 8th century as one of the four pillars of his Char Dham circuit.'},
-  {id:'dwarka', name:'Dwarka', x:145, y:240, color:'#E8630A', category:'Char Dham · Sapta Puri', state:'Gujarat',
-   text:'Krishna\'s legendary golden city by the Arabian Sea. According to the Mahabharata, after the war Krishna ruled here for 36 years until the city sank into the sea at the end of the Dvapara Yuga. Modern archaeology has indeed found submerged structures off the coast. The Dwarkadhish Temple, dedicated to Krishna as the King of Dwarka, is one of Hinduism\'s most sacred Vishnu temples.'},
-  {id:'puri', name:'Puri (Jagannath)', x:325, y:340, color:'#E8630A', category:'Char Dham', state:'Odisha',
-   text:'Home to the Jagannath Temple — the "Lord of the Universe" — a unique form of Krishna worshipped with his brother Balabhadra and sister Subhadra. The temple is famous for its annual Rath Yatra (Chariot Festival), when the deities are pulled through the streets on massive wooden chariots — the origin of the English word "juggernaut."'},
-  {id:'rameswaram', name:'Rameswaram', x:255, y:530, color:'#E8630A', category:'Char Dham · Jyotirlinga', state:'Tamil Nadu',
-   text:'The southernmost Char Dham and one of the twelve Jyotirlingas. According to the Ramayana, Rama installed a Shivalinga here before crossing the ocean to Lanka to rescue Sita, and worshipped Shiva for blessings on his mission. The temple is famous for its longest corridor of any Hindu temple in India.'},
+  // CHAR DHAM
+  {name:'Badrinath', lat:30.7433, lng:79.4938, color:'#E8630A', cat:'Char Dham · North', text:'High in the Himalayas at 10,279 feet, Badrinath is the northern abode of Vishnu. The temple is built around a self-manifested black stone image of Vishnu in meditation. Closed each winter under snow, it reopens every spring with great ceremony.'},
+  {name:'Dwarka', lat:22.2394, lng:68.9678, color:'#E8630A', cat:'Char Dham · West', text:'Krishna\'s legendary golden city by the Arabian Sea. According to the Mahabharata, Krishna ruled here for 36 years before the city sank into the sea. Modern archaeology has indeed found submerged structures offshore.'},
+  {name:'Jagannath Puri', lat:19.8135, lng:85.8312, color:'#E8630A', cat:'Char Dham · East', text:'Home to the Jagannath Temple — the "Lord of the Universe" — a unique form of Krishna worshipped with his siblings Balabhadra and Subhadra. Famous for its annual Rath Yatra, the origin of the English word "juggernaut".'},
+  {name:'Rameswaram', lat:9.2876, lng:79.3129, color:'#E8630A', cat:'Char Dham · South · Jyotirlinga', text:'The southernmost Char Dham and one of the twelve Jyotirlingas. According to the Ramayana, Rama installed a Shivalinga here before crossing the ocean to Lanka. The temple has the longest corridor of any in India.'},
 
-  // JYOTIRLINGAS (additional) - color: gold
-  {id:'kashi', name:'Kashi Vishwanath', x:280, y:200, color:'#C9920A', category:'Jyotirlinga · Sapta Puri', state:'Varanasi',
-   text:'In the ancient city of Varanasi — the oldest continuously inhabited city in the world — stands Kashi Vishwanath, the Lord of the Universe. Shiva is said to never leave Varanasi; anyone who dies within the city is granted moksha directly by Shiva whispering the Taraka Mantra in their ear. The temple has been destroyed and rebuilt many times, most famously rebuilt by Queen Ahilyabai Holkar in 1780.'},
-  {id:'somnath', name:'Somnath', x:140, y:255, color:'#C9920A', category:'Jyotirlinga', state:'Gujarat',
-   text:'The first and most ancient of the twelve Jyotirlingas, on the Arabian Sea coast. The original temple, said to have been built of gold, was sacked seventeen times by various invaders — most famously by Mahmud of Ghazni in 1024 CE. The temple was rebuilt after Indian independence in 1951, and stands today as a symbol of resilience.'},
-  {id:'kedarnath', name:'Kedarnath', x:220, y:88, color:'#C9920A', category:'Jyotirlinga', state:'Uttarakhand',
-   text:'Perched at 11,755 feet in the Himalayas, Kedarnath is the highest of the twelve Jyotirlingas and one of the most physically demanding pilgrimages. The temple, built of massive stone slabs, miraculously survived the 2013 Uttarakhand floods that destroyed everything around it — an act that millions of devotees interpret as Shiva\'s grace.'},
-  {id:'mahakal', name:'Mahakaleshwar', x:215, y:240, color:'#C9920A', category:'Jyotirlinga · Sapta Puri', state:'Ujjain',
-   text:'In Ujjain, the ancient city associated with King Vikramaditya. The Mahakaleshwar Jyotirlinga is considered the only south-facing (Dakshinamukhi) Shivalinga of the twelve — believed to be especially powerful for liberation. The daily Bhasma Aarti (sacred ash worship) at 4 AM is one of the most intense ritual experiences in all of Hinduism.'},
+  // JYOTIRLINGAS (extras beyond Rameswaram)
+  {name:'Kashi Vishwanath', lat:25.3109, lng:83.0107, color:'#C9920A', cat:'Jyotirlinga · Sapta Puri', text:'In the eternal city of Varanasi — the oldest continuously inhabited city in the world. Shiva is said to never leave Varanasi; anyone who dies within the city is granted moksha. Rebuilt by Queen Ahilyabai Holkar in 1780.'},
+  {name:'Somnath', lat:20.8880, lng:70.4015, color:'#C9920A', cat:'Jyotirlinga', text:'The first and most ancient of the twelve Jyotirlingas, on the Arabian Sea. The original temple, built of gold, was sacked seventeen times by various invaders. Rebuilt after Indian independence in 1951 as a symbol of resilience.'},
+  {name:'Kedarnath', lat:30.7346, lng:79.0669, color:'#C9920A', cat:'Jyotirlinga', text:'Perched at 11,755 feet in the Himalayas — the highest of the twelve Jyotirlingas. The temple miraculously survived the catastrophic 2013 floods that destroyed everything around it — an act devotees attribute to Shiva\'s grace.'},
+  {name:'Mahakaleshwar', lat:23.1828, lng:75.7681, color:'#C9920A', cat:'Jyotirlinga · Sapta Puri', text:'In Ujjain. The only south-facing Shivalinga of the twelve — considered especially powerful for liberation. The daily Bhasma Aarti at 4 AM, with sacred ash from cremation grounds, is one of the most intense rituals in Hinduism.'},
+  {name:'Trimbakeshwar', lat:19.9326, lng:73.5293, color:'#C9920A', cat:'Jyotirlinga', text:'At the source of the Godavari River in Nashik, Maharashtra. The Jyotirlinga has three faces representing Brahma, Vishnu, and Shiva — unique among the twelve.'},
+  {name:'Omkareshwar', lat:22.2436, lng:76.1499, color:'#C9920A', cat:'Jyotirlinga', text:'On an island in the Narmada River shaped like the sacred syllable Om. Pilgrims circumambulate the entire island as part of the worship.'},
 
-  // SHAKTI PEETHAS - color: red
-  {id:'kamakhya', name:'Kamakhya', x:380, y:175, color:'#A83232', category:'Adi Shakti Peetha', state:'Assam',
-   text:'On Nilachal Hill in Guwahati, Kamakhya is the most powerful of all Shakti Peethas — the spot where Sati\'s yoni (womb) fell when her body was cut into pieces. The temple has no idol; the goddess is worshipped in the form of a natural stone yoni-shaped fissure in the floor, kept moist by a natural spring. Every June, during Ambubachi Mela, the spring runs red — believed to be the goddess\'s menstruation — and the temple is closed for three days.'},
-  {id:'kalighat', name:'Kalighat', x:355, y:285, color:'#A83232', category:'Shakti Peetha', state:'Kolkata',
-   text:'In Kolkata, the spot where Sati\'s right toes fell. The temple\'s namesake gave the entire city its name — "Kolkata" is derived from "Kalighat." Goddess Kali is worshipped here in her most fierce form, and the temple is one of the most active places of goddess worship in India, especially during Kali Puja (the night of Diwali in Bengal).'},
+  // SHAKTI PEETHAS
+  {name:'Kamakhya', lat:26.1664, lng:91.7058, color:'#A83232', cat:'Adi Shakti Peetha', text:'On Nilachal Hill in Guwahati — the most powerful of all Shakti Peethas, where Sati\'s yoni fell. The temple has no idol; the goddess is worshipped as a natural yoni-shaped stone kept moist by a spring. During Ambubachi Mela in June, the spring runs red — believed to be the goddess\'s menstruation.'},
+  {name:'Kalighat', lat:22.5202, lng:88.3422, color:'#A83232', cat:'Shakti Peetha', text:'In Kolkata, where Sati\'s right toes fell. The temple\'s name gave the entire city its name ("Kolkata" derives from "Kalighat"). Kali is worshipped here in her most fierce form.'},
+  {name:'Vaishno Devi', lat:33.0307, lng:74.9468, color:'#A83232', cat:'Shakti Peetha', text:'In the Trikuta hills of Jammu & Kashmir at 5,200 feet. One of the most visited Hindu shrines, drawing over 10 million pilgrims yearly. The goddess is worshipped as three natural rock formations (pindis) representing Mahakali, Mahalakshmi, and Mahasaraswati.'},
 
-  // SAPTA PURI - color: blue
-  {id:'ayodhya', name:'Ayodhya', x:265, y:185, color:'#2A7AAF', category:'Sapta Puri', state:'Uttar Pradesh',
-   text:'The birthplace of Rama and the setting of much of the Ramayana. After centuries of religious and political dispute, the Ram Mandir was consecrated in January 2024, restoring what tradition considers the original site of Rama\'s birth. The city sits on the banks of the sacred Sarayu River where Rama is said to have taken his final ascent.'},
-  {id:'mathura', name:'Mathura', x:225, y:175, color:'#2A7AAF', category:'Sapta Puri', state:'Uttar Pradesh',
-   text:'The birthplace of Krishna, on the banks of the Yamuna River. The Krishna Janmabhoomi temple complex marks the prison cell where Krishna was born to Devaki and Vasudeva. Nearby Vrindavan and Gokul, where Krishna grew up as a cowherd, form together with Mathura the heart of Krishna devotion (Braj Bhumi).'},
-  {id:'haridwar', name:'Haridwar', x:235, y:130, color:'#2A7AAF', category:'Sapta Puri · Kumbh Mela', state:'Uttarakhand',
-   text:'Where the holy Ganga emerges from the Himalayas onto the plains of India. "Haridwar" means "Gateway to Hari (Vishnu)." The evening Ganga Aarti at Har Ki Pauri ghat, when hundreds of lamps are floated on the river, is one of the most moving sights in all of religious India. Every twelve years, Haridwar hosts the Kumbh Mela.'},
-  {id:'prayagraj', name:'Prayagraj', x:280, y:200, color:'#2A7AAF', category:'Kumbh Mela', state:'Uttar Pradesh',
-   text:'The Triveni Sangam — the confluence of three rivers: the Ganga, the Yamuna, and the invisible Saraswati. This is considered the most sacred spot in all of India. The greatest Kumbh Melas happen here every twelve years, drawing tens of millions of pilgrims to bathe at the confluence. The 2025 Mahakumbh drew an estimated 660 million visitors.'},
+  // SAPTA PURI
+  {name:'Ayodhya', lat:26.7922, lng:82.1998, color:'#2A7AAF', cat:'Sapta Puri · Janmabhumi of Rama', text:'The birthplace of Rama, on the banks of the sacred Sarayu River. The Ram Mandir was consecrated in January 2024, restoring what tradition considers the original site of Rama\'s birth.'},
+  {name:'Mathura', lat:27.4924, lng:77.6737, color:'#2A7AAF', cat:'Sapta Puri · Janmabhumi of Krishna', text:'The birthplace of Krishna, on the banks of the Yamuna River. The Krishna Janmabhoomi temple marks the prison cell where Krishna was born to Devaki and Vasudeva. Together with nearby Vrindavan and Gokul, this is the heart of Krishna devotion.'},
+  {name:'Haridwar', lat:29.9457, lng:78.1642, color:'#2A7AAF', cat:'Sapta Puri · Kumbh Mela', text:'"Gateway to Hari (Vishnu)" — where the Ganga emerges from the Himalayas onto the plains. The evening Ganga Aarti at Har Ki Pauri, with hundreds of lamps floated on the river, is one of the most moving sights in religious India.'},
+  {name:'Prayagraj (Allahabad)', lat:25.4358, lng:81.8463, color:'#2A7AAF', cat:'Kumbh Mela · Triveni Sangam', text:'The Triveni Sangam — confluence of three rivers: Ganga, Yamuna, and the invisible Saraswati. The greatest Kumbh Melas happen here every twelve years. The 2025 Mahakumbh drew an estimated 660 million pilgrims — the largest peaceful human gathering in history.'},
+  {name:'Kanchipuram', lat:12.8342, lng:79.7036, color:'#2A7AAF', cat:'Sapta Puri', text:'In Tamil Nadu — "city of a thousand temples." One of the seven sacred cities, with major temples to both Shiva (Ekambareswarar) and Vishnu (Varadharaja Perumal). Adi Shankaracharya established one of his four major mathas here.'},
 
   // Other significant sites
-  {id:'tirupati', name:'Tirupati', x:240, y:445, color:'#E8630A', category:'Vaishnava', state:'Andhra Pradesh',
-   text:'Tirumala Venkateswara Temple — the wealthiest Hindu temple in the world and the most visited religious site on Earth, drawing over 30 million pilgrims annually. The deity, Lord Venkateswara (a form of Vishnu), is said to grant any wish made by sincere devotees. Many pilgrims tonsure their heads as an offering.'},
-  {id:'amarnath', name:'Amarnath', x:200, y:60, color:'#C9920A', category:'Cave Shrine', state:'Kashmir',
-   text:'High in the Himalayas at 12,756 feet, in a cave reached only by a strenuous trek through Kashmir, an ice stalagmite forms each summer — believed by devotees to be a self-manifested Shivalinga. Tradition holds that Shiva first revealed the secret of immortality (Amar Katha) to Parvati in this cave.'}
+  {name:'Tirupati Venkateswara', lat:13.6833, lng:79.3475, color:'#E8630A', cat:'Vaishnava', text:'The wealthiest Hindu temple in the world and the most visited religious site on Earth — over 30 million pilgrims annually. The deity Venkateswara (a form of Vishnu) is believed to grant any wish made by sincere devotees.'},
+  {name:'Amarnath Cave', lat:34.2152, lng:75.5018, color:'#C9920A', cat:'Cave Shrine of Shiva', text:'High in the Himalayas at 12,756 feet in Kashmir. Each summer an ice stalagmite forms naturally inside the cave — worshipped as a self-manifested Shivalinga. Tradition holds that Shiva first revealed the secret of immortality (Amar Katha) to Parvati here.'}
 ];
 
-(function renderSacredSites() {
-  const svgGroup = document.getElementById('sacred-sites');
-  if (!svgGroup) return;
+const GEO_CATEGORIES = {
+  chardham: {
+    title: 'Char Dham — The Four Abodes',
+    intro: 'The four cardinal abodes of God, one in each direction of India. Established by the philosopher Adi Shankaracharya in the 8th century CE. Completing this pilgrimage is one of the most ancient and venerated journeys in Hinduism — traditionally believed to grant moksha (liberation).',
+    sites: [
+      ['Badrinath (North)', 'Uttarakhand — Vishnu\'s abode at 10,279 feet in the Himalayas'],
+      ['Dwarka (West)', 'Gujarat — Krishna\'s legendary golden city by the Arabian Sea'],
+      ['Jagannath Puri (East)', 'Odisha — Krishna as Jagannath, "Lord of the Universe"'],
+      ['Rameswaram (South)', 'Tamil Nadu — where Rama built the bridge to Lanka']
+    ]
+  },
+  jyotirlinga: {
+    title: 'The Twelve Jyotirlingas',
+    intro: 'Twelve places where Shiva is said to have manifested as an infinite pillar of cosmic light. Each is considered a self-manifested (svayambhu) form of Shiva, predating any temple built around it. Visiting all twelve in one\'s lifetime is among the most demanding Hindu pilgrimages.',
+    sites: [
+      ['Somnath', 'Gujarat — the original, on the Arabian Sea'],
+      ['Mallikarjuna', 'Andhra Pradesh — Srisailam, on the Krishna River'],
+      ['Mahakaleshwar', 'Madhya Pradesh — Ujjain, the only south-facing linga'],
+      ['Omkareshwar', 'Madhya Pradesh — island shaped like Om in the Narmada'],
+      ['Kedarnath', 'Uttarakhand — at 11,755 feet in the Himalayas'],
+      ['Bhimashankar', 'Maharashtra — Sahyadri hills near Pune'],
+      ['Kashi Vishwanath', 'Varanasi — Shiva\'s eternal city'],
+      ['Trimbakeshwar', 'Maharashtra — source of the Godavari'],
+      ['Vaidyanath', 'Jharkhand — Deoghar, "lord of physicians"'],
+      ['Nageshwar', 'Gujarat — near Dwarka'],
+      ['Rameswaram', 'Tamil Nadu — built by Rama himself'],
+      ['Grishneshwar', 'Maharashtra — near the Ellora caves']
+    ]
+  },
+  shaktipeetha: {
+    title: 'The 51 Shakti Peethas',
+    intro: 'When the goddess Sati immolated herself at her father Daksha\'s sacrifice, the grief-mad Shiva carried her body across the cosmos. Vishnu used his Sudarshana Chakra to cut her body into 51 pieces — each spot where a piece fell became a Shakti Peetha, a power-seat of the Devi. The four most sacred are the Adi Shakti Peethas.',
+    sites: [
+      ['Kamakhya', 'Assam — where her yoni fell (the most powerful)'],
+      ['Vimala / Puri', 'Odisha — where her feet fell'],
+      ['Tara Tarini', 'Odisha — where her breasts fell'],
+      ['Kalighat', 'Kolkata — where her right toes fell'],
+      ['Hinglaj', 'Balochistan, Pakistan — where her head fell'],
+      ['Sharada Peetha', 'Pakistan-occupied Kashmir — her right hand'],
+      ['Vaishno Devi', 'Jammu & Kashmir — Trikuta hills'],
+      ['Jwala Ji', 'Himachal Pradesh — eternal flames worshipped as goddess'],
+      ['Naina Devi', 'Himachal Pradesh — where her eyes fell'],
+      ['... and 42 more across India, Nepal, Sri Lanka, and Bangladesh', 'Each marking the descent of a piece of the goddess']
+    ]
+  },
+  saptapuri: {
+    title: 'Sapta Puri — The Seven Sacred Cities',
+    intro: 'Seven cities considered so spiritually charged that dying within their boundaries is said to grant immediate liberation. Each is associated with a major deity or moment of cosmic history. Together they represent the geographic backbone of Hindu civilization.',
+    sites: [
+      ['Ayodhya', 'Birthplace of Rama, on the Sarayu River'],
+      ['Mathura', 'Birthplace of Krishna, on the Yamuna'],
+      ['Haridwar', 'Where Ganga enters the plains from the Himalayas'],
+      ['Varanasi (Kashi)', 'Shiva\'s eternal city; oldest continuously inhabited city on Earth'],
+      ['Kanchipuram', 'Tamil Nadu, "city of a thousand temples"'],
+      ['Ujjain', 'Site of Mahakaleshwar; one of the four Kumbh Mela cities'],
+      ['Dwarka', 'Krishna\'s submerged kingdom by the Arabian Sea']
+    ]
+  },
+  rivers: {
+    title: 'Sapta Sindhu — The Seven Sacred Rivers',
+    intro: 'In Hindu tradition, rivers are not metaphors but goddesses — living, conscious beings who descended from the heavens for the benefit of humanity. Bathing in their waters is believed to wash away karmic impurities accumulated over lifetimes. Seven are considered most sacred.',
+    sites: [
+      ['Ganga', 'Descended from heaven through Shiva\'s matted hair; the supreme purifier'],
+      ['Yamuna', 'Sister of Yama (god of death); Krishna\'s beloved river of childhood'],
+      ['Saraswati', 'The lost goddess-river, now flowing underground; meets the others at Prayagraj'],
+      ['Godavari', '"Ganga of the South" — at Nashik, on the Deccan plateau'],
+      ['Narmada', 'Older than the Ganga; born from Shiva\'s body; flows westward'],
+      ['Sindhu (Indus)', 'Gave its name to "Hindu" civilization itself'],
+      ['Kaveri', 'The sacred river of the Tamil land']
+    ]
+  },
+  kumbh: {
+    title: 'Kumbh Mela — The Great Gathering',
+    intro: 'When the gods and demons churned the cosmic ocean for the nectar of immortality, four drops fell on Earth — at the four sites where the Kumbh Mela is held every twelve years. Bathing in these waters at the exact astrological moment is believed to wash away the karma of lifetimes. The 2025 Maha Kumbh at Prayagraj drew an estimated 660 million pilgrims — the largest peaceful gathering in human history.',
+    sites: [
+      ['Prayagraj', 'Confluence of Ganga, Yamuna, and the invisible Saraswati — the greatest of the four'],
+      ['Haridwar', 'On the Ganga, where it enters the plains'],
+      ['Ujjain', 'On the Shipra River, near Mahakaleshwar'],
+      ['Nashik', 'On the Godavari, near Trimbakeshwar']
+    ]
+  }
+};
 
-  SACRED_SITES.forEach(site => {
-    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    dot.setAttribute('cx', site.x);
-    dot.setAttribute('cy', site.y);
-    dot.setAttribute('r', '6');
-    dot.setAttribute('fill', site.color);
-    dot.setAttribute('class', 'sacred-site-dot');
-    dot.setAttribute('data-id', site.id);
-    dot.style.transformOrigin = `${site.x}px ${site.y}px`;
+let leafletMap = null;
 
-    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    label.setAttribute('x', site.x + 10);
-    label.setAttribute('y', site.y + 3);
-    label.setAttribute('class', 'sacred-site-label');
-    label.textContent = site.name;
+function initSacredMap() {
+  if (leafletMap) return; // already initialized
 
-    dot.addEventListener('click', () => selectSite(site));
-
-    svgGroup.appendChild(dot);
-    svgGroup.appendChild(label);
+  leafletMap = L.map('leaflet-map', {
+    center: [22.5, 80],
+    zoom: 5,
+    minZoom: 4,
+    maxZoom: 10,
+    scrollWheelZoom: true
   });
-})();
 
-function selectSite(site) {
-  // Update active state on dots
-  document.querySelectorAll('.sacred-site-dot').forEach(d => d.classList.remove('active'));
-  const activeDot = document.querySelector(`.sacred-site-dot[data-id="${site.id}"]`);
-  if (activeDot) activeDot.classList.add('active');
+  // Dark-toned map tile for our aesthetic
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(leafletMap);
 
-  // Update detail panel
-  const detail = document.getElementById('geo-detail');
-  detail.classList.add('has-content');
-  detail.innerHTML = `
-    <h3 class="geo-detail-name" style="color:${site.color}">${site.name}</h3>
-    <p class="geo-detail-meta">${site.category} &nbsp;·&nbsp; ${site.state}</p>
-    <p class="geo-detail-text">${site.text}</p>
-  `;
-  // Scroll detail into view
-  detail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Add sacred site markers
+  SACRED_SITES.forEach(site => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="sacred-marker" style="background:${site.color}; color:${site.color};"></div>`,
+      iconSize: [18, 18],
+      iconAnchor: [9, 9]
+    });
+    const marker = L.marker([site.lat, site.lng], { icon }).addTo(leafletMap);
+    marker.bindPopup(`
+      <span class="popup-title" style="color:${site.color}">${site.name}</span>
+      <span class="popup-meta">${site.cat}</span>
+      <div class="popup-text">${site.text}</div>
+    `, { maxWidth: 320 });
+  });
+
+  // Fix sizing when map first becomes visible
+  setTimeout(() => leafletMap.invalidateSize(), 100);
 }
+
+// Initialize map when geography page is shown
+const originalShowPage = showPage;
+showPage = function(name, btn) {
+  originalShowPage(name, btn);
+  if (name === 'geography') {
+    setTimeout(initSacredMap, 50);
+  }
+  // Update journey bar
+  document.querySelectorAll('.journey-step').forEach(s => s.classList.remove('active'));
+  const step = document.querySelector(`.journey-step[data-step="${name}"]`);
+  if (step) step.classList.add('active');
+};
+
+// Wire journey bar to navigation
+document.querySelectorAll('.journey-step').forEach(step => {
+  step.addEventListener('click', () => {
+    const pageName = step.dataset.step;
+    const navBtn = document.querySelector(`.nav-btn[data-page="${pageName}"]`);
+    if (navBtn) navBtn.click();
+  });
+});
+
+// Set initial active state on journey bar
+const firstJourneyStep = document.querySelector('.journey-step[data-step="cosmos"]');
+if (firstJourneyStep) firstJourneyStep.classList.add('active');
+
+// Geography category cards open modal with details
+function openGeoCategory(catKey) {
+  const cat = GEO_CATEGORIES[catKey];
+  if (!cat) return;
+
+  // Use color based on category
+  const colorMap = {
+    chardham: ['#E8630A', '#5C2800'],
+    jyotirlinga: ['#C9920A', '#5A4000'],
+    shaktipeetha: ['#A83232', '#4A1010'],
+    saptapuri: ['#2A7AAF', '#0A2E4A'],
+    rivers: ['#4A90B8', '#1A3A5A'],
+    kumbh: ['#C97A0A', '#5A3500']
+  };
+  const c = colorMap[catKey] || ['#E8630A', '#5C2800'];
+
+  document.getElementById('mbanner').style.background = `linear-gradient(90deg,${c[0]},${c[1]})`;
+  document.getElementById('mart').innerHTML = `<div style="font-family:'Cinzel Decorative',serif;font-size:3rem;color:${c[0]};text-shadow:0 0 30px ${c[0]}66">ॐ</div>`;
+  document.getElementById('mname').style.color = c[0];
+  document.getElementById('mname').textContent = cat.title;
+  document.getElementById('mepithet').textContent = 'Sacred Geography of India';
+  document.getElementById('mmantra').textContent = cat.intro;
+
+  let html = `<p class="m-sec">Sacred Sites in This Tradition</p><ul class="geo-modal-list">`;
+  cat.sites.forEach(([name, desc]) => {
+    html += `<li><span class="geo-marker" style="background:${c[0]}"></span><div><strong>${name}</strong><span>${desc}</span></div></li>`;
+  });
+  html += `</ul>`;
+
+  document.getElementById('mcontent').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.querySelectorAll('.geo-cat-card').forEach(card => {
+  card.addEventListener('click', () => openGeoCategory(card.dataset.cat));
+});
 
 /* ═══════════════════════════════════════════
    BACKGROUND RINGS

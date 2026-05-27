@@ -38,11 +38,16 @@
     }
 
     /* ── DARK MODE TOGGLE ─────────────────────────── */
-    #dark-toggle {
+    .top-actions {
       position: fixed;
       top: 1rem;
       right: 1rem;
       z-index: 200;
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+    #dark-toggle, #kalpavriksha-link {
       background: var(--paper2);
       border: 1px solid var(--rule);
       color: var(--ink3);
@@ -50,55 +55,37 @@
       font-size: 0.62rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.4rem 0.75rem;
+      padding: 0 0.75rem;
+      height: 32px;
       cursor: pointer;
       transition: background 0.2s, color 0.2s, border-color 0.2s;
-      display: flex;
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.4rem;
-    }
-    #dark-toggle:hover { color: var(--orange); border-color: var(--orange); }
-
-    /* ── KALPAVRIKSHA LINK ─────────────────────────── */
-    #kalpavriksha-link {
-      position: fixed;
-      top: 1rem;
-      right: 5.8rem;
-      z-index: 200;
-      background: var(--paper2);
-      border: 1px solid var(--rule);
-      color: var(--ink3);
-      font-family: var(--ff-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.4rem 0.75rem;
-      cursor: pointer;
       text-decoration: none;
-      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      line-height: 1;
     }
-    #kalpavriksha-link:hover {
+    #dark-toggle:hover, #kalpavriksha-link:hover {
       color: var(--orange);
       border-color: var(--orange);
     }
-    #kalpavriksha-link .om-glyph {
-      font-size: 0.95rem;
-      line-height: 1;
+    #kalpavriksha-link {
+      font-family: serif;
+      font-size: 1rem;
+      width: 32px;
+      padding: 0;
       color: var(--orange);
       animation: om-soft-glow 3s ease-in-out infinite;
-      display: inline-block;
-      font-family: serif;
     }
     @keyframes om-soft-glow {
-      0%, 100% { text-shadow: 0 0 4px rgba(232,99,10,0.35); opacity: 0.85; }
-      50%      { text-shadow: 0 0 10px rgba(232,99,10,0.7); opacity: 1; }
+      0%, 100% { text-shadow: 0 0 4px rgba(232,99,10,0.25); }
+      50%      { text-shadow: 0 0 10px rgba(232,99,10,0.7); }
     }
-    @media (max-width: 540px) {
-      #kalpavriksha-link .label-text { display: none; }
-      #kalpavriksha-link { right: 5rem; padding: 0.4rem 0.55rem; }
+    #kalpavriksha-link:hover {
+      color: var(--orange);
+      animation: none;
+      text-shadow: 0 0 12px rgba(232,99,10,0.85);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -429,8 +416,10 @@
 </head>
 <body>
 
-<a id="kalpavriksha-link" href="/kalpavriksha/" title="Kalpavriksha — A divine encyclopedia of Hinduism"><span class="om-glyph">ॐ</span> <span class="label-text">Kalpavriksha</span></a>
-<button id="dark-toggle" onclick="toggleDark()"><span id="toggle-icon">◐</span> <span id="toggle-label">Dark</span></button>
+<div class="top-actions">
+  <a id="kalpavriksha-link" href="/kalpavriksha/" target="_blank" rel="noopener" title="Kalpavriksha — A divine encyclopedia of Hinduism">ॐ</a>
+  <button id="dark-toggle" onclick="toggleDark()"><span id="toggle-icon">◐</span> <span id="toggle-label">Dark</span></button>
+</div>
 
 <header id="masthead">
   <div class="masthead-kicker">Data Engineering · Gen-AI/ML · Analytics</div>

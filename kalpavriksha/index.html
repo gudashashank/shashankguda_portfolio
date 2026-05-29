@@ -44,7 +44,7 @@ body {
 }
 
 /* Clickable elements, saffron Om-glow cursor */
-a, button.god-card.geo-cat-card.cosmos-card.nav-btn.journey-step.stanza.hover-reveal-wrap, [role="button"].read-btn.leaflet-marker-icon.leaflet-popup-close-button {
+a, button, .god-card, .geo-cat-card, .cosmos-card, .nav-btn, .journey-step, .hover-reveal-wrap, [role="button"], .read-btn, .leaflet-marker-icon, .leaflet-popup-close-button {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='4' fill='%23E8630A'/><circle cx='12' cy='12' r='8' fill='none' stroke='%23F0C050' stroke-width='1.2' opacity='0.7'/><circle cx='12' cy='12' r='11' fill='none' stroke='%23E8630A' stroke-width='0.8' opacity='0.4'/></svg>") 12 12, pointer;
 }
 
@@ -224,83 +224,49 @@ input, textarea, [contenteditable] {
   text-transform: uppercase;
 }
 
-/* INVOCATION, Sanskrit prayer block */
-.invocation {
-  max-width: 700px;
-  margin: 0 auto 2.8rem;
-  padding: 1.8rem 2rem;
-  background: rgba(20,8,0,0.6);
+/* SHLOKA OF THE DAY */
+.shloka {
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem 1.8rem;
+  background: rgba(232,99,10,0.05);
   border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
   text-align: center;
 }
-.invocation-label {
+.shloka::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+}
+.shloka-label {
   display: block;
   font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
+  font-size: 0.6rem; letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--saffron);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
-.invocation-stanzas {
+.shloka-sanskrit {
   font-family: 'EB Garamond', serif;
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
   font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.7;
   color: var(--gold-light);
-  line-height: 1.8;
-  letter-spacing: 0.04em;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.9rem;
 }
-.stanza {
-  cursor: help;
-  display: inline-block;
-  position: relative;
-  padding: 0.15rem 0.4rem;
-  border-bottom: 1px dashed rgba(240,192,80,0.3);
-  transition: color 0.3s, border-color 0.3s;
+.shloka-translation {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(253,248,238,0.85);
+  margin-bottom: 0.8rem;
 }
-.stanza:hover {
-  color: var(--cream);
-  border-bottom-color: var(--saffron-light);
-}
-.stanza::after {
-  content: attr(data-meaning);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-8px);
-  background: rgba(8,3,0,0.98);
-  border: 1px solid var(--border-strong);
-  color: var(--cream);
-  font-family: 'EB Garamond', serif;
-  font-size: 0.85rem;
-  font-style: normal;
-  white-space: nowrap;
-  padding: 0.5rem 0.85rem;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s, transform 0.25s;
-  z-index: 10;
-  letter-spacing: 0.02em;
-}
-.stanza:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-4px);
-}
-.stanza-sep { color: var(--text-muted); margin: 0 0.3rem; }
-.invocation-source {
+.shloka-source {
   font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
+  font-size: 0.62rem; letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
-}
-.invocation-hint {
-  font-family: 'EB Garamond', serif;
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0.02em;
-  color: var(--gold-dim);
 }
 
 .scroll-cue {
@@ -514,6 +480,381 @@ input, textarea, [contenteditable] {
 /* ═══════════════════════════════════════════
    PAGES
 ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   THE THREADS, connecting concepts
+═══════════════════════════════════════════ */
+.threads-list {
+  max-width: 860px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.thread-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.thread-card.open { border-color: var(--border-strong); }
+.thread-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, var(--saffron), var(--gold));
+}
+.thread-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.6rem 1.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+.thread-glyph {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  flex-shrink: 0;
+  width: 48px; text-align: center;
+  text-shadow: 0 0 14px rgba(240,192,80,0.35);
+}
+.thread-heading { flex: 1; min-width: 0; }
+.thread-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+.thread-sanskrit {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem; letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+}
+.thread-toggle {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  color: var(--saffron);
+  transition: transform 0.35s;
+}
+.thread-card.open .thread-toggle { transform: rotate(45deg); }
+.thread-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.thread-card.open .thread-body { max-height: 1600px; }
+.thread-body-inner {
+  padding: 0 1.8rem 1.8rem;
+}
+.thread-definition {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: rgba(253,248,238,0.92);
+  font-style: italic;
+  padding: 0 0 1.4rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.thread-connections-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 1rem;
+  display: block;
+}
+.thread-connection {
+  display: flex;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(200,140,40,0.12);
+}
+.thread-connection:last-child { border-bottom: none; }
+.thread-conn-where {
+  flex-shrink: 0;
+  width: 130px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--saffron-light);
+  padding-top: 0.1rem;
+}
+.thread-conn-text {
+  flex: 1;
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: rgba(253,248,238,0.85);
+}
+.thread-conn-text strong { color: var(--gold-light); font-weight: 600; }
+@media (max-width: 600px) {
+  .thread-connection { flex-direction: column; gap: 0.3rem; }
+  .thread-conn-where { width: auto; }
+}
+
+.thread-synthesis {
+  max-width: 860px;
+  margin: 0 auto;
+  background: rgba(30,12,0,0.65);
+  border: 1px solid var(--border-strong);
+  padding: 2.5rem 2.2rem;
+  position: relative;
+  text-align: center;
+}
+.thread-synthesis::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--saffron));
+}
+.thread-synthesis-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--gold-light);
+  margin-bottom: 1.2rem; line-height: 1.3;
+}
+.thread-synthesis-text {
+  font-size: 1.02rem; line-height: 1.85;
+  color: rgba(253,248,238,0.9);
+  max-width: 680px; margin: 0 auto 1.2rem;
+}
+.thread-synthesis-text:last-child { margin-bottom: 0; }
+.thread-synthesis-text em { color: var(--gold-light); font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   SAPTA RISHI, the seven sages
+═══════════════════════════════════════════ */
+.rishi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.sage-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.sage-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, var(--saffron), var(--gold));
+}
+.sage-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 30px rgba(200,100,0,0.18);
+}
+.sage-star {
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-size: 1rem; color: var(--gold-dim);
+}
+.sage-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem; color: var(--gold-light);
+  line-height: 1.2; margin-bottom: 0.25rem;
+  padding-right: 1.5rem;
+}
+.sage-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  margin-bottom: 1rem;
+}
+.sage-text {
+  font-size: 0.93rem; line-height: 1.75;
+  color: rgba(253,248,238,0.88);
+  margin-bottom: 1rem;
+}
+.sage-legacy {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.88rem; line-height: 1.6;
+  color: var(--gold-light);
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+.sage-legacy strong { color: var(--saffron-light); font-style: normal; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ═══════════════════════════════════════════
+   SACRED SYMBOLS
+═══════════════════════════════════════════ */
+.symbols-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.symbol-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.symbol-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.symbol-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 30px rgba(200,100,0,0.18);
+}
+.symbol-glyph {
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 18px rgba(240,192,80,0.35);
+  transition: transform 0.4s;
+}
+.symbol-card:hover .symbol-glyph { transform: scale(1.12); }
+.symbol-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.05rem; color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+.symbol-sanskrit {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  margin-bottom: 0.9rem;
+}
+.symbol-meaning {
+  font-size: 0.9rem; line-height: 1.7;
+  color: rgba(253,248,238,0.85);
+  text-align: left;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.35s ease, margin 0.35s ease;
+}
+.symbol-card.open .symbol-meaning {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+.symbol-hint {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: opacity 0.3s;
+}
+.symbol-card.open .symbol-hint { display: none; }
+
+/* ═══════════════════════════════════════════
+   PURUSHARTHAS, the four aims
+═══════════════════════════════════════════ */
+.aims-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.aim-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.aim-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.aim-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 30px rgba(200,100,0,0.18);
+}
+.aim-num {
+  position: absolute; top: 0.7rem; right: 1.1rem;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem; color: rgba(240,192,80,0.12);
+  line-height: 1;
+}
+.aim-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem; color: var(--gold-light);
+  margin-bottom: 0.2rem; line-height: 1.2;
+}
+.aim-trans {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  margin-bottom: 1rem;
+}
+.aim-text {
+  font-size: 0.92rem; line-height: 1.75;
+  color: rgba(253,248,238,0.88);
+}
+
+/* ═══════════════════════════════════════════
+   ASHRAMAS, the four stages, timeline
+═══════════════════════════════════════════ */
+.stages-timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 2rem;
+}
+.stages-timeline::before {
+  content: '';
+  position: absolute; left: 7px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--saffron), var(--gold), var(--gold-dim));
+}
+.stage-item {
+  position: relative;
+  padding: 0 0 2rem 1.5rem;
+}
+.stage-item:last-child { padding-bottom: 0; }
+.stage-item::before {
+  content: '';
+  position: absolute; left: -1.85rem; top: 4px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--saffron);
+  border: 2px solid #0D0500;
+  box-shadow: 0 0 10px rgba(232,99,10,0.6);
+}
+.stage-age {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  margin-bottom: 0.3rem;
+}
+.stage-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.25rem; color: var(--gold-light);
+  margin-bottom: 0.15rem; line-height: 1.2;
+}
+.stage-trans {
+  font-family: 'EB Garamond', serif;
+  font-style: italic; font-size: 0.92rem;
+  color: var(--saffron-light);
+  margin-bottom: 0.7rem;
+}
+.stage-text {
+  font-size: 0.92rem; line-height: 1.75;
+  color: rgba(253,248,238,0.88);
+}
+
 /* ═══════════════════════════════════════════
    LIVING TRADITION, days + festivals
 ═══════════════════════════════════════════ */
@@ -775,6 +1116,318 @@ input, textarea, [contenteditable] {
   }
   .back-to-top svg { width: 18px; height: 18px; }
 }
+
+/* ═══════════════════════════════════════════
+   ASK THE RISHI, chatbot
+═══════════════════════════════════════════ */
+.rishi-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(8,3,0,0.95);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(8px);
+  color: var(--gold-light);
+  cursor: pointer;
+  height: 46px;
+  width: 46px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: width 0.35s ease, gap 0.35s ease, padding 0.35s ease, box-shadow 0.3s, transform 0.3s;
+}
+.rishi-fab::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+  z-index: 1;
+}
+.rishi-fab:hover {
+  width: 180px;
+  gap: 0.55rem;
+  padding: 0 1.1rem 0 0;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(232,99,10,0.35);
+}
+.rishi-fab.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8);
+}
+.rishi-emoji {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 46px;
+  text-align: center;
+  filter: drop-shadow(0 0 6px rgba(240,192,80,0.4));
+  animation: rishi-float 3.5s ease-in-out infinite;
+}
+@keyframes rishi-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-2px); }
+}
+.rishi-fab-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  white-space: nowrap;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity 0.2s ease, max-width 0.35s ease;
+}
+.rishi-fab:hover .rishi-fab-label {
+  opacity: 1;
+  max-width: 140px;
+  transition: opacity 0.3s ease 0.12s, max-width 0.35s ease;
+}
+
+.rishi-panel {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 401;
+  width: 380px;
+  max-width: calc(100vw - 3rem);
+  height: 560px;
+  max-height: calc(100vh - 3rem);
+  background: rgba(10,4,0,0.98);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.96);
+  transform-origin: bottom left;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+.rishi-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.rishi-panel::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--saffron));
+  z-index: 2;
+}
+.rishi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(20,8,0,0.6);
+  flex-shrink: 0;
+}
+.rishi-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.rishi-header-emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(240,192,80,0.4));
+}
+.rishi-header-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  line-height: 1.2;
+}
+.rishi-header-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.rishi-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--gold-light);
+  cursor: pointer;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.rishi-close:hover { background: rgba(232,99,10,0.2); border-color: var(--saffron); }
+
+.rishi-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rishi-messages::-webkit-scrollbar { width: 6px; }
+.rishi-messages::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+.rishi-msg {
+  max-width: 85%;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  animation: rishi-msg-in 0.3s ease;
+}
+@keyframes rishi-msg-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rishi-msg.bot {
+  align-self: flex-start;
+  background: rgba(232,99,10,0.08);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 3px;
+  color: rgba(253,248,238,0.92);
+}
+.rishi-msg.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, rgba(232,99,10,0.25), rgba(201,146,10,0.2));
+  border: 1px solid var(--border-strong);
+  border-bottom-right-radius: 3px;
+  color: var(--cream);
+}
+.rishi-msg .rishi-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  cursor: pointer;
+  border-bottom: 1px dashed var(--border-strong);
+  transition: color 0.2s, border-color 0.2s;
+}
+.rishi-msg .rishi-link:hover {
+  color: var(--gold-light);
+  border-color: var(--saffron);
+}
+.rishi-msg strong { color: var(--gold-light); font-weight: 600; }
+.rishi-msg em { color: var(--saffron-light); font-style: italic; }
+
+.rishi-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0 1.2rem 0.8rem;
+  flex-shrink: 0;
+}
+.rishi-chip {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--saffron-light);
+  background: rgba(232,99,10,0.06);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.rishi-chip:hover {
+  background: rgba(232,99,10,0.18);
+  border-color: var(--saffron);
+  color: var(--gold-light);
+}
+
+.rishi-input-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.9rem 1.2rem 1.1rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.rishi-input {
+  flex: 1;
+  background: rgba(20,8,0,0.7);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 0.65rem 1rem;
+  color: var(--cream);
+  font-family: 'EB Garamond', serif;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.rishi-input:focus { border-color: var(--saffron); }
+.rishi-input::placeholder { color: var(--text-muted); font-style: italic; }
+.rishi-send {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  border: none;
+  color: var(--cream);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.rishi-send:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(232,99,10,0.5);
+}
+.rishi-typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 0.9rem 1rem;
+}
+.rishi-typing span {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--saffron);
+  animation: rishi-typing-bounce 1.2s infinite;
+}
+.rishi-typing span:nth-child(2) { animation-delay: 0.2s; }
+.rishi-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes rishi-typing-bounce {
+  0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+  30%         { transform: translateY(-5px); opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .rishi-fab {
+    bottom: 1rem;
+    left: 0.75rem;
+    width: 44px;
+    height: 44px;
+  }
+  .rishi-fab:hover {
+    width: 44px;
+    padding: 0;
+    transform: translateY(-3px);
+  }
+  .rishi-fab-label { display: none; }
+  .rishi-emoji { width: 44px; }
+  .rishi-panel {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    max-width: none;
+    height: calc(100vh - 1.5rem);
+  }
+}
 .panchang-content {
   flex: 1; min-width: 0;
   opacity: 0;
@@ -984,6 +1637,154 @@ input, textarea, [contenteditable] {
 .divider-gem { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════
+   YUGA TIMELINE, interactive
+═══════════════════════════════════════════ */
+.yuga-timeline {
+  max-width: 1000px;
+  margin: 0 auto 2.5rem;
+}
+.yuga-track {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.yuga-segment {
+  position: relative;
+  cursor: pointer;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: flex-grow 0.5s ease, background 0.3s;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  min-width: 0;
+}
+.yuga-segment:last-child { border-right: none; }
+.yuga-segment::before {
+  content: '';
+  position: absolute; inset: 0;
+  opacity: 0.18;
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+.yuga-segment:hover::before { opacity: 0.3; }
+.yuga-segment.active::before { opacity: 0.42; }
+.yuga-segment > * { position: relative; z-index: 1; }
+/* Each yuga shrinks visually like the declining ages */
+.yuga-segment[data-yuga="satya"] { flex: 4; }
+.yuga-segment[data-yuga="treta"] { flex: 3; }
+.yuga-segment[data-yuga="dvapara"] { flex: 2; }
+.yuga-segment[data-yuga="kali"] { flex: 1.2; }
+.yuga-segment.active { flex: 6 !important; }
+.yuga-seg-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+  color: var(--gold-light);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+}
+.yuga-seg-legs {
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.yuga-seg-years {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.yuga-segment.active .yuga-seg-years { color: var(--saffron-light); }
+
+.yuga-detail {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 2.2rem 2rem;
+  position: relative;
+  min-height: 200px;
+  transition: border-color 0.3s;
+}
+.yuga-detail::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.yuga-detail-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.yuga-detail-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  line-height: 1.2;
+}
+.yuga-detail-trans {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--saffron-light);
+}
+.yuga-detail-meta {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.3rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid var(--border);
+}
+.yuga-detail-text {
+  font-size: 1rem; line-height: 1.85;
+  color: rgba(253,248,238,0.9);
+  margin-bottom: 1.3rem;
+}
+.yuga-detail-text:last-child { margin-bottom: 0; }
+.yuga-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.3rem;
+}
+.yuga-fact {
+  background: rgba(15,5,0,0.5);
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+}
+.yuga-fact-label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 0.35rem;
+}
+.yuga-fact-val {
+  font-size: 0.9rem;
+  color: rgba(253,248,238,0.88);
+  line-height: 1.5;
+}
+.yuga-dharma-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.5rem;
+}
+.yuga-leg {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--saffron);
+}
+.yuga-leg.filled { background: var(--saffron); box-shadow: 0 0 8px rgba(232,99,10,0.6); }
+
+/* ═══════════════════════════════════════════
    COSMOS CARDS
 ═══════════════════════════════════════════ */
 .cosmos-grid {
@@ -1048,7 +1849,7 @@ input, textarea, [contenteditable] {
   cursor: pointer;
   outline: none;
 }
-.god-card:hover.god-card:focus {
+.god-card:hover, .god-card:focus {
   transform: translateY(-5px);
   border-color: var(--border-strong);
   box-shadow: 0 12px 48px rgba(200,100,0,0.18);
@@ -1432,6 +2233,31 @@ input, textarea, [contenteditable] {
   </svg>
 </button>
 
+<!-- ASK THE RISHI, chatbot, bottom-left -->
+<button class="rishi-fab" id="rishi-fab" aria-label="Ask the Rishi" title="Ask the Rishi">
+  <span class="rishi-emoji">🧘</span>
+  <span class="rishi-fab-label">Ask the Rishi</span>
+</button>
+
+<div class="rishi-panel" id="rishi-panel" aria-hidden="true">
+  <div class="rishi-header">
+    <div class="rishi-header-left">
+      <span class="rishi-header-emoji">🧘</span>
+      <div>
+        <div class="rishi-header-title">Ask the Rishi</div>
+        <div class="rishi-header-sub">Your guide to Kalpavriksha</div>
+      </div>
+    </div>
+    <button class="rishi-close" id="rishi-close" aria-label="Close">✕</button>
+  </div>
+  <div class="rishi-messages" id="rishi-messages"></div>
+  <div class="rishi-suggestions" id="rishi-suggestions"></div>
+  <div class="rishi-input-row">
+    <input type="text" class="rishi-input" id="rishi-input" placeholder="Ask about any god, story, or concept..." autocomplete="off"/>
+    <button class="rishi-send" id="rishi-send" aria-label="Send">➤</button>
+  </div>
+</div>
+
 <!-- PANCHANG WIDGET, top-right corner -->
 <div class="panchang" id="panchang">
   <span class="panchang-icon" aria-hidden="true">
@@ -1491,17 +2317,12 @@ input, textarea, [contenteditable] {
     start with <em>The Cosmos</em> and walk forward.
   </p>
 
-  <!-- Sanskrit invocation, with per-stanza hover-reveal -->
-  <div class="invocation">
-    <span class="invocation-label">An Opening Prayer</span>
-    <div class="invocation-stanzas">
-      <span class="stanza" data-meaning="Lead me from the unreal to the real">Asato Mā Sadgamaya</span>
-      <span class="stanza-sep">·</span>
-      <span class="stanza" data-meaning="From darkness to light">Tamaso Mā Jyotirgamaya</span>
-      <span class="stanza-sep">·</span>
-      <span class="stanza" data-meaning="From death to immortality">Mṛtyormā Amṛtaṁ Gamaya</span>
-    </div>
-    <p class="invocation-source"> from Brihadaranyaka Upanishad &nbsp;·&nbsp; <span class="invocation-hint">hover over each line for meaning</span></p>
+  <!-- Shloka of the Day, rotates daily -->
+  <div class="shloka" id="shloka">
+    <span class="shloka-label">Shloka of the Day</span>
+    <p class="shloka-sanskrit" id="shloka-sanskrit"></p>
+    <p class="shloka-translation" id="shloka-translation"></p>
+    <p class="shloka-source" id="shloka-source"></p>
   </div>
 
   <span class="scroll-cue">↓ &nbsp; Begin the Journey &nbsp; ↓</span>
@@ -1518,6 +2339,7 @@ input, textarea, [contenteditable] {
   <button class="nav-btn" data-page="pantheon">The Pantheon</button>
   <button class="nav-btn" data-page="geography">Sacred Geography</button>
   <button class="nav-btn" data-page="living">Living Tradition</button>
+  <button class="nav-btn" data-page="threads">The Threads</button>
 </nav>
 
 <!-- ═══════════════════════════════════════════
@@ -1565,6 +2387,12 @@ input, textarea, [contenteditable] {
       <span class="journey-num">7</span>
       <span class="journey-label">Living Tradition</span>
       <span class="journey-sub">Days, festivals, life</span>
+    </div>
+    <div class="journey-line"></div>
+    <div class="journey-step" data-step="threads">
+      <span class="journey-num">8</span>
+      <span class="journey-label">The Threads</span>
+      <span class="journey-sub">What connects it all</span>
     </div>
   </div>
 </div>
@@ -1621,14 +2449,15 @@ input, textarea, [contenteditable] {
     </div>
     <div class="cosmos-card">
       <span class="cosmos-card-num">III</span>
-      <h3 class="cosmos-card-title">The Four Yugas, Cosmic Ages</h3>
+      <h3 class="cosmos-card-title">AUM, The Primordial Sound</h3>
       <p class="cosmos-card-text">
-        Hindu cosmology organizes time into vast cycles. One Mahayuga spans 4.32 million years across four ages:
-        <em>Satya Yuga</em> (1,728,000 years, the golden age of truth and virtue, when beings live for thousands of years
-        and dharma stands on four legs); <em>Treta Yuga</em> (1,296,000 years, where dharma begins to decline, avatars appear
-        to guide humanity); <em>Dvapara Yuga</em> (864,000 years, further moral diminishment, the age of Krishna);
-        and <em>Kali Yuga</em> (432,000 years, our current age of darkness and confusion, which began in 3102 BCE
-        with the passing of Krishna). We are approximately 5,126 years into Kali Yuga.
+        Before form, before light, there was sound. Hindu tradition holds that the universe arose from a single
+        vibration: <em>AUM</em> (ॐ), the primordial syllable from which all creation unfolds. It is made of three sounds,
+        A-U-M, said to represent creation, preservation, and dissolution; waking, dreaming, and deep sleep; and the
+        three worlds of earth, atmosphere, and heaven. The silence that follows the sound represents <em>Turiya</em>,
+        the fourth state, pure consciousness beyond all three. To chant AUM is to align oneself with the fundamental
+        frequency of the cosmos. This is why nearly every Hindu mantra, prayer, and scripture begins with it, and why
+        the symbol ॐ has become the single most recognized emblem of Sanatan Dharma.
       </p>
     </div>
     <div class="cosmos-card">
@@ -1643,6 +2472,22 @@ input, textarea, [contenteditable] {
         only to be reborn again in the next great dawn.
       </p>
     </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- INTERACTIVE YUGA TIMELINE -->
+  <div class="sec-head">
+    <span class="sec-label">The Wheel of Ages</span>
+    <h2 class="sec-title">The Four Yugas</h2>
+    <p class="sec-intro">
+      Time in Hinduism does not march in a line, it turns in a vast wheel. Each cycle descends from a golden age of truth into a dark age of confusion, then begins anew. Click each age to journey through 4.32 million years.
+    </p>
+  </div>
+
+  <div class="yuga-timeline" id="yuga-timeline">
+    <div class="yuga-track" id="yuga-track"></div>
+    <div class="yuga-detail" id="yuga-detail"></div>
   </div>
 
   <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
@@ -1904,6 +2749,22 @@ input, textarea, [contenteditable] {
     </p>
   </div>
   <div class="gods-grid centered" id="grid-pantheon"></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- THE SAPTA RISHI -->
+  <div class="sec-head" style="margin-top:1rem">
+    <span class="sec-label">The Seven Seers</span>
+    <h2 class="sec-title">The Sapta Rishi</h2>
+    <p class="sec-intro">
+      Not all of Hinduism's great figures are gods. The Rishis were enlightened human sages who heard the eternal truths in deep meditation and gave them to the world. Their names echo through every story on this site.
+    </p>
+    <p class="sec-body">
+      The <em>Sapta Rishi</em> (seven sages) are considered the mind-born sons of Brahma and the original transmitters of Vedic knowledge. They are so revered that the seven stars of the Great Bear constellation (Ursa Major) are named after them. The specific seven vary across texts and cosmic ages, but below are the most celebrated sages, the human authors of the tradition you have been exploring.
+    </p>
+  </div>
+
+  <div class="rishi-grid" id="rishi-grid"></div>
 </div>
 </div>
 
@@ -2031,6 +2892,82 @@ input, textarea, [contenteditable] {
   </div>
 
   <div class="festivals-grid" id="festivals-grid"></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- SACRED SYMBOLS -->
+  <div class="sec-head" style="margin-top:1rem">
+    <span class="sec-label">Pratika, The Sacred Marks</span>
+    <h2 class="sec-title">Symbols of the Sacred</h2>
+    <p class="sec-intro">
+      Hinduism speaks not only in words but in symbols, marks, gestures, and objects that carry deep meaning. Click any symbol to discover what it truly represents.
+    </p>
+  </div>
+
+  <div class="symbols-grid" id="symbols-grid"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: THE THREADS THAT CONNECT EVERYTHING
+═══════════════════════════════════════════ -->
+<div class="page" id="page-threads">
+<div class="section">
+  <p class="narrative-thread">
+    You have met the gods, walked the sacred land, and seen the living tradition. But beneath all of it run a few deep ideas, the threads on which every story, every deity, and every ritual is strung. Understand these, and the whole tapestry comes into focus.
+  </p>
+  <div class="sec-head">
+    <span class="sec-label">The Living Tapestry</span>
+    <h2 class="sec-title">The Threads That Connect Everything</h2>
+    <p class="sec-intro">
+      Hinduism can feel like a thousand scattered stories. But the same handful of ideas runs through all of them. Here are the six great threads, and how each one weaves through everything you have just explored.
+    </p>
+    <p class="sec-body">
+      Click any thread to follow it through the cosmos, the gods, and the sacred land. You will start to see the same truth appearing again and again, in different clothes.
+    </p>
+  </div>
+
+  <div class="threads-list" id="threads-list"></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- THE FOUR AIMS OF LIFE -->
+  <div class="sec-head" style="margin-top:1rem">
+    <span class="sec-label">Purushartha, The Goals of Life</span>
+    <h2 class="sec-title">The Four Aims of a Human Life</h2>
+    <p class="sec-intro">
+      If the threads are the deep ideas, the Purusharthas are the practical answer to "how should I actually live?" Hinduism names four legitimate goals of a human life, to be pursued in balance, never one at the expense of the rest.
+    </p>
+  </div>
+
+  <div class="aims-grid" id="aims-grid"></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- THE FOUR STAGES OF LIFE -->
+  <div class="sec-head" style="margin-top:1rem">
+    <span class="sec-label">Ashrama, The Stages of Life</span>
+    <h2 class="sec-title">The Four Stages of a Life</h2>
+    <p class="sec-intro">
+      Hinduism also maps the human lifespan into four natural stages, each with its own purpose, duties, and freedoms. Together they turn a single life into a complete spiritual journey, from learning, to living, to letting go.
+    </p>
+  </div>
+
+  <div class="stages-timeline" id="stages-timeline"></div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  <!-- The synthesis -->
+  <div class="thread-synthesis">
+    <span class="devas-label">The One Behind the Many</span>
+    <h3 class="thread-synthesis-title">A Single Truth, A Thousand Faces</h3>
+    <p class="thread-synthesis-text">
+      Here is the secret that ties every thread together. Hinduism appears to have countless gods, countless scriptures, countless practices. But at its philosophical heart lies a single conviction: that one infinite reality, Brahman, underlies all of it. The gods are its faces. The stories are its lessons. The pilgrimages are its map. The festivals are its rhythm. The disciplines are its paths.
+    </p>
+    <p class="thread-synthesis-text">
+      <em>"Ekam sat vipra bahudha vadanti"</em>, truth is one, the wise call it by many names. When you worship Ganesha before a journey, or bathe in the Ganga, or light a lamp at Diwali, or simply act without attachment to the result, you are touching the same infinite reality from a different angle. That is the deepest thread of all, the one on which every other thread hangs.
+    </p>
+  </div>
 </div>
 </div>
 
@@ -2898,6 +3835,883 @@ if (backToTopBtn) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/* ═══════════════════════════════════════════
+   YUGA TIMELINE, interactive
+═══════════════════════════════════════════ */
+const YUGAS = [
+  {
+    id: 'satya', name: 'Satya Yuga', translation: 'The Age of Truth',
+    color: '#F0C050', colorDark: '#5A4000',
+    years: '1,728,000 years', legs: 4, lifespan: 'Up to 100,000 years',
+    virtue: '100% dharma',
+    text: 'The golden age, the first and most luminous of the four. Dharma stands firm on all four legs. Truth, virtue, and righteousness are the natural state of all beings; there is no need for law, for no one strays from what is right. Humans are tall, radiant, and live for tens of thousands of years in direct communion with the divine. There is no disease, no fear, no falsehood. Meditation is the path to liberation, for the mind is naturally pure and still.',
+    detail: 'In this age the divine is openly present. Knowledge flows directly from teacher to student, and the Vedas are perfectly preserved in living memory. Vishnu\'s avatars in this age, Matsya, Kurma, Varaha, and Narasimha, appear in cosmic, non-human forms, for humanity does not yet need a human example to follow.',
+    avatars: 'Matsya, Kurma, Varaha, Narasimha'
+  },
+  {
+    id: 'treta', name: 'Treta Yuga', translation: 'The Age of Three Quarters',
+    color: '#E8A020', colorDark: '#5A3500',
+    years: '1,296,000 years', legs: 3, lifespan: 'Up to 10,000 years',
+    virtue: '75% dharma',
+    text: 'Dharma now stands on three legs; one quarter of righteousness has been lost. The first shadow of imperfection enters the world. Sacrifice and ritual (yajna) become important, for virtue is no longer automatic and must be cultivated through disciplined action. Kings and heroes arise to uphold order against the first stirrings of adharma.',
+    detail: 'This is the age of Rama, the seventh avatar, the ideal king who embodies perfect dharma in human form precisely because humanity now needs a human example. The Ramayana unfolds in this age: the triumph of righteousness over the demon Ravana, but only through struggle, exile, and war, things unknown in the effortless Satya Yuga.',
+    avatars: 'Vamana, Parashurama, Rama'
+  },
+  {
+    id: 'dvapara', name: 'Dvapara Yuga', translation: 'The Age of Two Quarters',
+    color: '#C9920A', colorDark: '#4A3000',
+    years: '864,000 years', legs: 2, lifespan: 'Up to 1,000 years',
+    virtue: '50% dharma',
+    text: 'Dharma now balances precariously on two legs; half of all righteousness is gone. The world is split between virtue and vice in equal measure. Disease, desire, and discord become common. The Vedas, once a single body of living knowledge, are divided into four by the sage Vyasa so that humanity, with its weakening memory, can still preserve them.',
+    detail: 'This is the age of Krishna, the eighth avatar, whose life bridges Dvapara and the coming Kali Yuga. The Mahabharata unfolds here, culminating in the great war of Kurukshetra and the teaching of the Bhagavad Gita. Krishna\'s departure from the Earth marks the exact moment the Kali Yuga begins: 3102 BCE.',
+    avatars: 'Krishna (and Balarama)'
+  },
+  {
+    id: 'kali', name: 'Kali Yuga', translation: 'The Age of Darkness',
+    color: '#A0506A', colorDark: '#2A0F1A',
+    years: '432,000 years', legs: 1, lifespan: 'Up to 100-120 years',
+    virtue: '25% dharma',
+    text: 'Our present age. Dharma hobbles on a single leg; three quarters of righteousness have vanished from the world. This is the age of confusion and spiritual darkness, when greed, dishonesty, and shortsightedness rule, when the powerful exploit the weak and truth is hardest to find. Human lifespans shrink, the body weakens, and the divine seems most hidden.',
+    detail: 'Yet the Kali Yuga holds a hidden mercy. Because virtue is so rare, even a small act of goodness earns immense spiritual merit, and liberation, which once required lifetimes of meditation, can now be reached simply by sincerely chanting the divine name. We are roughly 5,100 years into this 432,000-year age. At its end, the final avatar Kalki will descend on a white horse to end the darkness and begin a new Satya Yuga, and the great wheel will turn again.',
+    avatars: 'Buddha (past), Kalki (yet to come)'
+  }
+];
+
+let activeYuga = 'kali'; // default to our current age
+
+function renderYugaDetail(yugaId) {
+  const y = YUGAS.find(y => y.id === yugaId);
+  if (!y) return;
+  const detail = document.getElementById('yuga-detail');
+  const legsHtml = Array.from({length: 4}, (_, i) =>
+    `<span class="yuga-leg ${i < y.legs ? 'filled' : ''}"></span>`
+  ).join('');
+  detail.style.borderColor = y.color + '88';
+  detail.innerHTML = `
+    <div class="yuga-detail-head">
+      <h3 class="yuga-detail-name" style="color:${y.color}">${y.name}</h3>
+      <span class="yuga-detail-trans">${y.translation}</span>
+    </div>
+    <p class="yuga-detail-meta">${y.years} &nbsp;·&nbsp; ${y.virtue}</p>
+    <p class="yuga-detail-text">${y.text}</p>
+    <p class="yuga-detail-text">${y.detail}</p>
+    <div class="yuga-facts">
+      <div class="yuga-fact">
+        <span class="yuga-fact-label">Dharma Stands On</span>
+        <span class="yuga-fact-val">${y.legs} of 4 legs</span>
+        <div class="yuga-dharma-bar">${legsHtml}</div>
+      </div>
+      <div class="yuga-fact">
+        <span class="yuga-fact-label">Human Lifespan</span>
+        <span class="yuga-fact-val">${y.lifespan}</span>
+      </div>
+      <div class="yuga-fact">
+        <span class="yuga-fact-label">Avatars of This Age</span>
+        <span class="yuga-fact-val">${y.avatars}</span>
+      </div>
+    </div>
+  `;
+}
+
+(function renderYugaTimeline() {
+  const track = document.getElementById('yuga-track');
+  if (!track) return;
+  YUGAS.forEach(y => {
+    const seg = document.createElement('div');
+    seg.className = 'yuga-segment' + (y.id === activeYuga ? ' active' : '');
+    seg.dataset.yuga = y.id;
+    seg.innerHTML = `
+      <div class="yuga-seg-name" style="color:${y.color}">${y.name}</div>
+      <div class="yuga-seg-legs" aria-hidden="true">${'●'.repeat(y.legs)}${'○'.repeat(4 - y.legs)}</div>
+      <div class="yuga-seg-years">${y.years}</div>
+    `;
+    // colored background tint
+    seg.style.background = `linear-gradient(180deg, ${y.colorDark}33, transparent)`;
+    seg.addEventListener('click', () => {
+      document.querySelectorAll('.yuga-segment').forEach(s => s.classList.remove('active'));
+      seg.classList.add('active');
+      activeYuga = y.id;
+      renderYugaDetail(y.id);
+    });
+    track.appendChild(seg);
+  });
+  renderYugaDetail(activeYuga);
+})();
+
+/* ═══════════════════════════════════════════
+   SAPTA RISHI, the seven sages
+═══════════════════════════════════════════ */
+const SAGES = [
+  {
+    name: 'Vyasa', title: 'The Compiler of the Vedas',
+    text: 'The greatest literary figure in Hindu tradition. Veda Vyasa ("the one who divided the Vedas") split the single primordial Veda into the four we know today, so that humanity\'s weakening memory in the Dvapara Yuga could still preserve them.',
+    legacy: 'Composed the Mahabharata (with Ganesha as his scribe), the eighteen Puranas, and the Brahma Sutras. He is also a character in his own epic.'
+  },
+  {
+    name: 'Valmiki', title: 'The First Poet, Adi Kavi',
+    text: 'Once a highway robber named Ratnakara, he was transformed by meditation so deep that an anthill grew over his still body, giving him his name (Valmiki, "born of the anthill"). His grief at seeing a hunter kill a bird burst forth as the first metrical verse ever spoken.',
+    legacy: 'Composed the Ramayana, the 24,000-verse epic of Rama, considered the first poem in human history.'
+  },
+  {
+    name: 'Vishwamitra', title: 'The Warrior Who Became a Brahmarishi',
+    text: 'Born a king and mighty warrior, he renounced his throne to attain spiritual power through thousands of years of austerity, the only person to rise from Kshatriya to the supreme rank of Brahmarishi through sheer will. His rivalry with the sage Vasishtha is legendary.',
+    legacy: 'Revealed the Gayatri Mantra, the most sacred verse of the Rigveda, chanted daily by millions. He also trained the young Rama and Lakshmana.'
+  },
+  {
+    name: 'Vasishtha', title: 'The Royal Preceptor',
+    text: 'The serene and supremely wise guru of the solar dynasty, including Rama himself. Owner of the divine wish-fulfilling cow Nandini, his patient wisdom is the counterpoint to Vishwamitra\'s fiery striving. Their long contest is a meditation on the nature of true spiritual attainment.',
+    legacy: 'His teachings to Rama form the Yoga Vasishtha, one of the great philosophical texts of Vedanta.'
+  },
+  {
+    name: 'Agastya', title: 'The Sage Who Drank the Ocean',
+    text: 'A short sage of immense power who carried Hindu civilization south of the Vindhya mountains. In legend he humbled the growing Vindhya range and once drank the entire ocean dry to help the gods defeat demons hiding within it.',
+    legacy: 'Revered as the father of Tamil grammar and Siddha medicine; a bridge between the Sanskrit north and the Tamil south.'
+  },
+  {
+    name: 'Atri & Bhrigu', title: 'Among the Mind-Born Sons of Brahma',
+    text: 'Atri, husband of the supremely virtuous Anasuya, fathered Dattatreya, a combined avatar of the Trimurti. Bhrigu, founder of a great lineage of sages, is famed for testing the three great gods to determine who was the most serene, a test only Vishnu passed.',
+    legacy: 'Their families authored many Vedic hymns; Bhrigu is associated with the predictive science of Bhrigu Samhita astrology.'
+  }
+];
+
+(function renderSages() {
+  const grid = document.getElementById('rishi-grid');
+  if (!grid) return;
+  SAGES.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'sage-card';
+    card.innerHTML = `
+      <span class="sage-star">✦</span>
+      <h3 class="sage-name">${s.name}</h3>
+      <p class="sage-title">${s.title}</p>
+      <p class="sage-text">${s.text}</p>
+      <p class="sage-legacy"><strong>Legacy</strong><br>${s.legacy}</p>
+    `;
+    grid.appendChild(card);
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   SACRED SYMBOLS
+═══════════════════════════════════════════ */
+const SYMBOLS = [
+  {
+    glyph: 'ॐ', name: 'Om / Aum', sanskrit: 'The Primordial Sound',
+    meaning: 'The most sacred symbol in Hinduism, representing the primordial vibration from which the universe arose. Its three curves represent the waking, dreaming, and deep-sleep states; the dot and crescent above represent the transcendent fourth state of pure consciousness. Nearly every mantra and prayer begins with Om.'
+  },
+  {
+    glyph: '卐', name: 'Swastika', sanskrit: 'That Which Is Auspicious',
+    meaning: 'One of the oldest auspicious symbols in the world, used in India for over 5,000 years. The word comes from "su-asti", "let good prevail." Its four arms represent the four Vedas, the four directions, and the cyclical nature of existence. In Hindu, Buddhist, and Jain traditions it is a sacred emblem of well-being and good fortune, drawn at thresholds and on doorways. Its meaning here is entirely distinct from the 20th-century European misuse of a tilted, reversed version of the shape.'
+  },
+  {
+    glyph: '🪷', name: 'The Lotus', sanskrit: 'Padma',
+    meaning: 'The supreme symbol of spiritual awakening and purity. The lotus grows from muddy water yet blooms immaculate above it, just as the soul rises untainted through the material world toward enlightenment. Lakshmi sits upon it, Brahma is born from it, and it represents the unfolding of the heart and consciousness.'
+  },
+  {
+    glyph: '🔱', name: 'The Trishula', sanskrit: 'Trident of Shiva',
+    meaning: 'Shiva\'s three-pronged trident, his primary weapon and emblem. The three points represent creation, preservation, and destruction; the three gunas (qualities of nature); and past, present, and future. It signifies Shiva\'s mastery over all three, and his power to cut through the three kinds of suffering.'
+  },
+  {
+    glyph: '🐚', name: 'The Shankha', sanskrit: 'The Sacred Conch',
+    meaning: 'Vishnu\'s conch, Panchajanya, whose sound is said to be the primordial Om. Blown at the start of rituals and battles, its call drives away negativity and announces the presence of the divine. Its spiral embodies the infinite expansion of the cosmos from a single point.'
+  },
+  {
+    glyph: '🪔', name: 'The Diya', sanskrit: 'The Sacred Lamp',
+    meaning: 'The oil lamp lit in every Hindu home and temple. Its flame represents the light of knowledge dispelling the darkness of ignorance, the inner Atman, and the presence of the divine. Rows of diyas light the festival of Diwali, guiding the goddess Lakshmi and welcoming Rama home.'
+  },
+  {
+    glyph: '⚜', name: 'The Kalash', sanskrit: 'The Sacred Pot',
+    meaning: 'A pot of water topped with mango leaves and a coconut, present at nearly every Hindu ceremony. It represents abundance, the source of life, and the womb of creation. The water is the elixir of life, the leaves are the senses, and the coconut is the divine consciousness, the whole cosmos held in a single vessel.'
+  },
+  {
+    glyph: '🔴', name: 'The Tilak & Bindu', sanskrit: 'The Sacred Mark',
+    meaning: 'The mark worn on the forehead at the ajna chakra, the "third eye" or seat of wisdom. A vertical mark (Urdhva Pundra) signals devotion to Vishnu; horizontal ash lines (Tripundra) signal devotion to Shiva. The red bindi marks the point where spiritual energy concentrates, retaining inner focus and signifying auspiciousness.'
+  }
+];
+
+(function renderSymbols() {
+  const grid = document.getElementById('symbols-grid');
+  if (!grid) return;
+  SYMBOLS.forEach(sym => {
+    const card = document.createElement('div');
+    card.className = 'symbol-card';
+    card.innerHTML = `
+      <div class="symbol-glyph">${sym.glyph}</div>
+      <h3 class="symbol-name">${sym.name}</h3>
+      <p class="symbol-sanskrit">${sym.sanskrit}</p>
+      <span class="symbol-hint">Tap to reveal</span>
+      <p class="symbol-meaning">${sym.meaning}</p>
+    `;
+    card.addEventListener('click', () => card.classList.toggle('open'));
+    grid.appendChild(card);
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   PURUSHARTHAS, the four aims of life
+═══════════════════════════════════════════ */
+const AIMS = [
+  {
+    name: 'Dharma', trans: 'Righteousness · Duty',
+    text: 'Living rightly, in harmony with cosmic and moral order. Dharma is the foundation that gives all the other aims their meaning; wealth and pleasure pursued without dharma lead only to ruin. It is the duty owed to oneself, to others, and to the world.'
+  },
+  {
+    name: 'Artha', trans: 'Prosperity · Means',
+    text: 'The pursuit of wealth, security, and worldly success, considered entirely legitimate and necessary. Hinduism does not glorify poverty; a householder is expected to prosper and provide. Artha is honored as long as it is earned through dharma, not at its expense.'
+  },
+  {
+    name: 'Kama', trans: 'Pleasure · Love',
+    text: 'The enjoyment of beauty, love, art, music, and the pleasures of the senses. Far from being shameful, Kama is a valid goal of human life, the source of the Kama Sutra and of all art. It too must rest on dharma to bring lasting joy rather than bondage.'
+  },
+  {
+    name: 'Moksha', trans: 'Liberation · Freedom',
+    text: 'The ultimate aim that transcends the other three: liberation from the cycle of rebirth and union with the infinite. The first three aims belong to worldly life; Moksha is the final goal toward which a complete life ultimately turns.'
+  }
+];
+
+(function renderAims() {
+  const grid = document.getElementById('aims-grid');
+  if (!grid) return;
+  AIMS.forEach((a, i) => {
+    const card = document.createElement('div');
+    card.className = 'aim-card';
+    card.innerHTML = `
+      <span class="aim-num">${i+1}</span>
+      <h3 class="aim-name">${a.name}</h3>
+      <p class="aim-trans">${a.trans}</p>
+      <p class="aim-text">${a.text}</p>
+    `;
+    grid.appendChild(card);
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   ASHRAMAS, the four stages of life
+═══════════════════════════════════════════ */
+const STAGES = [
+  {
+    age: 'Ages 0 to 25 (traditionally)', name: 'Brahmacharya', trans: 'The Student',
+    text: 'The stage of learning and discipline. The young person lives simply, studies the scriptures and a craft under a teacher, cultivates self-control, and builds the character and knowledge that will carry them through life.'
+  },
+  {
+    age: 'Ages 25 to 50', name: 'Grihastha', trans: 'The Householder',
+    text: 'The stage of marriage, family, and worldly engagement, considered the foundation that supports all of society. Here one pursues Artha and Kama within dharma, raises children, earns a living, and gives generously. The other three stages depend on the householder.'
+  },
+  {
+    age: 'Ages 50 to 75', name: 'Vanaprastha', trans: 'The Forest Dweller',
+    text: 'The stage of gradual retirement. Having fulfilled worldly duties and seen grandchildren, one steps back from active life, hands responsibilities to the next generation, and turns increasingly toward spiritual practice and reflection.'
+  },
+  {
+    age: 'Ages 75 onward', name: 'Sannyasa', trans: 'The Renunciate',
+    text: 'The final stage of complete renunciation. Letting go of possessions, status, and attachment, the seeker devotes themselves wholly to the pursuit of Moksha, wandering free, at peace, ready to merge with the infinite.'
+  }
+];
+
+(function renderStages() {
+  const timeline = document.getElementById('stages-timeline');
+  if (!timeline) return;
+  STAGES.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'stage-item';
+    item.innerHTML = `
+      <p class="stage-age">${s.age}</p>
+      <h3 class="stage-name">${s.name}</h3>
+      <p class="stage-trans">${s.trans}</p>
+      <p class="stage-text">${s.text}</p>
+    `;
+    timeline.appendChild(item);
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   THE THREADS, six connecting concepts
+═══════════════════════════════════════════ */
+const THREADS = [
+  {
+    glyph: '☸',
+    name: 'Dharma',
+    sanskrit: 'Cosmic Order · Righteous Duty',
+    definition: 'Dharma is the principle that holds the universe together, the right way of being for each person, each creature, each moment. It is not a fixed rulebook but a living question: what is the right action here, now, for someone in my position? Every story in Hinduism is, at bottom, a meditation on dharma.',
+    connections: [
+      { where: 'The Trimurti', text: 'Vishnu is the cosmic guardian of dharma itself. His entire function is preservation: keeping creation in balance so that righteousness can flourish.' },
+      { where: 'Avatars', text: 'Krishna gives the reason for every avatar: <strong>"Whenever dharma declines, I manifest myself."</strong> The ten avatars are dharma descending to Earth whenever it falters.' },
+      { where: 'Avatars · Rama', text: 'Rama is dharma made human. He accepts fourteen years of forest exile without complaint to honor his father\'s word, becoming the eternal model of righteous duty over personal desire.' },
+      { where: 'The Cosmos', text: 'The four Yugas measure dharma\'s slow decline: standing on four legs in the golden Satya Yuga, down to one leg in our present Kali Yuga.' }
+    ]
+  },
+  {
+    glyph: '⟳',
+    name: 'Karma',
+    sanskrit: 'Action and Consequence',
+    definition: 'Every action plants a seed that must one day bear fruit. Karma is not punishment or reward handed down by a judge, it is simply the moral law of cause and effect, as reliable as gravity. What you do echoes back to you, in this life or the next. Understanding karma is understanding why the soul is reborn at all.',
+    connections: [
+      { where: 'The Cosmos', text: 'The mortal realm of Earth (<strong>Martya</strong>) is where karma is enacted. Human birth is precious precisely because only here can the soul act, and therefore grow toward liberation.' },
+      { where: 'Avatars · Krishna', text: 'The Bhagavad Gita\'s central teaching is <strong>karma yoga</strong>: act fully, but surrender all attachment to the results. "You have a right to your actions, never to their fruits."' },
+      { where: 'The Shloka of the Day', text: 'The most quoted verse in all of Hinduism, Karmanye vadhikaraste, is about exactly this: doing your duty without grasping at the outcome.' },
+      { where: 'The Threads · Samsara', text: 'Karma is the engine of rebirth. The momentum of past actions carries the soul from one life to the next until the account is finally settled.' }
+    ]
+  },
+  {
+    glyph: '∞',
+    name: 'Samsara',
+    sanskrit: 'The Wheel of Rebirth',
+    definition: 'The soul (atman) does not live once and vanish. It is born, dies, and is born again, life after life, propelled by karma, wearing body after body like changing clothes. This endless wheel is samsara. It is not inherently joyful or tragic, it simply is. The goal of spiritual life is to understand it deeply enough to step off the wheel.',
+    connections: [
+      { where: 'The Cosmos', text: 'Samsara mirrors the cosmos itself: just as universes are born, sustained, and dissolved in endless Kalpas, so too is the soul reborn in endless cycles. The macrocosm and the microcosm follow the same rhythm.' },
+      { where: 'The Trimurti', text: 'The eternal dance of Brahma (creation), Vishnu (preservation), and Shiva (dissolution) is samsara written at the scale of the entire universe.' },
+      { where: 'Avatars · Buddha', text: 'Buddha, the ninth avatar, taught that craving is what binds the soul to the wheel, and that awakening is the way to freedom from it.' },
+      { where: 'The Threads · Moksha', text: 'Moksha is the goal precisely because it ends samsara, the soul finally merges with the infinite and is reborn no more.' }
+    ]
+  },
+  {
+    glyph: '✦',
+    name: 'Moksha',
+    sanskrit: 'Liberation · The Final Freedom',
+    definition: 'Moksha is the ultimate goal of human life: liberation from the wheel of rebirth, the soul\'s realization that it was never separate from the infinite reality of Brahman. It is not heaven, not a place you go, but a waking up to what was always true. The drop realizes it is the ocean. This is the destination toward which every path points.',
+    connections: [
+      { where: 'Sacred Geography', text: 'Entire cities are sacred because they grant moksha. Dying in <strong>Varanasi</strong>, Shiva\'s eternal city, is said to grant liberation directly. The seven Sapta Puri cities all carry this promise.' },
+      { where: 'Sacred Geography', text: 'The whole Char Dham pilgrimage, established by Adi Shankaracharya, was traditionally believed to grant moksha to those who complete it.' },
+      { where: 'The Devi · Kali', text: 'Kali is the goddess of liberation. Her terrifying form destroys the ego and the fear of death, the final barriers standing between the soul and freedom.' },
+      { where: 'The Cosmos', text: 'Beyond the three worlds lie higher planes culminating in Satya Loka. But moksha is beyond even these, beyond all realms, beyond samsara itself.' }
+    ]
+  },
+  {
+    glyph: '◉',
+    name: 'Maya',
+    sanskrit: 'The Veil of Illusion',
+    definition: 'Maya is the cosmic illusion that makes the one appear as many, that makes us see ourselves as separate beings in a world of separate objects, forgetting the single reality beneath. Maya is not "fake", the world is real enough. But it conceals the deeper truth, the way a wave forgets it is the ocean. Piercing Maya is the work of wisdom.',
+    connections: [
+      { where: 'The Cosmos', text: 'Brahman is the one reality; everything else is its appearance through Maya. The Mahavakya <strong>"Tat Tvam Asi"</strong>, Thou art That, is the piercing of this veil.' },
+      { where: 'The Devi', text: 'The goddess is both the weaver of Maya and the one who cuts through it. She creates the illusion and grants the wisdom to see past it, mother and liberator at once.' },
+      { where: 'Avatars · Krishna', text: 'When Krishna reveals his cosmic form (Vishwarupa) to Arjuna, the veil of Maya is momentarily torn away, and Arjuna sees the entire universe contained within the divine.' },
+      { where: 'The Pantheon', text: 'The "33 million gods" misconception is itself a kind of Maya. Behind the many forms is one reality, the wise see the unity, the unaware see only the multiplicity.' }
+    ]
+  },
+  {
+    glyph: '☮',
+    name: 'Ahimsa',
+    sanskrit: 'Non-Violence · Reverence for Life',
+    definition: 'Ahimsa is the principle of causing no harm to any living being, in thought, word, or deed. Because the same divine reality dwells in all beings, to harm another is to harm a form of the divine, and ultimately yourself. Ahimsa is not mere passivity, it is active reverence for the life in everything. It shaped not just Hinduism but the modern world through Gandhi.',
+    connections: [
+      { where: 'Avatars · Buddha', text: 'Buddha, the ninth avatar, descended specifically to teach ahimsa and turn humanity away from the violence of empty animal sacrifice. <strong>"Ahimsa paramo dharmah"</strong>, non-violence is the highest duty.' },
+      { where: 'Sacred Geography', text: 'Rivers are revered as living goddesses, mountains as gods, the land itself as the body of the Mother. To revere the Earth this way is ahimsa applied to all of nature.' },
+      { where: 'Living Tradition', text: 'Countless festivals and daily practices involve vegetarianism and care for animals, ahimsa woven into the rhythm of ordinary life.' },
+      { where: 'The Pantheon', text: 'Every deity has an animal companion, Nandi the bull, Garuda the eagle, the mouse of Ganesha, expressing the sacredness of all creatures, not just humans.' }
+    ]
+  }
+];
+
+(function renderThreads() {
+  const list = document.getElementById('threads-list');
+  if (!list) return;
+  THREADS.forEach((thread, idx) => {
+    const card = document.createElement('div');
+    card.className = 'thread-card';
+    const connectionsHtml = thread.connections.map(c =>
+      `<div class="thread-connection">
+        <div class="thread-conn-where">${c.where}</div>
+        <div class="thread-conn-text">${c.text}</div>
+      </div>`
+    ).join('');
+    card.innerHTML = `
+      <div class="thread-header">
+        <span class="thread-glyph">${thread.glyph}</span>
+        <div class="thread-heading">
+          <h3 class="thread-name">${thread.name}</h3>
+          <span class="thread-sanskrit">${thread.sanskrit}</span>
+        </div>
+        <span class="thread-toggle">+</span>
+      </div>
+      <div class="thread-body">
+        <div class="thread-body-inner">
+          <p class="thread-definition">${thread.definition}</p>
+          <span class="thread-connections-label">Follow this thread through the site</span>
+          ${connectionsHtml}
+        </div>
+      </div>`;
+    const header = card.querySelector('.thread-header');
+    header.addEventListener('click', () => card.classList.toggle('open'));
+    list.appendChild(card);
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   SHLOKA OF THE DAY, rotates daily
+═══════════════════════════════════════════ */
+const SHLOKAS = [
+  {
+    sanskrit: 'Karmanye vadhikaraste ma phaleshu kadachana',
+    translation: 'You have a right to your actions, but never to the fruits of your actions. Let not the results be your motive, nor be attached to inaction.',
+    source: 'Bhagavad Gita 2.47'
+  },
+  {
+    sanskrit: 'Yada yada hi dharmasya glanir bhavati Bharata',
+    translation: 'Whenever righteousness declines and unrighteousness rises, O Bharata, then I manifest myself upon the Earth.',
+    source: 'Bhagavad Gita 4.7'
+  },
+  {
+    sanskrit: 'Vasudhaiva Kutumbakam',
+    translation: 'The whole world is one family. This is the great truth realized by those of noble character.',
+    source: 'Maha Upanishad 6.71'
+  },
+  {
+    sanskrit: 'Satyameva jayate nanritam',
+    translation: 'Truth alone triumphs, never falsehood. Through truth the divine path is laid out, by which the sages travel to the supreme treasure.',
+    source: 'Mundaka Upanishad 3.1.6'
+  },
+  {
+    sanskrit: 'Ahimsa paramo dharmah',
+    translation: 'Non-violence is the highest duty. To cause no harm to any living being is the foundation of all righteousness.',
+    source: 'Mahabharata'
+  },
+  {
+    sanskrit: 'Ekam sat vipra bahudha vadanti',
+    translation: 'Truth is one; the wise call it by many names. The divine reality is single, though sages describe it in countless ways.',
+    source: 'Rigveda 1.164.46'
+  },
+  {
+    sanskrit: 'Sarve bhavantu sukhinah, sarve santu niramayah',
+    translation: 'May all beings be happy, may all be free from illness. May all see what is auspicious, may none suffer.',
+    source: 'Brihadaranyaka Upanishad'
+  },
+  {
+    sanskrit: 'Yogah karmasu kaushalam',
+    translation: 'Yoga is skill in action. To act with full presence, balance, and without attachment is itself the path of union.',
+    source: 'Bhagavad Gita 2.50'
+  },
+  {
+    sanskrit: 'Tat tvam asi',
+    translation: 'Thou art That. The innermost self within you is identical with the ultimate reality that pervades the universe.',
+    source: 'Chandogya Upanishad 6.8.7'
+  },
+  {
+    sanskrit: 'Aham Brahmasmi',
+    translation: 'I am Brahman. The individual consciousness, at its deepest root, is one with the infinite consciousness of the cosmos.',
+    source: 'Brihadaranyaka Upanishad 1.4.10'
+  },
+  {
+    sanskrit: 'Uddhared atmanatmanam',
+    translation: 'Let a person lift themselves by their own self; let them not degrade themselves. For the self alone is the friend of the self, and the self alone its enemy.',
+    source: 'Bhagavad Gita 6.5'
+  },
+  {
+    sanskrit: 'Na hi jnanena sadrisham pavitram iha vidyate',
+    translation: 'In this world there is nothing so purifying as knowledge. One who is perfected in yoga finds this within the self in time.',
+    source: 'Bhagavad Gita 4.38'
+  },
+  {
+    sanskrit: 'Asato ma sadgamaya, tamaso ma jyotirgamaya',
+    translation: 'Lead me from the unreal to the real, from darkness to light, from death to immortality.',
+    source: 'Brihadaranyaka Upanishad 1.3.28'
+  },
+  {
+    sanskrit: 'Manah eva manushyanam karanam bandha mokshayoh',
+    translation: 'The mind alone is the cause of bondage and liberation for human beings. A mind attached binds; a mind unattached frees.',
+    source: 'Amritabindu Upanishad 2'
+  },
+  {
+    sanskrit: 'Shraddhavan labhate jnanam',
+    translation: 'One who has faith, who is devoted, and who masters the senses attains knowledge. Having attained it, one swiftly finds supreme peace.',
+    source: 'Bhagavad Gita 4.39'
+  },
+  {
+    sanskrit: 'Anasaktasya vishaya, anasaktasya karma',
+    translation: 'For one free from attachment, work falls away like water from a lotus leaf. Act, but let no action cling to you.',
+    source: 'Bhagavata Purana'
+  },
+  {
+    sanskrit: 'Atmanam viddhi',
+    translation: 'Know thy self. All the wisdom of the scriptures points finally inward, to the seeker who reads them.',
+    source: 'Upanishadic teaching'
+  },
+  {
+    sanskrit: 'Dharmo rakshati rakshitah',
+    translation: 'Dharma protects those who protect it. When you uphold righteousness, righteousness in turn becomes your shield.',
+    source: 'Manusmriti 8.15'
+  },
+  {
+    sanskrit: 'Shanti shanti shantih',
+    translation: 'Peace, peace, peace. May there be peace in the heavens, peace on Earth, and peace within the heart of every being.',
+    source: 'Yajurveda, Shanti Mantra'
+  },
+  {
+    sanskrit: 'Lokah samastah sukhino bhavantu',
+    translation: 'May all the worlds, all beings everywhere, be happy and free. May my thoughts, words, and deeds contribute to that freedom for all.',
+    source: 'Traditional Sanskrit prayer'
+  }
+];
+
+(function renderShloka() {
+  // Day-of-year so the verse is the same for everyone today, changes daily
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now - start) / 86400000);
+  const shloka = SHLOKAS[dayOfYear % SHLOKAS.length];
+
+  const sEl = document.getElementById('shloka-sanskrit');
+  const tEl = document.getElementById('shloka-translation');
+  const srcEl = document.getElementById('shloka-source');
+  if (sEl) sEl.textContent = `"${shloka.sanskrit}"`;
+  if (tEl) tEl.textContent = shloka.translation;
+  if (srcEl) srcEl.textContent = shloka.source;
+})();
+
+/* ═══════════════════════════════════════════
+   ASK THE RISHI, knowledge-based chatbot
+═══════════════════════════════════════════ */
+(function initRishi() {
+  const fab = document.getElementById('rishi-fab');
+  const panel = document.getElementById('rishi-panel');
+  const closeBtn = document.getElementById('rishi-close');
+  const messages = document.getElementById('rishi-messages');
+  const input = document.getElementById('rishi-input');
+  const sendBtn = document.getElementById('rishi-send');
+  const suggestions = document.getElementById('rishi-suggestions');
+  if (!fab || !panel) return;
+
+  // ---- Build knowledge base from existing site data ----
+  const KB = [];
+
+  // Gods from all sections
+  Object.entries(DATA).forEach(([section, gods]) => {
+    gods.forEach(god => {
+      const storyText = (god.stories || []).map(s => s.title + '. ' + s.text).join(' ');
+      const factText = god.facts ? Object.entries(god.facts).map(([k,v]) => k + ': ' + v).join('. ') : '';
+      KB.push({
+        type: 'deity',
+        title: god.name,
+        keywords: (god.name + ' ' + god.epithet + ' ' + (god.attrs||[]).join(' ') + ' ' + god.summary).toLowerCase(),
+        deepText: (storyText + ' ' + factText + ' ' + god.origin).toLowerCase(),
+        answer: god.summary,
+        extra: god.mantra,
+        page: section,
+        section: god.id,
+        linkLabel: 'Open ' + god.name + "'s full story"
+      });
+    });
+  });
+
+  // Sacred sites
+  SACRED_SITES.forEach(site => {
+    KB.push({
+      type: 'place',
+      title: site.name,
+      keywords: (site.name + ' ' + site.cat).toLowerCase(),
+      deepText: site.text.toLowerCase(),
+      answer: site.text,
+      page: 'geography',
+      linkLabel: 'See ' + site.name + ' on the sacred map'
+    });
+  });
+
+  // Festivals
+  FESTIVALS.forEach(f => {
+    KB.push({
+      type: 'festival',
+      title: f.name,
+      keywords: (f.name + ' ' + f.deity + ' ' + f.season + ' festival').toLowerCase(),
+      deepText: f.text.toLowerCase(),
+      answer: f.text,
+      page: 'living',
+      linkLabel: 'Explore festivals'
+    });
+  });
+
+  // Threads (concepts)
+  THREADS.forEach(t => {
+    KB.push({
+      type: 'concept',
+      title: t.name,
+      keywords: (t.name + ' ' + t.sanskrit + ' concept meaning philosophy').toLowerCase(),
+      deepText: t.definition.toLowerCase() + ' ' + t.connections.map(c=>c.text).join(' ').toLowerCase(),
+      answer: t.definition,
+      page: 'threads',
+      linkLabel: 'Follow the thread of ' + t.name
+    });
+  });
+
+  // Yugas
+  YUGAS.forEach(y => {
+    KB.push({
+      type: 'age',
+      title: y.name,
+      keywords: (y.name + ' ' + y.translation + ' yuga age era time cosmic').toLowerCase(),
+      deepText: (y.text + ' ' + y.detail).toLowerCase(),
+      answer: y.text,
+      page: 'cosmos',
+      linkLabel: 'Explore the Yuga timeline'
+    });
+  });
+
+  // Days of week
+  DAYS_OF_WEEK.forEach(d => {
+    KB.push({
+      type: 'day',
+      title: d.name + ' (' + d.sanskrit + ')',
+      keywords: (d.name + ' ' + d.sanskrit + ' ' + d.deity + ' day weekday').toLowerCase(),
+      deepText: (d.deity + ' ' + d.mantra + ' ' + d.color).toLowerCase(),
+      answer: d.name + ' (' + d.sanskrit + ') is sacred to ' + d.deity + '. The traditional color is ' + d.color + ', and the mantra is "' + d.mantra + '".',
+      page: 'living',
+      linkLabel: 'See the days of the week'
+    });
+  });
+
+  // Geo categories
+  Object.entries(GEO_CATEGORIES).forEach(([key, cat]) => {
+    KB.push({
+      type: 'pilgrimage',
+      title: cat.title,
+      keywords: (cat.title + ' pilgrimage yatra sacred sites').toLowerCase(),
+      deepText: cat.intro.toLowerCase() + ' ' + cat.sites.map(s=>s[0]+' '+s[1]).join(' ').toLowerCase(),
+      answer: cat.intro,
+      page: 'geography',
+      linkLabel: 'Explore sacred geography'
+    });
+  });
+
+  // Static topic entries for cosmos concepts and scriptures
+  const STATIC_TOPICS = [
+    { title:'Brahman', keywords:'brahman ultimate reality consciousness supreme absolute', deepText:'the infinite self-existent consciousness underlying everything tat tvam asi',
+      answer:'Brahman is the ultimate reality, not a deity but the infinite, self-existent consciousness that underlies and pervades everything. Every god, soul, and atom is an expression of this one boundless reality. The great saying "Tat Tvam Asi" (Thou art That) reminds every soul that its deepest nature is identical with Brahman.', page:'cosmos', linkLabel:'Read about the cosmos' },
+    { title:'AUM / Om', keywords:'aum om pranava sound syllable sacred symbol', deepText:'the primordial sound from which creation arose a u m three states',
+      answer:'AUM (ॐ) is the primordial sound from which all creation unfolds. Its three sounds A-U-M represent creation, preservation, and dissolution; waking, dreaming, and deep sleep; and the three worlds. The silence after represents Turiya, pure consciousness. Nearly every Hindu mantra begins with it.', page:'cosmos', linkLabel:'Read about the cosmos' },
+    { title:'The Vedas', keywords:'vedas rigveda samaveda yajurveda atharvaveda scripture shruti', deepText:'the four foundational texts heard by sages rishis oldest scriptures',
+      answer:'The Vedas are the foundational texts of Hinduism, among the oldest religious scriptures in the world. There are four: the Rigveda (hymns), Samaveda (chants), Yajurveda (ritual formulas), and Atharvaveda (diverse hymns and healing). They were "heard" (shruti) by ancient sages in deep meditation and preserved orally for millennia.', page:'cosmos', linkLabel:'Read about the scriptures' },
+    { title:'The Upanishads', keywords:'upanishads vedanta philosophy mahavakya', deepText:'philosophical crown of the vedas exploring the self and reality',
+      answer:'The Upanishads are the philosophical crown of the Vedas, 108 texts exploring the deepest questions: What is ultimate reality? What is the true self? They gave rise to Vedanta, the most influential school of Hindu philosophy, and contain the great sayings like "Tat Tvam Asi" (Thou art That).', page:'cosmos', linkLabel:'Read about the scriptures' },
+    { title:'The Mahabharata', keywords:'mahabharata epic pandavas kauravas kurukshetra vyasa gita', deepText:'worlds longest epic poem the war between pandavas and kauravas contains the bhagavad gita',
+      answer:'The Mahabharata is the world\'s longest epic poem, 100,000 verses composed by Veda Vyasa with Ganesha as scribe. It narrates the great war between the Pandavas and Kauravas at Kurukshetra, and contains the Bhagavad Gita, Hinduism\'s most influential philosophical text.', page:'cosmos', linkLabel:'Read about the scriptures' },
+    { title:'The Ramayana', keywords:'ramayana valmiki rama sita ravana lanka epic', deepText:'the epic of rama his exile sitas abduction and the war in lanka',
+      answer:'The Ramayana, composed by the sage Valmiki, narrates the life of Rama, the seventh avatar of Vishnu: his exile, the abduction of his wife Sita by the demon Ravana, the great war in Lanka, and his coronation as the ideal king. It has been retold across all of South and Southeast Asia.', page:'cosmos', linkLabel:'Read about the scriptures' },
+    { title:'The Bhagavad Gita', keywords:'bhagavad gita krishna arjuna kurukshetra karma yoga', deepText:'krishnas discourse to arjuna on the battlefield the four paths of yoga',
+      answer:'The Bhagavad Gita is Krishna\'s 700-verse discourse to the warrior Arjuna on the battlefield of Kurukshetra. It covers the four paths of yoga, the immortality of the soul, and the famous teaching of karma yoga: act fully, but surrender attachment to the results.', page:'avatars', linkLabel:'Read about Krishna' },
+    { title:'The Trimurti', keywords:'trimurti trinity brahma vishnu shiva three gods', deepText:'the three supreme deities creation preservation dissolution',
+      answer:'The Trimurti are the three supreme deities embodying the great cosmic functions: Brahma the creator, Vishnu the preserver, and Shiva the destroyer and transformer. Together they form the threefold activity of the one reality, Brahman.', page:'trimurti', linkLabel:'Meet the Trimurti' },
+    { title:'The 33 Devas', keywords:'33 devas thirty three gods adityas rudras vasus ashvini million', deepText:'the misconception of 33 million gods the actual vedic teaching of 33 categories',
+      answer:'The common idea that Hinduism has "33 million gods" is a misunderstanding. The Vedas speak of 33 categories (koti) of divine beings: 12 Adityas (solar gods), 11 Rudras (storm gods), 8 Vasus (elemental gods), and 2 Ashvini Kumaras (twin healers). Behind all forms is one reality.', page:'pantheon', linkLabel:'Explore the Pantheon' }
+  ];
+  STATIC_TOPICS.forEach(t => KB.push({ ...t, type:'topic' }));
+
+  // Sapta Rishi sages
+  if (typeof SAGES !== 'undefined') SAGES.forEach(s => {
+    KB.push({
+      type: 'sage',
+      title: s.name,
+      keywords: (s.name + ' ' + s.title + ' sage rishi seer sapta').toLowerCase(),
+      deepText: (s.text + ' ' + s.legacy).toLowerCase(),
+      answer: s.text + ' ' + s.legacy,
+      page: 'pantheon',
+      linkLabel: 'Meet the Sapta Rishi'
+    });
+  });
+
+  // Sacred symbols
+  if (typeof SYMBOLS !== 'undefined') SYMBOLS.forEach(sym => {
+    KB.push({
+      type: 'symbol',
+      title: sym.name,
+      keywords: (sym.name + ' ' + sym.sanskrit + ' symbol sacred sign').toLowerCase(),
+      deepText: sym.meaning.toLowerCase(),
+      answer: sym.meaning,
+      page: 'living',
+      linkLabel: 'Explore sacred symbols'
+    });
+  });
+
+  // Purusharthas (aims)
+  if (typeof AIMS !== 'undefined') AIMS.forEach(a => {
+    KB.push({
+      type: 'aim',
+      title: a.name + ' (' + a.trans + ')',
+      keywords: (a.name + ' ' + a.trans + ' aim goal purushartha life').toLowerCase(),
+      deepText: a.text.toLowerCase(),
+      answer: a.text,
+      page: 'threads',
+      linkLabel: 'See the four aims of life'
+    });
+  });
+
+  // Ashramas (stages)
+  if (typeof STAGES !== 'undefined') STAGES.forEach(s => {
+    KB.push({
+      type: 'stage',
+      title: s.name + ' (' + s.trans + ')',
+      keywords: (s.name + ' ' + s.trans + ' stage ashrama life student householder').toLowerCase(),
+      deepText: s.text.toLowerCase(),
+      answer: s.trans + ': ' + s.text,
+      page: 'threads',
+      linkLabel: 'See the four stages of life'
+    });
+  });
+
+  // ---- Search logic ----
+  function searchKB(query) {
+    const q = query.toLowerCase().trim();
+    if (!q) return [];
+    const words = q.split(/\s+/).filter(w => w.length > 2);
+    const scored = KB.map(entry => {
+      let score = 0;
+      const titleLower = entry.title.toLowerCase();
+      // Exact title match is strongest
+      if (titleLower === q) score += 100;
+      if (titleLower.includes(q) || q.includes(titleLower)) score += 40;
+      words.forEach(w => {
+        if (titleLower.includes(w)) score += 15;
+        if (entry.keywords.includes(w)) score += 8;
+        if (entry.deepText && entry.deepText.includes(w)) score += 3;
+      });
+      return { entry, score };
+    }).filter(s => s.score > 0)
+      .sort((a, b) => b.score - a.score);
+    return scored.map(s => s.entry);
+  }
+
+  // ---- Conversation helpers ----
+  function addMessage(text, sender, link) {
+    const msg = document.createElement('div');
+    msg.className = 'rishi-msg ' + sender;
+    msg.innerHTML = text;
+    if (link) {
+      const a = document.createElement('span');
+      a.className = 'rishi-link';
+      a.textContent = link.label + ' \u2192';
+      a.addEventListener('click', () => {
+        const navBtn = document.querySelector(`.nav-btn[data-page="${link.page}"]`);
+        if (navBtn) navBtn.click();
+        // If a deity, open its modal
+        if (link.section && link.deitySection) {
+          setTimeout(() => openModal(link.deitySection, link.section), 400);
+        }
+        closePanel();
+      });
+      msg.appendChild(document.createElement('br'));
+      msg.appendChild(a);
+    }
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function showTyping() {
+    const t = document.createElement('div');
+    t.className = 'rishi-typing';
+    t.id = 'rishi-typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(t);
+    messages.scrollTop = messages.scrollHeight;
+  }
+  function hideTyping() {
+    const t = document.getElementById('rishi-typing');
+    if (t) t.remove();
+  }
+
+  // ---- Greeting helpers for non-content queries ----
+  function intentResponse(q) {
+    const ql = q.toLowerCase();
+    if (/^(hi|hello|namaste|hey|pranam|greetings)/.test(ql)) {
+      return 'Namaste. I am the Rishi, your guide through Kalpavriksha. Ask me about any god, story, festival, sacred place, or concept, and I will point you to it. Try "Who is Shiva?" or "What is karma?"';
+    }
+    if (/thank|dhanyavaad|thanks/.test(ql)) {
+      return 'It is my joy to guide you. May your journey through these stories bring you light. Ask me anything else whenever you wish.';
+    }
+    if (/who are you|what are you|your name/.test(ql)) {
+      return 'I am the Rishi, a humble guide to this encyclopedia. I know only what lives within Kalpavriksha: its gods, its stories, its sacred places and ideas. Ask, and I will lead you to the right corner of the site.';
+    }
+    if (/help|what can|how do|what should i ask/.test(ql)) {
+      return 'You may ask me about any of the gods (like Krishna, Durga, Ganesha), the great concepts (dharma, karma, moksha), the sacred sites (Kashi, Kedarnath, Tirupati), the festivals (Diwali, Holi), the cosmic ages (the Yugas), or the scriptures (the Vedas, the Gita). What would you like to explore?';
+    }
+    return null;
+  }
+
+  function answerQuery(query) {
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      // Check conversational intents first
+      const intent = intentResponse(query);
+      if (intent) { addMessage(intent, 'bot'); return; }
+
+      const results = searchKB(query);
+      if (results.length === 0) {
+        addMessage('I could not find that within Kalpavriksha. I can only speak of what lives here: the gods, the cosmos, the avatars, the sacred geography, the festivals, and the great concepts of dharma, karma, and moksha. Try rephrasing, or ask about a specific deity or idea.', 'bot');
+        return;
+      }
+      const top = results[0];
+      let answer = `<strong>${top.title}</strong><br>${top.answer}`;
+      if (top.extra) answer += `<br><em>${top.extra}</em>`;
+      const link = {
+        label: top.linkLabel,
+        page: top.page,
+        section: top.section,
+        deitySection: (top.type === 'deity') ? top.page : null
+      };
+      addMessage(answer, 'bot', link);
+
+      // Offer related results
+      if (results.length > 1) {
+        const related = results.slice(1, 4).map(r => r.title);
+        if (related.length) {
+          setTimeout(() => {
+            addMessage('You might also explore: ' + related.map(r => `<em>${r}</em>`).join(', ') + '.', 'bot');
+          }, 400);
+        }
+      }
+    }, 550);
+  }
+
+  // ---- Suggestion chips ----
+  const SUGGESTED = ['Who is Krishna?', 'What is dharma?', 'Tell me about Diwali', 'What are the Yugas?', 'Where is Kashi?'];
+  function renderSuggestions() {
+    suggestions.innerHTML = '';
+    SUGGESTED.forEach(s => {
+      const chip = document.createElement('button');
+      chip.className = 'rishi-chip';
+      chip.textContent = s;
+      chip.addEventListener('click', () => {
+        addMessage(s, 'user');
+        answerQuery(s);
+        suggestions.style.display = 'none';
+      });
+      suggestions.appendChild(chip);
+    });
+  }
+
+  // ---- Panel open/close ----
+  let greeted = false;
+  function openPanel() {
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    fab.classList.add('hidden');
+    if (!greeted) {
+      greeted = true;
+      setTimeout(() => {
+        addMessage('Namaste \u{1F64F} I am the <strong>Rishi</strong>, your guide through Kalpavriksha. Ask me about any god, story, festival, sacred place, or concept within this encyclopedia.', 'bot');
+        renderSuggestions();
+      }, 300);
+    }
+    setTimeout(() => input.focus(), 350);
+  }
+  function closePanel() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    fab.classList.remove('hidden');
+  }
+
+  function handleSend() {
+    const val = input.value.trim();
+    if (!val) return;
+    addMessage(val, 'user');
+    answerQuery(val);
+    input.value = '';
+    suggestions.style.display = 'none';
+  }
+
+  fab.addEventListener('click', openPanel);
+  closeBtn.addEventListener('click', closePanel);
+  sendBtn.addEventListener('click', handleSend);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('open')) closePanel(); });
+})();
 
 /* ═══════════════════════════════════════════
    BACKGROUND RINGS
